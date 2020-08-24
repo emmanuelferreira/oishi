@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
   belongs_to :user, :address
+  has_many :order_products
+  has_many :products through: :order_products
 
-
-  validates :status, :user, :deliver_date, :address, :payment_status, :payment_amount, :payment_type
+  validates :status, :user, presence: true
 end
