@@ -1,4 +1,6 @@
 class UserPreference < ApplicationRecord
   belongs_to :user
-  belongs_to :shopping_preference
+  has_many :shopping_preference
+
+  validates :user, :shopping_preference, presence :true
 end
