@@ -1,6 +1,6 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: white;
+  background: transparent;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -9,4 +9,57 @@
 
 .navbar-lewagon .navbar-brand img {
   width: 40px;
+}
+
+.nav-logo {
+  font-family: Sacramento;
+  font-size: 32px;
+  color: #525252;
+}
+
+
+.nav-logo {
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.nav-link {
+  font-family: Roboto;
+}
+
+.btn-flat {
+  color: white;
+  padding: 8px 24px;
+  background: #6A8437;
+  transition: background 0.3s ease;
+  font-family: Roboto;
+  font-weight: medium;
+}
+
+.btn-flat:hover {
+  background: #6A8437;
+  color: white;
+}
+
+.btn-ghost {
+  color: white;
+  border: 1px solid white;
+  padding: 8px 24px;
+  font-family: Roboto;
+  font-weight: medium;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+  margin-left: 40px;
+  margin-right: 12px;
+}
+
+.btn-ghost:hover {
+  opacity: 1;
+  color: #6A8437;
+}
+
+#btn-nav {
+  display: flex;
+  justify-content: space-between;
 }
