@@ -138,7 +138,7 @@ products = []
 num_queries = 0
 puts 'Fetching products from FoodRepo API...'
 
-until num_queries == 3 do
+until num_queries == 1 do
   response = HTTParty.get(url, headers: headers)
   num_queries += 1
   raise unless response.code == 200 # HTTP OK
@@ -151,47 +151,49 @@ until num_queries == 3 do
 
   puts 'Creating products in DB'
   products.each do |product|
-
-
     # openfoodfacts_url = "https://world.openfoodfacts.org/api/v0/product/#{barcode}.json" in case wrapper does not work
     # open food data parsing
     barcode = product['barcode']
     prod = Openfoodfacts::Product.get(barcode, locale: 'world')
-    prod_categories = prod.categories.split(",")
+
+    next if product['name_translations']["en"].nil?
+    next if product["origin_translations"]["en"].nil?
+    next if prod.categories.nil?
+    next if prod.nutriscore_grade.nil?
+
+
+    prod_categories = prod.categories.split(",").map(&:strip)
     nutriscore = prod.nutriscore_grade
 
     # Get Subcategory id by comparing the subcategory array to a converted array (previously string) parsed with open foods api
-    prod_categories.each do |prod_category|
-      subcategory_names = Subcategory.pluck(:name)
-      if subcategory_names.include?(prod_category)
-        subcat = Subcategory.find_by("name ILIKE ?", "%#{prod_category}%")
-      else
-        subcat = Subcategory.last
+    Subcategory.pluck(:name).each do |sub_category|
+      if prod_categories.include?(sub_category)
+        @subcat = Subcategory.find_by("name ILIKE ?", "%#{sub_category}%")
       end
     end
+    @subcat = Subcategory.last if @subcat.nil?
 
     # Get category id based on subcategory
-    if fruits.include?(subcat.name)
-      cat_id = Subcategory.find_by(name: "Fruits").id
-    elsif vegetables.include?(subcat.name)
-      cat_id = Subcategory.find_by(name: "Vegetables").id
-    elsif dairy.include?(subcat.name)
-      cat_id = Subcategory.find_by(name: "Bakery").id
-    elsif meat.include?(subcat.name)
-      cat_id = Subcategory.find_by(name: "Meat & Fish").id
-    elsif bakery.include?(subcat.name)
-      cat_id = Subcategory.find_by(name: "Dairy").id
-    elsif sweets.include?(subcat.name)
-      cat_id = Subcategory.find_by(name: "Sweets").id
-    elsif drinks.include?(subcat.name)
-      cat_id = Subcategory.find_by(name: "Drinks").id
+    if fruits.include?(@subcat.name)
+      cat_id = Category.find_by(name: "Fruits").id
+    elsif vegetables.include?(@subcat.name)
+      cat_id = Category.find_by(name: "Vegetables").id
+    elsif dairy.include?(@subcat.name)
+      cat_id = Category.find_by(name: "Bakery").id
+    elsif meat.include?(@subcat.name)
+      cat_id = Category.find_by(name: "Meat & Fish").id
+    elsif bakery.include?(@subcat.name)
+      cat_id = Category.find_by(name: "Dairy").id
+    elsif sweets.include?(@subcat.name)
+      cat_id = Category.find_by(name: "Sweets").id
+    elsif drinks.include?(@subcat.name)
+      cat_id = Category.find_by(name: "Drinks").id
     else
-      cat_id = Subcategory.find_by(name: "Other Stuff").id
+      cat_id = Category.find_by(name: "Other Stuff").id
     end
 
     #ecoscore basic calculation
-
-    ecoscore = "A" if product["origin_translations"]["en"].capitalize == "Switzerland" && nutriscore == "A"
+    ecoscore = "A" if product["origin_translations"]["en"].capitalize == "[\"Switzerland\"]" && nutriscore == "A"
     ecoscore = "B" if nutriscore == "B" || nutriscore == "A"
     ecoscore = "D" if nutriscore == "C"
     ecoscore = "E" if nutriscore == "D"
@@ -207,14 +209,14 @@ until num_queries == 3 do
       barcode: product['barcode'],
       name: product['name_translations']["en"],
       category_id: cat_id,
-      subcategory_id: subcat.id,
+      subcategory_id: @subcat.id,
       description: product["ingredients_translations"]["en"],
       origin: product["origin_translations"]["en"],
       expiration_date: Date.today() + rand(7..30),
       availability: "available",
       price: Faker::Commerce.price(range: 0..10.0),
       currency: "CHF",
-      nutri_score: nutriscore,
+      nutri_score: nutriscore.capitalize,
       eco_score: ecoscore,
       supplier_id: Supplier.find_by(name: rand_name).id
     )
