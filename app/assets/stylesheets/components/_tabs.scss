@@ -21,6 +21,11 @@
   font-weight: medium;
 }
 
+.tabs-underlined .tab-underlined:hover {
+  background-color: #ECE5D3;
+  opacity: 0.4;
+}
+
 .tabs-underlined .tab-underlined.active {
   opacity: 1;
   border-bottom: 3px solid #555555;
@@ -51,6 +56,8 @@
   opacity: 0.9;
 }
 
+
+
 .second-tabs {
   background-color: #233E41;
 }
@@ -65,4 +72,9 @@
   border-bottom: 4px solid transparent;
   font-family: Roboto;
   font-weight: medium;
+}
+
+.tabs-underlined .tab-underlined-second:hover {
+  background-color: #233E41;
+  opacity: 0.4;
 }
