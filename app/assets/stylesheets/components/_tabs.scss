@@ -1,0 +1,68 @@
+.tabs-underlined {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #ECE5D3;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+.tabs-underlined .tab-underlined {
+  color: black;
+  padding: 8px;
+  margin: 8px 16px;
+  opacity: 0.9;
+  cursor: pointer;
+  text-decoration: none;
+  border-bottom: 4px solid transparent;
+  font-family: Roboto;
+  font-weight: medium;
+}
+
+.tabs-underlined .tab-underlined.active {
+  opacity: 1;
+  border-bottom: 3px solid #555555;
+}
+
+.btn-all {
+  background-color: #F8B960;
+  font-family: Roboto;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.btn-all:hover {
+  background-color: #F8B960;
+  opacity: 0.9;
+}
+
+
+.btn-lists {
+  background-color: #DA3A0A;
+  font-family: Roboto;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.btn-lists:hover {
+  background-color: #DA3A0A;
+  opacity: 0.9;
+}
+
+.second-tabs {
+  background-color: #233E41;
+}
+
+.tabs-underlined .tab-underlined-second {
+  color: white;
+  padding: 8px;
+  margin: 8px 16px;
+  opacity: 0.9;
+  cursor: pointer;
+  text-decoration: none;
+  border-bottom: 4px solid transparent;
+  font-family: Roboto;
+  font-weight: medium;
+}
