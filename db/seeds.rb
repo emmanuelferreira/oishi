@@ -10,6 +10,8 @@ Product.destroy_all
 Supplier.destroy_all
 Subcategory.destroy_all
 Category.destroy_all
+UserPreference.destroy_all
+ShoppingPreference.destroy_all
 User.destroy_all
 Address.destroy_all
 
@@ -47,13 +49,13 @@ puts 'Done creating user'
 
 puts 'Creating User Preferences'
 ord = 0
-3.times do
-  ord += 1
+while ord < 3 do
   user_pref = UserPreference.new(
     user_id: User.first.id,
     order: ord,
-    shopping_preference_id: ShoppingPreference.find_by(id: ord)
+    shopping_preference_id: ShoppingPreference.find_by(name: preferences[ord - 1]).id
   )
+  ord += 1
   user_pref.save!
 end
 
@@ -97,23 +99,19 @@ puts 'Done creating subcategories'
 
 # ----------------------------Supplier creation--------------------------------------
 puts 'Creating suppliers'
-suppliers = [["Coop", "Place de la Gare 9", "021 643 70 20"],
-["Supermarché" "Avenue de Morges 60" "021 213 27 90"],
-["ALDI" "Avenue du Chablais 3b" "021 626 12 57"],
-["Migros" "Avenue de Sévelin 2" "058 573 74 30"],
-["Top Marché" "Place Chauderon 32" "+41796441709"],
-["Manor Food" "Avenue du Théâtre 4" "021 320 75 31"]]
+suppliers = [["Coop", "Place de la Gare 9", "021 643 70 20"], ["Supermarché", "Avenue de Morges 60", "021 213 27 90"], ["ALDI", "Avenue du Chablais 3b", "021 626 12 57"],["Migros", "Avenue de Sévelin 2", "058 573 74 30"], ["Top Marché", "Place Chauderon 32", "+41796441709"], ["Manor Food", "Avenue du Théâtre 4", "021 320 75 31"]]
 
 suppliers.each do |supplier|
-  Address.create(
+  addr = Address.new(
     street: supplier[1],
     zip: "1004",
     city: "Lausanne"
     )
+  addr.save!
 
   supp = Supplier.new(
     name: supplier[0],
-    address_id: Address.find_by(street: supplier[1]),
+    address_id: Address.find_by(street: "#{supplier[1]}").id,
     phone: supplier[2]
     )
   supp.save!
@@ -159,49 +157,50 @@ until num_queries == 3 do
     # open food data parsing
     barcode = product['barcode']
     prod = Openfoodfacts::Product.get(barcode, locale: 'world')
-    prod_categories = product.categories.split(",")
-    nutriscore = prod.nutriscore_grade.capitalize
+    prod_categories = prod.categories.split(",")
+    nutriscore = prod.nutriscore_grade
 
     # Get Subcategory id by comparing the subcategory array to a converted array (previously string) parsed with open foods api
     prod_categories.each do |prod_category|
       subcategory_names = Subcategory.pluck(:name)
       if subcategory_names.include?(prod_category)
         subcat = Subcategory.find_by("name ILIKE ?", "%#{prod_category}%")
+      else
+        subcat = Subcategory.last
       end
     end
 
     # Get category id based on subcategory
-    if fruits.include?(subcat)
+    if fruits.include?(subcat.name)
       cat_id = Subcategory.find_by(name: "Fruits").id
-    elsif vegetables.include?(subcat)
+    elsif vegetables.include?(subcat.name)
       cat_id = Subcategory.find_by(name: "Vegetables").id
-    elsif dairy.include?(subcat)
+    elsif dairy.include?(subcat.name)
       cat_id = Subcategory.find_by(name: "Bakery").id
-    elsif meat.include?(subcat)
+    elsif meat.include?(subcat.name)
       cat_id = Subcategory.find_by(name: "Meat & Fish").id
-    elsif bakery.include?(subcat)
+    elsif bakery.include?(subcat.name)
       cat_id = Subcategory.find_by(name: "Dairy").id
-    elsif sweets.include?(subcat)
+    elsif sweets.include?(subcat.name)
       cat_id = Subcategory.find_by(name: "Sweets").id
-    elsif drinks.include?(subcat)
+    elsif drinks.include?(subcat.name)
       cat_id = Subcategory.find_by(name: "Drinks").id
     else
       cat_id = Subcategory.find_by(name: "Other Stuff").id
     end
 
-
     #ecoscore basic calculation
 
     ecoscore = "A" if product["origin_translations"]["en"].capitalize == "Switzerland" && nutriscore == "A"
-    ecoscore = "B" if (product["origin_translations"]["en"].capitalize == "Switzerland" && || nutriscore == "B") || nutriscore == "A"
+    ecoscore = "B" if nutriscore == "B" || nutriscore == "A"
     ecoscore = "D" if nutriscore == "C"
-    ecoscore = "E" if || nutriscore == "D"
+    ecoscore = "E" if nutriscore == "D"
     ecoscore = "F" if nutriscore == "F" || nutriscore == "E"
     ecoscore = "C" if ecoscore.nil?
 
     # Supplier name random attribution
     supplier_name = []
-    Supplier.all.each { |supplier| rand_name << supplier.name}
+    Supplier.all.each { |supplier| supplier_name << supplier.name}
     rand_name = supplier_name.sample
 
     prod = Product.new(
