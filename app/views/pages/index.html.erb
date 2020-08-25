@@ -1,5 +1,55 @@
-<div class="d-flex justify-content-center">
-  <div class="card-product w-50 p-3">
+<nav class="navbar navbar-light">
+  <form class="form-inline">
+    <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
+    <button class="btn btn-primary" type="submit">Search</button>
+  </form>
+</nav>
+
+
+
+
+<div class="d-flex flex-column">
+  <div class="ml-4">
+    <h3>25 Suppliers</h3>
+    <br>
+    <br>
+    <h3>Preferences</h3>
+    <div class="form-check">
+      <label class="form-check-label col-2">
+        <input type="radio" class="form-check-input" name="optradio">Preference 1
+      </label>
+    </div>
+    <div class="form-check">
+      <label class="form-check-label col-2">
+        <input type="radio" class="form-check-input" name="optradio">Preference 2
+      </label>
+    </div>
+    <div class="form-check disabled">
+      <label class="form-check-label col-2">
+        <input type="radio" class="form-check-input" name="optradio">Preference 3
+      </label>
+    </div>
+  </div>
+  <br>
+  <div class="ml-4">
+    <h3>Preferences</h3>
+    <div class="form-check">
+      <label class="form-check-label col-2">
+        <input type="radio" class="form-check-input" name="optradio">Preference 1
+      </label>
+    </div>
+    <div class="form-check">
+      <label class="form-check-label col-2">
+        <input type="radio" class="form-check-input" name="optradio">Preference 2
+      </label>
+    </div>  
+</div>
+
+
+
+
+<div class="d-flex justify-content-end">
+  <div class="card-product w-75">
     <img class="mh-100" style="width: "width: 200px; height: 300px" src="https://images.unsplash.com/photo-1464965911861-746a04b4bca6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" />
     <div class="card-product-infos">
       <div class="d-flex justify-content-between">
@@ -7,13 +57,17 @@
         <h2>15CHF</h2>
       </div>
       <h3>Category</h3>
-      <div class="d-flex justify-content-around badges">
+      <div class="d-flex justify-content-between badges">
         <i class="fas fa-cloud fa-2x"></i>
         <i class="fas fa-certificate fa-2x"></i>
         <i class="fas fa-money-bill-wave fa-2x"></i>
       </div>
-      <p class="align-text-bottom">Product description with <strong>relevant info</strong> only.</p>
+      <div class="d-flex justify-content-between">
+        <p>Product description with <strong>relevant info</strong> only.</p>
+        <p>TouchSpin missing</p>
+        <i class="fas fa-plus-circle fa-2x"></i>
+
+      </div>
     </div>
   </div>
 </div>
-
