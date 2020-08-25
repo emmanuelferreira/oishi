@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_24_143448) do
+ActiveRecord::Schema.define(version: 2020_08_25_083716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,12 +97,22 @@ ActiveRecord::Schema.define(version: 2020_08_24_143448) do
     t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "subcategory_id", null: false
     t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["subcategory_id"], name: "index_products_on_subcategory_id"
     t.index ["supplier_id"], name: "index_products_on_supplier_id"
   end
 
   create_table "shopping_preferences", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "subcategories", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "picture"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -149,6 +159,7 @@ ActiveRecord::Schema.define(version: 2020_08_24_143448) do
   add_foreign_key "playlist_products", "playlists"
   add_foreign_key "playlist_products", "products"
   add_foreign_key "products", "categories"
+  add_foreign_key "products", "subcategories"
   add_foreign_key "products", "suppliers"
   add_foreign_key "suppliers", "addresses"
   add_foreign_key "user_preferences", "shopping_preferences"
