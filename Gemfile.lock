@@ -90,11 +90,14 @@ GEM
       railties (>= 3.2)
     erubi (1.9.0)
     execjs (2.7.0)
+    faker (2.13.0)
+      i18n (>= 1.6, < 2)
     ffi (1.13.1)
     font-awesome-sass (5.13.0)
       sassc (>= 1.11)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    hashie (3.6.0)
     httparty (0.18.1)
       mime-types (~> 3.0)
       multi_xml (>= 0.5.2)
@@ -125,6 +128,9 @@ GEM
     nio4r (2.5.2)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
+    openfoodfacts (0.5.1)
+      hashie (~> 3.4)
+      nokogiri (~> 1.7)
     orm_adapter (0.5.0)
     pg (1.2.3)
     pry (0.13.1)
@@ -246,10 +252,12 @@ DEPENDENCIES
   capybara (>= 2.15)
   devise
   dotenv-rails
+  faker
   font-awesome-sass
   httparty
   jbuilder (~> 2.7)
   listen (~> 3.2)
+  openfoodfacts
   pg (>= 0.18, < 2.0)
   pry-byebug
   pry-rails

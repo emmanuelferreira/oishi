@@ -1,6 +1,11 @@
 # This file contains all the record creation needed to seed the database with its default values.
 # Your OAuth 2.0 Client Secret is: 15f0b6247e5c4f5a9f5fc80da5854a54 -do not remove (fatsecret key)
 # (key: d1c88864830c4814a001a305f083b928)
+require 'openfoodfacts'
+require 'httparty'
+require 'json'
+require 'faker'
+
 Product.destroy_all
 Supplier.destroy_all
 Subcategory.destroy_all
@@ -55,7 +60,7 @@ end
 
 #-------------------------------- Category creation----------------------------------
 puts 'Creating categories'
-categories = %w(Drinks, Fruits, Vegetables, Bread & Baked Goods, Meat & Fish, Dairy Products & Eggs, Sweets, Snacks & Superfoods)
+categories = %w(Drinks Fruits Vegetables Bakery Meat\ &\ Fish Dairy Sweets Other\ Stuff)
 categories.each do |category|
   cat = Category.new(
     name: category
@@ -78,6 +83,7 @@ meat = %w(Pork Beef Veal Lamb Chicken Seafood Fish Sausage Terrines Sausage Inse
 bakery = %w(Bread Tortillas Cookies Cakes Toast Pastry Tarts)
 sweets =  %w(Crisps Popcorn Nuts Dried\ Fruit  Cereal\ Bars Chocolate Caramel & nougat)
 drinks = %w(Mineral\ Water Sparkling\ Water Soft\ Drinks Fruit\ Juices Beer Cider Coffee Tea)
+other_stuff = %w(Miscellenneous)
 categories = [fruits, vegetables, dairy, meat, bakery, sweets, drinks]
 categories.each do |category|
   category.each do |subcategory|
@@ -115,12 +121,9 @@ end
 puts 'Done creating suppliers'
 
 
-
  #------------------------ Creatin PRODUCTS------------------------------------------------
 
 # Sample Ruby code for multiple calls against the Food Repo API v3 products listing, with paging
-require 'httparty'
-require 'json'
 BASE_URL = 'https://www.foodrepo.org/api/v3'
 KEY = '9ea7424b86b666b97c53a8ed2dadb21b'
 ENDPOINT = '/products'
@@ -137,7 +140,7 @@ products = []
 num_queries = 0
 puts 'Fetching products from FoodRepo API...'
 
-until num_queries == 5 do
+until num_queries == 3 do
   response = HTTParty.get(url, headers: headers)
   num_queries += 1
   raise unless response.code == 200 # HTTP OK
@@ -148,25 +151,73 @@ until num_queries == 5 do
   break if url.nil?
 
 
-
   puts 'Creating products in DB'
   products.each do |product|
-    # barcode = product['barcode']
-    # openfoodfacts_url = "https://world.openfoodfacts.org/api/v0/product/#{barcode}.json"
+
+
+    # openfoodfacts_url = "https://world.openfoodfacts.org/api/v0/product/#{barcode}.json" in case wrapper does not work
+    # open food data parsing
+    barcode = product['barcode']
+    prod = Openfoodfacts::Product.get(barcode, locale: 'world')
+    prod_categories = product.categories.split(",")
+    nutriscore = prod.nutriscore_grade.capitalize
+
+    # Get Subcategory id by comparing the subcategory array to a converted array (previously string) parsed with open foods api
+    prod_categories.each do |prod_category|
+      subcategory_names = Subcategory.pluck(:name)
+      if subcategory_names.include?(prod_category)
+        subcat = Subcategory.find_by("name ILIKE ?", "%#{prod_category}%")
+      end
+    end
+
+    # Get category id based on subcategory
+    if fruits.include?(subcat)
+      cat_id = Subcategory.find_by(name: "Fruits").id
+    elsif vegetables.include?(subcat)
+      cat_id = Subcategory.find_by(name: "Vegetables").id
+    elsif dairy.include?(subcat)
+      cat_id = Subcategory.find_by(name: "Bakery").id
+    elsif meat.include?(subcat)
+      cat_id = Subcategory.find_by(name: "Meat & Fish").id
+    elsif bakery.include?(subcat)
+      cat_id = Subcategory.find_by(name: "Dairy").id
+    elsif sweets.include?(subcat)
+      cat_id = Subcategory.find_by(name: "Sweets").id
+    elsif drinks.include?(subcat)
+      cat_id = Subcategory.find_by(name: "Drinks").id
+    else
+      cat_id = Subcategory.find_by(name: "Other Stuff").id
+    end
+
+
+    #ecoscore basic calculation
+
+    ecoscore = "A" if product["origin_translations"]["en"].capitalize == "Switzerland" && nutriscore == "A"
+    ecoscore = "B" if (product["origin_translations"]["en"].capitalize == "Switzerland" && || nutriscore == "B") || nutriscore == "A"
+    ecoscore = "D" if nutriscore == "C"
+    ecoscore = "E" if || nutriscore == "D"
+    ecoscore = "F" if nutriscore == "F" || nutriscore == "E"
+    ecoscore = "C" if ecoscore.nil?
+
+    # Supplier name random attribution
+    supplier_name = []
+    Supplier.all.each { |supplier| rand_name << supplier.name}
+    rand_name = supplier_name.sample
+
     prod = Product.new(
       barcode: product['barcode'],
       name: product['name_translations']["en"],
-      # category_id: ,
-      # subcategory_id: ,
+      category_id: cat_id,
+      subcategory_id: subcat.id,
       description: product["ingredients_translations"]["en"],
       origin: product["origin_translations"]["en"],
       expiration_date: Date.today() + rand(7..30),
       availability: "available",
-      # price:,
+      price: Faker::Commerce.price(range: 0..10.0),
       currency: "CHF",
-      # nutri_score: ,
-      # eco_score: ,
-      # supplier_id:
+      nutri_score: nutriscore,
+      eco_score: ecoscore,
+      supplier_id: Supplier.find_by(name: rand_name).id
     )
     unless product["images"][1].nil?
       prod.image = product["images"][1]["thumb"]
