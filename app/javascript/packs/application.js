@@ -26,6 +26,7 @@ require("channels")
 import "bootstrap";
 
 // Internal imports, e.g:
+import "../components/tabs.js";
 // import { initSelect2 } from '../components/init_select2';
 
 document.addEventListener('turbolinks:load', () => {

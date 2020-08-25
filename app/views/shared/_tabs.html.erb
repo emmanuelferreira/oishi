@@ -1,51 +1,68 @@
 <ul class="list-inline tabs-underlined">
   <li>
-    <%= link_to "ALL", "#", class: "btn btn-flat btn-all" %>
+    <%= link_to "ALL", "#", class: "btn btn-flat btn-all tablinks", onclick: "openCity(event, 'All')" %>
   </li>
   <li>
-    <%= link_to "FRUITS", "#", class: "tab-underlined" %>
+    <%= link_to "FRUITS", "#", class: "tab-underlined tablinks active", onclick: "openCity(event, 'Fruits')" %>
   </li>
   <li>
-    <%= link_to "VEGETABLES", "#", class: "tab-underlined" %>
+    <%= link_to "VEGETABLES", "#", class: "tab-underlined tablinks", onclick: "openCity(event, 'Vegetables')" %>
   </li>
   <li>
-    <%= link_to "MEAT", "#", class: "tab-underlined" %>
+    <%= link_to "MEAT", "#", class: "tab-underlined tablinks", onclick: "openCity(event, 'Meat')" %>
   </li>
   <li>
-    <%= link_to "FISH", "#", class: "tab-underlined" %>
+    <%= link_to "FISH", "#", class: "tab-underlined tablinks", onclick: "openCity(event, 'Fish')" %>
   </li>
   <li>
-    <%= link_to "BAKERY", "#", class: "tab-underlined" %>
+    <%= link_to "BAKERY", "#", class: "tab-underlined tablinks", onclick: "openCity(event, 'Bakery')" %>
   </li>
   <li>
-    <%= link_to "SWEET", "#", class: "tab-underlined" %>
+    <%= link_to "SWEET", "#", class: "tab-underlined tablinks", onclick: "openCity(event, 'Sweet')" %>
   </li>
   <li>
-    <%= link_to "LISTS", "#", class: "btn btn-flat btn-lists" %>
+    <%= link_to "LISTS", "#", class: "btn btn-flat btn-lists tablinks", onclick: "openCity(event, 'Lists')" %>
   </li>
 </ul>
 
+<div id="Fruits" class="tabcontent">
+  <ul class="list-inline tabs-underlined second-tabs">
+    <li>
+      <%= link_to "APPLE", "#", class: "btn btn-flat btn-all" %>
+    </li>
+    <li>
+      <%= link_to "CHERRY", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "BANANA", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "HIMBER", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "PEACH", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "WATERMELON", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "ORANGE", "#", class: "tab-underlined-second" %>
+    </li>
+  </ul>
+</div>
 
-<ul class="list-inline tabs-underlined second-tabs">
-  <li>
-    <%= link_to "APPLE", "#", class: "btn btn-flat btn-all" %>
-  </li>
-  <li>
-    <%= link_to "CHERRY", "#", class: "tab-underlined-second" %>
-  </li>
-  <li>
-    <%= link_to "BANANA", "#", class: "tab-underlined-second" %>
-  </li>
-  <li>
-    <%= link_to "HIMBER", "#", class: "tab-underlined-second" %>
-  </li>
-  <li>
-    <%= link_to "PEACH", "#", class: "tab-underlined-second" %>
-  </li>
-  <li>
-    <%= link_to "WATERMELON", "#", class: "tab-underlined-second" %>
-  </li>
-  <li>
-    <%= link_to "ORANGE", "#", class: "tab-underlined-second" %>
-  </li>
-</ul>
+<script>
+function openCity(evt, categoryName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(categoryName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
