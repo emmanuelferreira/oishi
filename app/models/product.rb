@@ -6,5 +6,6 @@ class Product < ApplicationRecord
   has_many :orders, through: :order_products
   has_many :playlist_products
   has_many :playlists, through: :playlist_products
-  validates :barcode, :name, :description, :origin, :price, presence: true
+  validates :barcode, :name, presence: true
+
 end
