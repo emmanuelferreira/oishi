@@ -1,0 +1,44 @@
+.card-product {
+  margin-right: 24px;
+  overflow: hidden;
+  height: 200px;
+  background: white;
+  display: flex;
+  align-items: stretch;
+  font-family: $body-font;
+  border: 1px solid $light-gray;
+}
+
+.card-product img {
+  height: 100%;
+  width: 200px;
+  object-fit: cover;
+}
+
+.card-product h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.card-product h3 {
+  padding-top: 4px;
+  font-size: 16px;
+  color: $light-gray;
+  margin: 0;
+}
+
+.card-product p {
+  padding-top: 16px;
+  color: $light-gray;
+  vertical-align: text-bottom;
+}
+
+.badges{
+  padding-top: 8px;
+}
+
+.card-product .card-product-infos {
+  padding: 16px;
+}
+

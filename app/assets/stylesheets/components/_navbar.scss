@@ -8,11 +8,11 @@
 }
 
 .navbar-lewagon .navbar-brand img {
-  width: 40px;
+  // width: 40px;
 }
 
 .nav-logo {
-  font-family: Sacramento;
+  font-family: "Sacramento";
   font-size: 32px;
   color: #525252;
 }
@@ -32,8 +32,8 @@
   color: white;
   padding: 8px 24px;
   background: #6A8437;
-  transition: background 0.3s ease;
-  font-family: Roboto;
+  transition: opacity 0.3s ease;
+  font-family: "Roboto";
   font-weight: medium;
 }
 
@@ -45,11 +45,10 @@
 
 .btn-ghost {
   color: white;
-  border: 1px solid white;
+  border: 2px solid white;
   padding: 8px 24px;
-  font-family: Roboto;
-  font-weight: medium;
-  opacity: 0.6;
+  font-weight: normal;;
+  opacity: 0.9;
   transition: opacity 0.3s ease;
   margin-left: 40px;
   margin-right: 12px;
@@ -57,10 +56,15 @@
 
 .btn-ghost:hover {
   opacity: 1;
-  color: #6A8437;
+  color: $info;
+  border: 2px solid $info;
 }
 
 #btn-nav {
   display: flex;
   justify-content: space-between;
+}
+
+.btn {
+  width: 150px;
 }
