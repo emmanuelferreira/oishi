@@ -1,1 +1,37 @@
 // Specific CSS for your home-page
+.title {
+  margin-left: 240px;
+  margin-top: 280px;
+}
+
+.title h1{
+  font-size: 144px;
+  font-weight: bold;
+  letter-spacing: 15px;
+}
+
+.title p {
+  color: $light-gray;
+}
+
+.rectangle {
+  background: $yellow;
+  width: 600px;
+  height: 600px;
+  top:0;
+  right:0;
+  position: absolute;
+  // transform: skew(45deg);
+  // margin-left: 800px;
+  // display: flex;
+  // align-content: flex-end;
+  // margin-bottom: 900px;
+  // z-index: -10;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%);
+}
+
+.paper {
+  background-image: url("paper.png");
+  z-index: -9;
+  opacity: 0.95;
+}
