@@ -27,11 +27,15 @@
 <div class="container pl-10 ">
   <div class="row justify-content-end top-buffer">
     <div class="col-4">
-      CHARTS 1
+      <div class="eco-chart chart">
+        <%= column_chart(a:3, b:9, c:4, d:5) %>
+      </div>
     </div>
     <div class="col-4">
-      CHART 2
-    </div>
+      <div class="nutritionnal-chart chart">
+        <%= column_chart(a:3, b:7, c:1, d:6) %>
+      </div>
+    </div> 
     <div class="col-4">
       <h4>last Orders</h4>
       <ul>
