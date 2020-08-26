@@ -7,6 +7,10 @@
   position: absolute;
 }
 
+.overview-title{
+  margin-left: 32px;
+}
+
 .paper {
   background-image: url("paper.png");
   z-index: -9;
@@ -15,4 +19,9 @@
 
 .top-buffer{
   margin-top: 48px;
+}
+
+.current-order {
+  position: absolute;
+  margin-left: 32px;
 }
