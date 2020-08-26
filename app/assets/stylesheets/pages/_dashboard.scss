@@ -1,0 +1,18 @@
+.rectangle-overview {
+  background: $alt-white;
+  width: 400px;
+  height: 100%;
+  top:0;
+  left:0;
+  position: absolute;
+}
+
+.paper {
+  background-image: url("paper.png");
+  z-index: -9;
+  opacity: 0.95;
+}
+
+.top-buffer{
+  margin-top: 48px;
+}

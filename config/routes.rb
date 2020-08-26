@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   resources :playlists, only: [:index, :create, :new]
   resources :orders, only: [:show, :new, :create]
   resources :dashboards, only: [:show]
+  get "dashboard", to: "dashboards#overview"
 end
 
