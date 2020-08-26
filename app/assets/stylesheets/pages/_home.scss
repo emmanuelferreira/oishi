@@ -60,6 +60,7 @@
   left: 80px;
   -webkit-transform: rotate(-30deg);
   top: 270px;
+  z-index: -10;
 
   animation: beacon 4s infinite;
 }
@@ -75,6 +76,7 @@
   position: absolute;
   left: 200px;
   top: 80px;
+  z-index: -10;
 
   animation: watermelon 2s infinite;
 }
@@ -91,6 +93,7 @@
   bottom: 150px;
   left: 45px;
   -webkit-transform: rotate(40deg);
+  z-index: -10;
 
   animation: cherries 6s infinite;
 }
@@ -107,6 +110,7 @@
   -webkit-transform: rotate(15deg);
   top: 250px;
   left: 330px;
+  z-index: -10;
 
   animation: cumcumber 5s infinite;
 }
@@ -123,6 +127,7 @@
   -webkit-transform: rotate(10deg);
   bottom: 80px;
   left: 230px;
+  z-index: -10;
 
   animation: fish 3s infinite;
 }
