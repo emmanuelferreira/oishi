@@ -1,72 +1,69 @@
+
 <nav class="navbar navbar-light">
-  <form class="form-inline">
-    <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
-    <button class="btn btn-primary" type="submit">Search</button>
-  </form>
+  <%= form_tag products_path, method: :get, :class => 'form-inline' do %>
+    <%= text_field_tag :query,
+      params[:query],class: "form-control",placeholder: "Search..."%>
+    <%= submit_tag "Search", class: "btn btn-primary" %>
+  <% end %>
 </nav>
 
 
-
-
-<div class="d-flex flex-column">
-  <div class="ml-4">
-    <h3>25 Suppliers</h3>
-    <br>
-    <br>
-    <h3>Preferences</h3>
-    <div class="form-check">
-      <label class="form-check-label col-2">
-        <input type="radio" class="form-check-input" name="optradio">Preference 1
-      </label>
-    </div>
-    <div class="form-check">
-      <label class="form-check-label col-2">
-        <input type="radio" class="form-check-input" name="optradio">Preference 2
-      </label>
-    </div>
-    <div class="form-check disabled">
-      <label class="form-check-label col-2">
-        <input type="radio" class="form-check-input" name="optradio">Preference 3
-      </label>
+<div class="container d-flex">
+  <div class="d-flex flex-column">
+    <div class="ml-4">
+      <h3> <%= @suppliers.count %> Suppliers</h3>
+      <br>
+      <br>
+      <% @suppliers.each do |supplier| %>
+        <div class="form-check">
+          <label class="form-check-label col-2">
+            <input type="radio" class="form-check-input" name="optradio"><%= supplier.name %>
+          </label>
+        </div>
+      <% end %>
     </div>
   </div>
-  <br>
-  <div class="ml-4">
-    <h3>Preferences</h3>
-    <div class="form-check">
-      <label class="form-check-label col-2">
-        <input type="radio" class="form-check-input" name="optradio">Preference 1
-      </label>
-    </div>
-    <div class="form-check">
-      <label class="form-check-label col-2">
-        <input type="radio" class="form-check-input" name="optradio">Preference 2
-      </label>
-    </div>  
-</div>
 
 
+  <div class="container-products">
+    <% @products.each do |product| %>
+      <div class="d-flex justify-content-end">
+        <div class="card-product w-75">
+           <%= image_tag product.image, class: "mh-100", style: "width: 200px; height: 300px;"  %>
+          <div class="card-product-infos flex-grow-1">
+            <div class="d-flex justify-content-between ">
+              <h2><%= product.name.capitalize %></h2>
+              <h2><%= product.price%><%= product.currency.upcase %></h2>
+            </div>
+            <h3><%= product.subcategory.name %></h3>
+            <div class="d-flex justify-content-start badges">
+              <% if product.eco_score == "A" || product.eco_score == "B"%>
+                <i class="fas fa-globe-americas fa-2x" style="color: #004D00;"></i>
+              <%elsif  product.eco_score == "C" || product.eco_score == "D"%>
+                <i class="fas fa-globe-americas fa-2x" style="color: #f9d71c;"></i>
+              <% else %>
+                <i class="fas fa-globe-americas fa-2x" style="color: #A52A2A;"></i>
+              <% end %>
 
-<%# product card %>
-<div class="d-flex justify-content-end">
-  <div class="card-product w-75">
-    <img class="mh-100" style="width: "width: 200px; height: 300px" src="https://images.unsplash.com/photo-1464965911861-746a04b4bca6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" />
-    <div class="card-product-infos">
-      <div class="d-flex justify-content-between">
-        <h2>Product name</h2>
-        <h2>15CHF</h2>
+              <% if product.nutri_score == "A" || product.nutri_score == "B"%>
+                <i class="fas fa-heartbeat fa-2x pl-3" style="color: #004D00;"></i>
+              <%elsif  product.nutri_score == "C" || product.nutri_score == "D"%>
+                <i class="fas fa-heartbeat fa-2x pl-3" style="color: #f9d71c;"></i>
+              <% else %>
+                <i class="fas fa-heartbeat fa-2x pl-3" style="color: #A52A2A;"></i>
+              <% end %>
+
+
+              <!-- <i class="fas fa-money-bill-wave fa-2x pl-3"></i>  money icon removed as we have random prices, add again when we can compare with average price-->
+            </div>
+            <div class="d-flex justify-content-between">
+              <p><%= product.description%></p>
+              <p>TouchSpin missing</p>
+              <i class="fas fa-plus-circle fa-2x"></i>
+            </div>
+          </div>
+        </div>
       </div>
-      <h3>Category</h3>
-      <div class="d-flex justify-content-between badges">
-        <i class="fas fa-cloud fa-2x"></i>
-        <i class="fas fa-certificate fa-2x"></i>
-        <i class="fas fa-money-bill-wave fa-2x"></i>
-      </div>
-      <div class="d-flex justify-content-between">
-        <p>Product description with <strong>relevant info</strong> only.</p>
-        <p>TouchSpin missing</p>
-        <i class="fas fa-plus-circle fa-2x"></i>
-      </div>
-    </div>
+    <% end %>
   </div>
 </div>
