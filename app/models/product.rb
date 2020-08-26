@@ -7,5 +7,6 @@ class Product < ApplicationRecord
   has_many :playlist_products
   has_many :playlists, through: :playlist_products
   validates :barcode, :name, presence: true
+  
 
 end
