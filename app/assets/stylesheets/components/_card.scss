@@ -4,7 +4,7 @@
   height: 200px;
   background: white;
   display: flex;
-  align-items: stretch;
+  // align-items: stretch;
   font-family: $body-font;
   border: 1px solid $light-gray;
 }
@@ -41,4 +41,3 @@
 .card-product .card-product-infos {
   padding: 16px;
 }
-
