@@ -1,11 +1,11 @@
 class OrderProductsController < ApplicationController
+  skip_before_action :authenticate_user!
 
   def create
     @order = @current_order
-    @order.order_products.new(order_product_params)
-    @order_product = @order.save
+    order_product = @order.order_products.new(order_product_params)
+    @order.save
     session[:order_id] = @order.id
-
   end
 
   def update
