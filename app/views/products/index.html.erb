@@ -1,10 +1,19 @@
 
+
 <nav class="navbar navbar-light">
   <%= form_tag products_path, method: :get, :class => 'form-inline' do %>
     <%= text_field_tag :query,
       params[:query],class: "form-control",placeholder: "Search..."%>
     <%= submit_tag "Search", class: "btn btn-primary" %>
   <% end %>
+<%= render "/shared/popup" %>
+
+
+ <nav class="navbar navbar-light">
+  <form class="form-inline">
+    <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
+    <button class="btn btn-primary" type="submit">Search</button>
+  </form>
 </nav>
 
 
@@ -23,7 +32,20 @@
       <% end %>
     </div>
   </div>
-
+  <br>
+  <div class="ml-4">
+    <h3>Preferences</h3>
+    <div class="form-check">
+      <label class="form-check-label col-2">
+        <input type="radio" class="form-check-input" name="optradio">Preference 1
+      </label>
+    </div>
+    <div class="form-check">
+      <label class="form-check-label col-2">
+        <input type="radio" class="form-check-input" name="optradio">Preference 2
+      </label>
+    </div>
+  </div>
 
   <div class="container-products">
     <% @products.each do |product| %>
@@ -53,7 +75,7 @@
                 <i class="fas fa-heartbeat fa-2x pl-3" style="color: #A52A2A;"></i>
               <% end %>
 
-              <!-- <i class="fas fa-money-bill-wave fa-2x pl-3"></i>  money icon removed as we have random prices, add again when we can compare with average price-->
+              <i class="fas fa-money-bill-wave fa-2x pl-3"></i>  money icon removed as we have random prices, add again when we can compare with average price
             </div>
             <div class="d-flex justify-content-between">
               <p><%= product.description%></p>
@@ -72,3 +94,4 @@
     <% end %>
   </div>
 </div>
+

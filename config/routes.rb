@@ -8,9 +8,10 @@ Rails.application.routes.draw do
   resources :products, only: [:show, :index]
   resources :playlists, only: [:index, :create, :new]
   resources :orders, only: [:show, :new, :create]
-  resources :dashboards, only: [:show]
   resources :carts
   resources :order_products
+  get "dashboard", to: "dashboards#overview"
+
 end
 
 
