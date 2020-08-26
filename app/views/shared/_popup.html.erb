@@ -1,0 +1,90 @@
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Trigger modal
+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Product title</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-md-4">
+              <h5>Category</h5>
+              <div class="show-emotes">
+                <i class="fas fa-leaf"></i>
+                <i class="fas fa-heartbeat"></i>
+                <i class="fas fa-dollar-sign"></i>
+              </div>
+              <img src="https://images.unsplash.com/photo-1584306670957-acf935f5033c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=666&q=80" style="height:100px;" alt="">
+            </div>
+
+            <div class="col-md-8 ml-auto d-flex flex-row">
+              <div class="quantity-show">
+                <p>Quantity</p>
+                <div class="min-max-q-show">
+                <button id="minus">−</button>
+                <input type="number" value="0" id="input"/>
+                <button id="plus">+</button>
+                </div>
+              </div>
+              <div class="price-show">
+                <p>Price</p>
+                <p>10CHF</p>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <div id="list-example" class="list-group">
+                    <a class="list-group-item list-group-item-action active" href="#list-item-1">Item 1</a>
+                    <a class="list-group-item list-group-item-action" href="#list-item-2">Item2</a>
+                    <a class="list-group-item list-group-item-action" href="#list-item-3">Item 3</a>
+                    <a class="list-group-item list-group-item-action" href="#list-item-4">Item 4</a>
+                  </div>
+                </div>
+                <div class="col-8">
+                  <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example">
+                    <h4 id="list-item-1">Item 1</h4>
+                    <p>Quis anim sit do amet fugiat dolor velit sit ea ea do reprehenderit culpa duis. Nostrud aliqua ipsum fugiat minim proident occaecat excepteur aliquip culpa aute tempor reprehenderit. Deserunt tempor mollit elit ex pariatur dolore velit fugiat mollit culpa irure ullamco est ex ullamco excepteur.</p>
+                    <h4 id="list-item-2">Item 2</h4>
+                    <p>Quis anim sit do amet fugiat dolor velit sit ea ea do reprehenderit culpa duis. Nostrud aliqua ipsum fugiat minim proident occaecat excepteur aliquip culpa aute tempor reprehenderit. Deserunt tempor mollit elit ex pariatur dolore velit fugiat mollit culpa irure ullamco est ex ullamco excepteur.</p>
+                    <h4 id="list-item-3">Item 3</h4>
+                    <p>Quis anim sit do amet fugiat dolor velit sit ea ea do reprehenderit culpa duis. Nostrud aliqua ipsum fugiat minim proident occaecat excepteur aliquip culpa aute tempor reprehenderit. Deserunt tempor mollit elit ex pariatur dolore velit fugiat mollit culpa irure ullamco est ex ullamco excepteur.</p>
+                    <h4 id="list-item-4">Item 4</h4>
+                    <p>Quis anim sit do amet fugiat dolor velit sit ea ea do reprehenderit culpa duis. Nostrud aliqua ipsum fugiat minim proident occaecat excepteur aliquip culpa aute tempor reprehenderit. Deserunt tempor mollit elit ex pariatur dolore velit fugiat mollit culpa irure ullamco est ex ullamco excepteur.</p>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const minusButton = document.getElementById('minus');
+const plusButton = document.getElementById('plus');
+const inputField = document.getElementById('input');
+
+minusButton.addEventListener('click', event => {
+  event.preventDefault();
+  const currentValue = Number(inputField.value) || 0;
+  inputField.value = currentValue - 1;
+});
+
+plusButton.addEventListener('click', event => {
+  event.preventDefault();
+  const currentValue = Number(inputField.value) || 0;
+  inputField.value = currentValue + 1;
+});
+</script>
