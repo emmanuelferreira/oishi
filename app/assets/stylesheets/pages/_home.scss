@@ -128,67 +128,49 @@
 }
 
 @keyframes leeks{
-  0%{transform: rotate(0deg)}
-  3%{transform: rotate(-2deg)}
-  4%{transform: rotate(2deg)}
-  5%{transform: rotate(0deg)}
-  100%{transform: rotate(0deg)}
+  0% { transform: rotate(0deg); }
+  80% { transform: rotate(0deg); }
+  85% { transform: rotate(5deg); }
+  95% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
 }
 
 @keyframes beacon{
   0%{transform: rotate(-30deg)}
-  3%{transform: rotate(-32deg)}
-  4%{transform: rotate(-30deg)}
-  5%{transform: rotate(-30deg)}
+  80%{transform: rotate(-30deg)}
+  85%{transform: rotate(-25deg)}
+  95%{transform: rotate(-35deg)}
   100%{transform: rotate(-30deg)}
 }
 
 @keyframes watermelon{
   0%{transform: rotate(0deg)}
-  3%{transform: rotate(4deg)}
-  4%{transform: rotate(2deg)}
-  5%{transform: rotate(0deg)}
+  80%{transform: rotate(0deg)}
+  85%{transform: rotate(5deg)}
+  95%{transform: rotate(-5deg)}
   100%{transform: rotate(0deg)}
 }
 
 @keyframes cherries{
   0%{transform: rotate(40deg)}
-  3%{transform: rotate(38deg)}
-  4%{transform: rotate(42deg)}
-  5%{transform: rotate(40deg)}
+  80%{transform: rotate(40deg)}
+  85%{transform: rotate(35deg)}
+  95%{transform: rotate(45deg)}
   100%{transform: rotate(40deg)}
 }
 
 @keyframes cumcumber{
   0%{transform: rotate(15deg)}
-  3%{transform: rotate(12deg)}
-  4%{transform: rotate(18deg)}
-  5%{transform: rotate(15deg)}
+  80%{transform: rotate(15deg)}
+  85%{transform: rotate(10deg)}
+  95%{transform: rotate(20deg)}
   100%{transform: rotate(15deg)}
 }
 
 @keyframes fish{
   0%{transform: rotate(10deg)}
-  3%{transform: rotate(8deg)}
-  4%{transform: rotate(13deg)}
-  5%{transform: rotate(10deg)}
+  80%{transform: rotate(10deg)}
+  85%{transform: rotate(5deg)}
+  95%{transform: rotate(15deg)}
   100%{transform: rotate(10deg)}
 }
-
-// @keyframes fish {
-//   10%, 90% {
-//     transform: translate3d(-4px, 0, 0);
-//   }
-  
-//   20%, 80% {
-//     transform: translate3d(6px, 0, 0);
-//   }
-
-//   30%, 50%, 70% {
-//     transform: translate3d(-9px, 0, 0);
-//   }
-
-//   40%, 60% {
-//     transform: translate3d(9px, 0, 0);
-//   }
-// }
