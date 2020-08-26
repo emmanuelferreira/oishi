@@ -22,12 +22,6 @@
   top:0;
   right:0;
   position: absolute;
-  // transform: skew(45deg);
-  // margin-left: 800px;
-  // display: flex;
-  // align-content: flex-end;
-  // margin-bottom: 900px;
-  // z-index: -10;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%);
 }
 
@@ -36,4 +30,3 @@
   z-index: -9;
   opacity: 0.95;
 }
-
