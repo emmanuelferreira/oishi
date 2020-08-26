@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_26_070991) do
+ActiveRecord::Schema.define(version: 2020_08_26_145155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,13 @@ ActiveRecord::Schema.define(version: 2020_08_26_070991) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "carts", force: :cascade do |t|
+    t.float "subtotal"
+    t.float "total"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -100,6 +107,11 @@ ActiveRecord::Schema.define(version: 2020_08_26_070991) do
     t.bigint "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "quantity"
+    t.float "unit_price"
+    t.float "total_price"
+    t.bigint "cart_id", null: false
+    t.index ["cart_id"], name: "index_order_products_on_cart_id"
     t.index ["order_id"], name: "index_order_products_on_order_id"
     t.index ["product_id"], name: "index_order_products_on_product_id"
   end
@@ -114,6 +126,10 @@ ActiveRecord::Schema.define(version: 2020_08_26_070991) do
     t.string "payment_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "subtotal"
+    t.float "total"
+    t.float "tax"
+    t.float "shipping"
     t.index ["address_id"], name: "index_orders_on_address_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -142,7 +158,7 @@ ActiveRecord::Schema.define(version: 2020_08_26_070991) do
     t.string "origin"
     t.date "expiration_date"
     t.string "availability"
-    t.integer "price"
+    t.float "price"
     t.string "currency"
     t.string "nutri_score"
     t.string "eco_score"
@@ -1347,6 +1363,7 @@ ActiveRecord::Schema.define(version: 2020_08_26_070991) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "inventories", "products"
   add_foreign_key "inventories", "suppliers"
+  add_foreign_key "order_products", "carts"
   add_foreign_key "order_products", "orders"
   add_foreign_key "order_products", "products"
   add_foreign_key "orders", "addresses"

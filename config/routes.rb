@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'shopping_cart/index'
+  get 'shopping_cart/create'
+  get 'shopping_cart/delete'
   devise_for :users
   root to: 'pages#home'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
@@ -6,5 +9,8 @@ Rails.application.routes.draw do
   resources :playlists, only: [:index, :create, :new]
   resources :orders, only: [:show, :new, :create]
   resources :dashboards, only: [:show]
+  resources :carts
+  resources :order_products
 end
+
 

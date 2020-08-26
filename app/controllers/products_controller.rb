@@ -4,6 +4,9 @@ class ProductsController < ApplicationController
   def index
     @products = Product.all
     @suppliers = Supplier.all
+    @order_product = @current_order.order_products.new
   end
 
 end
+
+
