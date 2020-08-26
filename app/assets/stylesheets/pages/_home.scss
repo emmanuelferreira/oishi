@@ -31,11 +31,8 @@
   opacity: 0.95;
 }
 
-// .images-container{
-//   width: 20%;
-//   height: auto;
-// }
 
+// Illustration
 .leeks{
   background-image: url("leeks.png");
   width: 100%;
@@ -45,4 +42,75 @@
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;
+  bottom: 40px;
+  left: 427px;
+}
+
+.beacon{
+  background-image: url("beacon.png");
+  width: 100%;
+  height:100%;
+  overflow: hidden;
+  background-size: 50px;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 80px;
+  -webkit-transform: rotate(-30deg);
+  top: 270px;
+}
+
+.watermelon{
+  background-image: url("watermelon.png");
+  width: 100%;
+  height:100%;
+  overflow: hidden;
+  background-size: 140px;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 200px;
+  top: 80px;
+}
+
+.cherries{
+  background-image: url("cherries.png");
+  width: 100%;
+  height:100%;
+  overflow: hidden;
+  background-size: 100px;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: 150px;
+  left: 45px;
+  -webkit-transform: rotate(40deg);
+}
+
+.cumcumber{
+  background-image: url("cumcumber.png");
+  width: 100%;
+  height:100%;
+  overflow: hidden;
+  background-size: 180px;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  -webkit-transform: rotate(15deg);
+  top: 250px;
+  left: 330px;
+}
+
+.fish{
+  background-image: url("fish.png");
+  width: 100%;
+  height:100%;
+  overflow: hidden;
+  background-size: 180px;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  -webkit-transform: rotate(10deg);
+  bottom: 80px;
+  left: 230px;
 }
