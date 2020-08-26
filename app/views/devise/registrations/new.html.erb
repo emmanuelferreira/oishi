@@ -1,12 +1,28 @@
 <h2>Sign up</h2>
-
+<% resource.build_address  %>
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :email,
+    <%= f.input :firstname,
                 required: true,
                 autofocus: true,
+                input_html: { autocomplete: "firstname" }%>
+    <%= f.input :lastname,
+                required: true,
+                input_html: { autocomplete: "lastname" }%>
+    <%= f.input :username,
+                required: true,
+                input_html: { autocomplete: "username" } %>
+      
+      <%= f.simple_fields_for :address do |ff| %>
+              <%= ff.input :street,  required: true %>              
+              <%= ff.input :city,  required: true %> 
+              <%= ff.input :zip,  required: true %> 
+        <%end 
+      %>
+    <%= f.input :email,
+                required: true,
                 input_html: { autocomplete: "email" }%>
     <%= f.input :password,
                 required: true,
