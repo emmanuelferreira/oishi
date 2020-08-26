@@ -30,3 +30,147 @@
   z-index: -9;
   opacity: 0.95;
 }
+
+
+// Illustrations
+#leeks{
+  background-image: url("leeks.png");
+  width: 100%;
+  height:100%;
+  overflow: hidden;
+  background-size: 80px;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: 40px;
+  left: 427px;
+
+  animation: leeks 3s infinite;
+}
+
+#beacon{
+  background-image: url("beacon.png");
+  width: 100%;
+  height:100%;
+  overflow: hidden;
+  background-size: 50px;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 80px;
+  -webkit-transform: rotate(-30deg);
+  top: 270px;
+
+  animation: beacon 4s infinite;
+}
+
+#watermelon{
+  background-image: url("watermelon.png");
+  width: 100%;
+  height:100%;
+  overflow: hidden;
+  background-size: 140px;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 200px;
+  top: 80px;
+
+  animation: watermelon 2s infinite;
+}
+
+#cherries{
+  background-image: url("cherries.png");
+  width: 100%;
+  height:100%;
+  overflow: hidden;
+  background-size: 100px;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: 150px;
+  left: 45px;
+  -webkit-transform: rotate(40deg);
+
+  animation: cherries 6s infinite;
+}
+
+#cumcumber{
+  background-image: url("cumcumber.png");
+  width: 100%;
+  height:100%;
+  overflow: hidden;
+  background-size: 180px;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  -webkit-transform: rotate(15deg);
+  top: 250px;
+  left: 330px;
+
+  animation: cumcumber 5s infinite;
+}
+
+#fish{
+  background-image: url("fish.png");
+  width: 100%;
+  height:100%;
+  overflow: hidden;
+  background-size: 180px;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  -webkit-transform: rotate(10deg);
+  bottom: 80px;
+  left: 230px;
+
+  animation: fish 3s infinite;
+}
+
+@keyframes leeks{
+  0%{transform: rotate(0deg)}
+  3%{transform: rotate(-2deg)}
+  4%{transform: rotate(2deg)}
+  5%{transform: rotate(0deg)}
+  100%{transform: rotate(0deg)}
+}
+
+@keyframes beacon{
+  0%{transform: rotate(-30deg)}
+  3%{transform: rotate(-32deg)}
+  4%{transform: rotate(-30deg)}
+  5%{transform: rotate(-30deg)}
+  100%{transform: rotate(-30deg)}
+}
+
+@keyframes watermelon{
+  0%{transform: rotate(0deg)}
+  3%{transform: rotate(4deg)}
+  4%{transform: rotate(2deg)}
+  5%{transform: rotate(0deg)}
+  100%{transform: rotate(0deg)}
+}
+
+@keyframes cherries{
+  0%{transform: rotate(40deg)}
+  3%{transform: rotate(38deg)}
+  4%{transform: rotate(42deg)}
+  5%{transform: rotate(40deg)}
+  100%{transform: rotate(40deg)}
+}
+
+@keyframes cumcumber{
+  0%{transform: rotate(15deg)}
+  3%{transform: rotate(12deg)}
+  4%{transform: rotate(18deg)}
+  5%{transform: rotate(15deg)}
+  100%{transform: rotate(15deg)}
+}
+
+@keyframes fish{
+  0%{transform: rotate(10deg)}
+  3%{transform: rotate(8deg)}
+  4%{transform: rotate(13deg)}
+  5%{transform: rotate(10deg)}
+  100%{transform: rotate(10deg)}
+}
