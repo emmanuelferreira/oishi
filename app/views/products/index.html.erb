@@ -54,7 +54,6 @@
           <div class="d-flex justify-content-between">
             <p class="flex-grow"><%= product.description%></p>
             <span>
-              <%= @current_cart.inspect %>
             <%= form_for @order_product , class: "form-inline", remote: true do |f| %>
               <%= f.hidden_field :product_id, value: product.id%>
               <%= f.text_field :quantity, value: 1, min: 1, size: 2 %>

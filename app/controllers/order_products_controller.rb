@@ -12,7 +12,7 @@ class OrderProductsController < ApplicationController
   end
 
   def update
-    @cart = current_cart
+    @cart = @current_cart
     @order_product = @cart.order_products.find(params[:id])
     @order_product.update_attributes(order_product_params)
     @order_products = @cart.order_products
