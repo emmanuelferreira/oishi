@@ -193,6 +193,7 @@ ActiveRecord::Schema.define(version: 2020_08_27_072848) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "inventories", "products"
   add_foreign_key "inventories", "suppliers"
   add_foreign_key "order_products", "carts"
