@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   def index
     @products = Product.includes(:subcategory)
     @suppliers = Supplier.all
-    @order_product = @current_cart.order_products.new
+    @order_product = OrderProduct.new
   end
 
 end

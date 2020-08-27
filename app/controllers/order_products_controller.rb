@@ -3,10 +3,12 @@ class OrderProductsController < ApplicationController
 
 
   def create
-    @cart = @current_cart
-    @order_product = @cart.order_products.new(order_product_params)
-    @cart.save
-    session[:cart_id] = @cart.id
+    if @current_cart.key?(order_product_params[:product_id])
+      @current_cart[order_product_params[:product_id]] += order_product_params[:quantity].to_i
+    else
+      @current_cart[order_product_params[:product_id]] = order_product_params[:quantity].to_i
+    end
+    session[:cart] = @current_cart
   end
 
   def update
@@ -26,7 +28,7 @@ class OrderProductsController < ApplicationController
   private
 
   def order_product_params
-    params.require(:order_product).permit(:product_id, :quantity, :unit_price, :total_price)
+    params.require(:order_product).permit(:product_id, :quantity)
   end
 end
 

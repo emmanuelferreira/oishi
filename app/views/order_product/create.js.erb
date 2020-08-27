@@ -1,5 +1,0 @@
-<% if @cart.errors.any? || @order_product.errors.any? %>
-  alert("Invalid");
-<% else %>
-  $(".cart").html("<%= escape_javascript(render '../shared/cart') %>");
-<% end %>
