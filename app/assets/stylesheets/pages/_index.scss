@@ -4,19 +4,17 @@
 .index-banner{
   background-image: linear-gradient(rgba(245, 245, 245, 0.4),rgba(245,245,245,0.4)), url("index-banner.png");
   opacity: 0.7;
-  // background-image: url("index-banner.png");
   height: 250px;
   width: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
-  // margin-bottom: 24px;
   z-index: -1;
 }
 
 .product-description{
-  overflow: scroll;
+  overflow: auto;
   position: static;
 }
 
@@ -29,4 +27,6 @@
 }
 
 .container-product{
+  position: static;
+  overflow: auto;
 }
