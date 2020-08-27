@@ -1,3 +1,4 @@
+
 function initTabSelector() {
   const tabcontent = document.getElementsByClassName("tabcontent");
   let i;
@@ -21,6 +22,7 @@ function tabsSelector(evt, categoryName) {
   }
   tablinks = document.getElementsByClassName("tablinks");
   for (i = 0; i < tablinks.length; i++) {
+
     tablinks[i].className = tablinks[i].className.replace("active", "");
   }
   document.getElementById(categoryName).style.display = "block";
