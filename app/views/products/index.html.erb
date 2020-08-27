@@ -29,7 +29,7 @@
 
   <div class="container-products col-lg-12">
     <% @products.each do |product| %>
-      <div class="card-product w-75">
+      <div class="card-product w-75" data-toggle="modal" data-target="#<%= product.id %>">
         <%= image_tag product.image, class: "mh-100", style: "width: 200px; height: 300px;"  %>
         <div class="card-product-infos flex-grow-1">
           <div class="d-flex justify-content-between ">
@@ -67,7 +67,7 @@
           </div>
         </div>
       </div>
-
+      <%= render 'shared/popup', product: product%>
     <% end %>
   </div>
 </div>
