@@ -10,5 +10,5 @@ function openCity(evt, categoryName) {
   }
   document.getElementById(categoryName).style.display = "block";
   evt.currentTarget.className += " active";
-
-  export { openCity };
+}
+export { openCity };
