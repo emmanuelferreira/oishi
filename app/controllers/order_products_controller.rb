@@ -16,7 +16,6 @@ class OrderProductsController < ApplicationController
       @current_cart[order_product_params[:product_id]] = order_product_params[:quantity].to_i
     end
     session[:cart] = @current_cart
-    render "create"
   end
 
   def delete_from_cart
@@ -24,12 +23,8 @@ class OrderProductsController < ApplicationController
       @current_cart.delete(params[:product_id])
     end
     session[:cart] = @current_cart
-    render "create"
   end
 
-
-
-  end
 
   private
 

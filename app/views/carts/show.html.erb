@@ -1,6 +1,6 @@
 <div class="container">
-  <div id="cart-item">
-    <% if @current_cart.values.reduce(:+) > 0 %>
+  <% if @current_cart.values.reduce(:+) > 0 %>
+    <div id="cart-item">
       <% @order_products.each do |item| %>
         <ul>
           <li>
@@ -15,13 +15,49 @@
           </li>
         </ul>
       <% end %>
-      <span>Total Price:
-        <%= @current_cart.inject(0) do |sum, (key, quantity)| %>
-          <% @product = Product.find(key) %>
-          <% sum += @product.price * quantity %>
-        <% end  %>
-      CHF</span>
+    </div>
+
+    <div class="container">
+      <%= form_tag charges_path do %>
+      <article>
+        <% if flash[:error].present? %>
+          <div id="error_explanation">
+            <p><%= flash[:error] %></p>
+          </div>
+        <% end %>
+        <label class="amount">
+          <span>Total Amount:
+                <%= @current_cart.inject(0) do |sum, (key, quantity)| %>
+                  <% @product = Product.find(key) %>
+                  <% sum += @product.price * quantity %>
+                <% end  %>
+              CHF
+            <% end %>
+          </span>
+        </label>
+      </article>
+
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+              data-description="Current Order"
+              data-amount="500"
+              data-locale="auto">
+      </script>
+    </div>
+  <% end %>
+
+
+  <% if false %>
+    <%= form_for @order do |order_form| %>
+      First name: <%= order_form.text_field :first_name %>
+      Last name : <%= order_form.text_field :last_name %>
+
+      <%= fields_for :permission, @person.permission do |permission_fields| %>
+        Admin?  : <%= permission_fields.check_box :admin %>
+      <% end %>
+
+      <%= person_form.submit %>
     <% end %>
-  </div>
+  <% end %>
 
 </div>

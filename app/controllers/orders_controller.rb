@@ -1,6 +1,11 @@
 class OrdersController < ApplicationController
 
-  def save
+  def create
+    @cart_amount = @current_cart.inject(0) do |sum, (key, quantity)|
+          @product = Product.find(key)
+          sum += @product.price * quantity
+        end
+
     @order = Order.new(
       status: "pending",
       user_id: @current_user.id,

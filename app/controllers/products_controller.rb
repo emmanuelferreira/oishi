@@ -2,9 +2,10 @@ class ProductsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   def index
-
-    if params[:quiery].present?
-      @products = Product.where(subcategory: params[:quiery])
+    if params[:query].present?
+      @products = Product.where(subcategory: params[:query])
+      @suppliers = Supplier.all
+      @order_product = OrderProduct.new
     else
       @products = Product.includes(:subcategory)
       @suppliers = Supplier.all
