@@ -1,3 +1,17 @@
 // Import page-specific CSS files here.
 @import "home";
 
+.index-banner{
+  background-image: linear-gradient(rgba(245, 245, 245, 0.4),rgba(245,245,245,0.4)), url("index-banner.png");
+  // background-image: url("index-banner.png");
+  height: 250px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: static;
+  // margin-bottom: 24px;
+}
+
+.description{
+  overflow: scroll;
+}

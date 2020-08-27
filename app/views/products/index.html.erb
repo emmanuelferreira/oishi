@@ -1,11 +1,11 @@
-
-
+  <div class="index-banner"></div>
 
   <%= form_tag products_path, method: :get, :class => 'form-inline' do %>
     <%= text_field_tag :query,
       params[:query],class: "form-control",placeholder: "Search..."%>
     <%= submit_tag "Search", class: "btn btn-primary" %>
   <% end %>
+
 
 <div class="container d-flex">
   <div class="d-flex flex-column suppliers">
@@ -26,7 +26,7 @@
   <div class="container-products">
     <% @products.each do |product| %>
       <div class="card-product w-75">
-         <%= image_tag product.image, class: "mh-100", style: "width: 200px; height: 300px;"  %>
+        <%= image_tag product.image, class: "mh-100", style: "width: 200px; height: 300px;"  %>
         <div class="card-product-infos flex-grow-1">
           <div class="d-flex justify-content-between ">
             <h2><%= product.name.capitalize %></h2>
@@ -52,7 +52,7 @@
             <!-- <i class="fas fa-money-bill-wave fa-2x pl-3"></i>  money icon removed as we have random prices, add again when we can compare with average price -->
           </div>
           <div class="d-flex justify-content-between">
-            <p class="flex-grow"><%= product.description%></p>
+            <p class="flex-grow description"><%= product.description%></p>
             <span>
             <%= form_for @order_product , class: "form-inline", remote: true do |f| %>
               <%= f.hidden_field :product_id, value: product.id%>
