@@ -1,16 +1,14 @@
 <% if !@order_products.nil? || @order_products.errors.any? %>
   <ul>
-    <% @order_products.each do |order_product| %>
-      <% @order_product.errors.full_messages.each do |msg| %>
-        <li> <%= msg %></li>
-      <% end %>
+    <% @order_products.each do |msg| %>
+      <li> <%= msg%></li>
     <% end %>
   </ul>
 <% end %>
 
 <% if @order_products.size > 0 %>
   <% @order_products.each do |item| %>
-    <h3> <%= item.product.title %> </h3>
+    <h3> <%= item.product.name %> </h3>
     <% form_for(item, remote: true) do |f| %>
       <%= f.hidden_field :product_id, value: item.product.id %>
       <h5><%= item.product.price %></h5>
