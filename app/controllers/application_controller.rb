@@ -1,13 +1,18 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
-  before_action :current_order
+  before_action :current_cart
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  def current_order
-    if !session[:order_id].nil?
-      @current_order = Order.find(session[:order_id])
+  def current_cart
+    if session[:cart].present?
+      @current_cart = session[:cart]
     else
-      @current_order = Order.new
+      @current_cart = {}
+    end
+
+    @cart_amount = @current_cart.inject(0) do |sum, (key, quantity)|
+      @product = Product.find(key)
+      sum += @product.price * quantity
     end
   end
 

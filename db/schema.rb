@@ -71,7 +71,6 @@ ActiveRecord::Schema.define(version: 2020_08_27_072848) do
   end
 
   create_table "order_products", force: :cascade do |t|
-    t.bigint "order_id", null: false
     t.bigint "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -80,7 +79,6 @@ ActiveRecord::Schema.define(version: 2020_08_27_072848) do
     t.float "total_price"
     t.bigint "cart_id", null: false
     t.index ["cart_id"], name: "index_order_products_on_cart_id"
-    t.index ["order_id"], name: "index_order_products_on_order_id"
     t.index ["product_id"], name: "index_order_products_on_product_id"
   end
 
@@ -193,11 +191,9 @@ ActiveRecord::Schema.define(version: 2020_08_27_072848) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "inventories", "products"
   add_foreign_key "inventories", "suppliers"
   add_foreign_key "order_products", "carts"
-  add_foreign_key "order_products", "orders"
   add_foreign_key "order_products", "products"
   add_foreign_key "orders", "addresses"
   add_foreign_key "orders", "users"

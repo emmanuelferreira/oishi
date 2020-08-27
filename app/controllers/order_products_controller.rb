@@ -1,26 +1,28 @@
 class OrderProductsController < ApplicationController
   skip_before_action :authenticate_user!
 
-  def create
-    @order = @current_order
-    order_product = @order.order_products.new(order_product_params)
-    session[:order_id] = @order.id
-    @order.save
 
+  def create
+    if @current_cart.key?(order_product_params[:product_id])
+      @current_cart[order_product_params[:product_id]] += order_product_params[:quantity].to_i
+    else
+      @current_cart[order_product_params[:product_id]] = order_product_params[:quantity].to_i
+    end
+    session[:cart] = @current_cart
   end
 
   def update
-    @order = current_order
-    @order_product = @order.order_products.find(params[:id])
+    @cart = @current_cart
+    @order_product = @cart.order_products.find(params[:id])
     @order_product.update_attributes(order_product_params)
-    @order_products = @order.order_products
+    @order_products = @cart.order_products
   end
 
   def destroy
-    @order = current_order
-    @order_product = @order.order_products.find(params[:id])
+    @cart = @current_cart
+    @order_product = @cart.order_products.find(params[:id])
     @order_product.destroy
-    @order_products = @order.order_products
+    @order_products = @cart.order_products
   end
 
   private

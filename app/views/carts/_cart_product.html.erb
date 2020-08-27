@@ -1,23 +1,14 @@
-<% if !@order_products.nil? || @order_products.errors.any? %>
-  <ul>
-    <% @order_products.each do |order_product| %>
-      <% @order_product.errors.full_messages.each do |msg| %>
-        <li> <%= msg %></li>
-      <% end %>
-    <% end %>
-  </ul>
-<% end %>
 
-<% if @order_products.size > 0 %>
-  <% @order_products.each do |item| %>
-    <h3> <%= item.product.title %> </h3>
-    <% form_for(item, remote: true) do |f| %>
+<% if @cart.size > 0 %>
+  <% @order_items.each do |item| %>
+    <h3> <%= item.product.name %> </h3>
+    <% form_for(quantity, remote: true) do |f| %>
       <%= f.hidden_field :product_id, value: item.product.id %>
       <h5><%= item.product.price %></h5>
-      <%= f.text_field :quantity, value: item.quantity.to_i, min: 1, class: 'form-control' %>
+      <%= f.text_field :quantity, value: order_product.quantity, min: 1, class: 'form-control' %>
       <%= f.submit "+/-", class: 'btn btn-transparent-sm'  %>
       <%= link_to "-", item, method: :delete, remote: true, class: 'btn btn-danger-sm' %>
-      <span>Total Price: <%= item.total_price %></span>
+      <span>Total Price: <%= @card_amount%></span>
     <% end %>
   <% end %>
 <% end %>
