@@ -18,6 +18,7 @@
 }
 
 .card-product h2 {
+  color: $gray;
   font-size: 18px;
   font-weight: bold;
   margin: 0;
@@ -32,7 +33,7 @@
 
 .card-product p {
   padding-top: 16px;
-  color: $light-gray;
+  color: $gray;
   vertical-align: text-bottom;
 }
 
