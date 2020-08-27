@@ -232,8 +232,28 @@ end
 puts "\n#{products.length} products fetched from #{num_queries} queries."
 puts "Time taken: #{(Time.now - START_TIME).round(1)} seconds"
 
-# ----------------------Orders creation----------------------------------------
-
-
-
-
+# ----------------------Orders creation----------------------------------------#
+stat = ["pending","delivered"].sample
+d = Date.today
+ord = Order.new(
+  status: stat,
+  user_id: User.first.id,
+  deliver_date: stat == "delivered" ? d - rand(1..10) : d + 1,
+  address_id: User.first.address.id,
+)
+prdct = Product.all
+prd = prdct.sample
+qte = rand(1..3)
+ord_prd= OrderProduct.new(
+  order_id: ord[:id],
+  product_id: prd[:id],
+  quantity: qte,
+  unit_price: prd[:price],
+  total_price: qte*prd[:price],
+)
+ord.order_products = OrderProduct.all
+amt=0
+order.order_products.each do |product|
+amt= amt + product[total_price]
+end
+ord[:payment_amount]=amt
