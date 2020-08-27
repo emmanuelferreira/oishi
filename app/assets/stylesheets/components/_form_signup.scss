@@ -1,10 +1,14 @@
 .container {
   position: relative;
   margin-bottom: 20px;
+  margin-top: 120px;
 }
 
 .title_create_account {
   margin-left: 240px;
+  width: 300px;
+  position: absolute;
+  margin-top: -40px;
 }
 
 .form-sign_up {
@@ -71,96 +75,102 @@
 
 
 // Illustrations
-#leeks{
+#leeks-sign-up{
   background-image: url("leeks.png");
-  width: 100%;
-  height:100%;
+  width: 5%;
+  height:65%;
   overflow: hidden;
   background-size: 80px;
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;
-  bottom: 40px;
-  left: 427px;
+  bottom: -60px;
+  left: 1600px;
 
   animation: leeks 3s infinite;
 }
 
-#beacon{
+#beacon-sign-up{
   background-image: url("beacon.png");
-  width: 100%;
-  height:100%;
+  width: 4%;
+  height:34%;
   overflow: hidden;
   background-size: 50px;
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;
-  left: 80px;
   -webkit-transform: rotate(-30deg);
-  top: 270px;
+  top: 180px;
+  left: 300px;
+  z-index: -10;
 
   animation: beacon 4s infinite;
 }
 
-#watermelon{
+#watermelon-sign-up{
   background-image: url("watermelon.png");
-  width: 100%;
-  height:100%;
+  width: 11%;
+  height:18%;
   overflow: hidden;
   background-size: 140px;
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;
-  left: 200px;
-  top: 80px;
+  left: 1300px;
+  top: 400px;
+  z-index: -10;
 
   animation: watermelon 2s infinite;
 }
 
-#cherries{
+#cherries-sign-up{
   background-image: url("cherries.png");
-  width: 100%;
-  height:100%;
+  width: 9%;
+  height: 34%;
   overflow: hidden;
   background-size: 100px;
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;
-  bottom: 150px;
-  left: 45px;
+  bottom: 260px;
+  left: 360px;
+  top: 560px;
   -webkit-transform: rotate(40deg);
+  z-index: -10;
 
   animation: cherries 6s infinite;
 }
 
-#cumcumber{
+#cumcumber-sign-up{
   background-image: url("cumcumber.png");
-  width: 100%;
-  height:100%;
   overflow: hidden;
   background-size: 180px;
   background-position: center;
   background-repeat: no-repeat;
-  position: absolute;
   -webkit-transform: rotate(15deg);
-  top: 250px;
-  left: 330px;
+  position: absolute;
+  width: 800px;
+  height: 240px;
+  left: 1150px;
+  top: 65px;
+  z-index: 10;
 
   animation: cumcumber 5s infinite;
 }
 
-#fish{
+#fish-sign-up{
   background-image: url("fish.png");
-  width: 100%;
-  height:100%;
+  width: 14%;
+  height:18%;
   overflow: hidden;
   background-size: 180px;
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;
   -webkit-transform: rotate(10deg);
-  bottom: 80px;
-  left: 230px;
+  bottom: 400px;
+  left: 800px;
+  z-index: -10;
 
   animation: fish 3s infinite;
 }
