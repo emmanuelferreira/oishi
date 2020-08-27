@@ -3,6 +3,7 @@
 
 .index-banner{
   background-image: linear-gradient(rgba(245, 245, 245, 0.4),rgba(245,245,245,0.4)), url("index-banner.png");
+  opacity: 0.7;
   // background-image: url("index-banner.png");
   height: 250px;
   width: 100%;
@@ -21,4 +22,11 @@
 
 .index-tabs{
   position: static;
+}
+
+.suppliers{
+  margin: 24px;
+}
+
+.container-product{
 }
