@@ -1,3 +1,22 @@
-<div class="cart-item">
-  <%= render 'carts/cart_product' %>
+<div class="container">
+  <div id="cart-item">
+    <% if @current_cart.values.reduce(:+) > 0 %>
+      <% @order_products.each do |item| %>
+        <ul>
+          <li>
+            <h3> <%= item.product.name %> </h3>
+            <%= form_for(item, url: remove_from_cart_path(item.product.id), remote: true) do |f| %>
+              <%= f.hidden_field :product_id, value: item.product.id %>
+              <h5><%= item.product.price %> CHF</h5>
+              <%= f.text_field :quantity, value: item.quantity, min: 1, class: 'form-control' %>
+              <%= f.submit "Update", class: 'btn btn-transparent-sm'  %>
+              <%= link_to "Delete", delete_from_cart_path(item.product.id),remote: true, class: 'btn btn-danger-sm' %>
+            <% end %>
+          </li>
+        </ul>
+        <span>Total Price: <%= @card_amount %></span>
+      <% end %>
+    <% end %>
+  </div>
+  <%= link_to "Process Order",  %>
 </div>

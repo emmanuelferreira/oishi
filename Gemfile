@@ -31,6 +31,9 @@ gem 'cloudinary', '~> 1.12.0'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 gem 'devise'
+gem 'stripe'
+gem 'omniauth'
+gem 'omniauth-stripe-connect'
 
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass'
