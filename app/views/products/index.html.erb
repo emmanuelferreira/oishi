@@ -1,10 +1,14 @@
   <div class="index-banner"></div>
+  <%= render 'shared/tabs', class: "index-tabs" %>
 
+
+<div class="search-form d-flex justify-content-center p-3">
   <%= form_tag products_path, method: :get, :class => 'form-inline' do %>
     <%= text_field_tag :query,
       params[:query],class: "form-control",placeholder: "Search..."%>
     <%= submit_tag "Search", class: "btn btn-primary" %>
   <% end %>
+</div>
 
 
 <div class="container d-flex">
@@ -35,24 +39,24 @@
           <h3><%= product.subcategory.name %></h3>
           <div class="d-flex justify-content-start badges">
             <% if product.eco_score == "A" || product.eco_score == "B"%>
-              <i class="fas fa-globe-americas fa-2x" style="color: #004D00;"></i>
+              <i class="fas fa-globe-americas fa-2x" style="color: #4CA90C;"></i>
             <%elsif  product.eco_score == "C" || product.eco_score == "D"%>
-              <i class="fas fa-globe-americas fa-2x" style="color: #f9d71c;"></i>
+              <i class="fas fa-globe-americas fa-2x" style="color: #FFC400;"></i>
             <% else %>
-              <i class="fas fa-globe-americas fa-2x" style="color: #A52A2A;"></i>
+              <i class="fas fa-globe-americas fa-2x" style="color: #EB5757;"></i>
             <% end %>
 
             <% if product.nutri_score == "A" || product.nutri_score == "B"%>
-              <i class="fas fa-heartbeat fa-2x pl-3" style="color: #004D00;"></i>
+              <i class="fas fa-heartbeat fa-2x pl-3" style="color: #4CA90C;"></i>
             <%elsif  product.nutri_score == "C" || product.nutri_score == "D"%>
-              <i class="fas fa-heartbeat fa-2x pl-3" style="color: #f9d71c;"></i>
+              <i class="fas fa-heartbeat fa-2x pl-3" style="color: #FFC400;"></i>
             <% else %>
-              <i class="fas fa-heartbeat fa-2x pl-3" style="color: #A52A2A;"></i>
+              <i class="fas fa-heartbeat fa-2x pl-3" style="color: #EB5757;"></i>
             <% end %>
             <!-- <i class="fas fa-money-bill-wave fa-2x pl-3"></i>  money icon removed as we have random prices, add again when we can compare with average price -->
           </div>
           <div class="d-flex justify-content-between">
-            <p class="flex-grow description"><%= product.description%></p>
+            <p class="flex-grow overflow-auto"><%= product.description%></p>
             <span>
             <%= form_for @order_product , class: "form-inline", remote: true do |f| %>
               <%= f.hidden_field :product_id, value: product.id%>
@@ -67,5 +71,4 @@
     <% end %>
   </div>
 </div>
-
 

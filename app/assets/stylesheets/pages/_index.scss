@@ -5,13 +5,20 @@
   background-image: linear-gradient(rgba(245, 245, 245, 0.4),rgba(245,245,245,0.4)), url("index-banner.png");
   // background-image: url("index-banner.png");
   height: 250px;
+  width: 100%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  position: static;
+  position: relative;
   // margin-bottom: 24px;
+  z-index: -1;
 }
 
-.description{
+.product-description{
   overflow: scroll;
+  position: static;
+}
+
+.index-tabs{
+  position: static;
 }
