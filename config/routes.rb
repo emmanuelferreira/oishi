@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   resources :carts
   resources :order_products
   get "dashboard", to: "dashboards#overview"
-
 end
 
 

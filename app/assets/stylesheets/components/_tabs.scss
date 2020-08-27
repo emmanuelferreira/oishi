@@ -11,7 +11,7 @@
 }
 
 .tabs-underlined .tab-underlined {
-  color: black;
+  color: $gray;
   padding: 8px;
   margin: 8px 16px;
   opacity: 0.9;
@@ -29,38 +29,38 @@
 
 .tabs-underlined .tab-underlined.active {
   opacity: 1;
-  border-bottom: 3px solid #555555;
+  border-bottom: 3px solid $yellow;
 }
 
 .btn-all {
-  background-color: #F8B960;
+  background-color: $yellow;
   font-family: Roboto;
   padding-left: 40px;
   padding-right: 40px;
 }
 
 .btn-all:hover {
-  background-color: #F8B960;
+  background-color: $yellow;
   opacity: 0.9;
 }
 
 
 .btn-lists {
-  background-color: #DA3A0A;
+  background-color: $orange;
   font-family: Roboto;
   padding-left: 40px;
   padding-right: 40px;
 }
 
 .btn-lists:hover {
-  background-color: #DA3A0A;
+  background-color: $orange;
   opacity: 0.9;
 }
 
 
 
 .second-tabs {
-  background-color: #233E41;
+  background-color: $dark-green;
 }
 
 .tabs-underlined .tab-underlined-second {
@@ -76,6 +76,6 @@
 }
 
 .tabs-underlined .tab-underlined-second:hover {
-  background-color: #233E41;
-  opacity: 0.4;
+  // background-color: $dark-green;
+  color: $yellow;
 }
