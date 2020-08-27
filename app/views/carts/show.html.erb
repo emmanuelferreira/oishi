@@ -8,15 +8,20 @@
             <%= form_for(item, url: remove_from_cart_path(item.product.id), remote: true) do |f| %>
               <%= f.hidden_field :product_id, value: item.product.id %>
               <h5><%= item.product.price %> CHF</h5>
-              <%= f.text_field :quantity, value: item.quantity, min: 1, class: 'form-control' %>
+              <%= f.text_field :quantity, value: item.quantity, min: 1, class: 'form-control', style: 'w-1' %>
               <%= f.submit "Update", class: 'btn btn-transparent-sm'  %>
-              <%= link_to "Delete", delete_from_cart_path(item.product.id),remote: true, class: 'btn btn-danger-sm' %>
+              <%= link_to "Delete", delete_from_cart_path(item.product.id), method: :post, remote: true, class: 'btn btn-danger-sm' %>
             <% end %>
           </li>
         </ul>
-        <span>Total Price: <%= @card_amount %></span>
       <% end %>
+      <span>Total Price:
+        <%= @current_cart.inject(0) do |sum, (key, quantity)| %>
+          <% @product = Product.find(key) %>
+          <% sum += @product.price * quantity %>
+        <% end  %>
+      CHF</span>
     <% end %>
   </div>
-  <%= link_to "Process Order",  %>
+
 </div>
