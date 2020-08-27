@@ -3,6 +3,23 @@
 
 }
 
+.modal-title {
+  color: #525252;
+  font-family: Roboto;
+}
+
+.basket-selection {
+  padding-bottom: 48px;
+  padding-left: 48px;
+  padding-right: 48px;
+}
+
+.basket-selection p {
+  font-family: Roboto;
+  color: #C4C4C4;
+  font-weight: lighter;
+}
+
 .list-group-item {
   width: 160px;
 }
@@ -13,5 +30,70 @@
 
 .show-emotes {
   display: flex;
+  justify-content: flex-start;
+}
+
+.fa-heartbeat {
+  padding-right: 80px;
+  color: #DA3A0A;
+}
+
+.fa-leaf {
+  padding-right: 80px;
+  color: #FFC400;
+}
+
+.fa-dollar-sign {
+  color: #4CA90C;
+}
+
+.img-show {
+  padding-top: 24px;
+  width: 200px;
+}
+
+h5 {
+  padding-bottom: 18px;
+
+}
+
+
+.btn-basket {
+  background-color: #DA3A0A;
+  font-family: Roboto;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.list-group-item-action {
+  font-family: Roboto;
+}
+
+.recommandations-show {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.suggestions {
+  display: flex;
   justify-content: space-around;
+}
+
+.modal {
+  left: -150px;
+}
+
+.suggestion-title {
+  display: flex;
+  justify-content: center;
+}
+
+.img-suggestions {
+  text-align: center;
+}
+
+.suggestion-title h1 {
+  font-family: Roboto;
+  color: #C4C4C4;
+  font-size: 18px;
 }

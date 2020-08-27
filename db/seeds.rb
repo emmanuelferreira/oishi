@@ -214,7 +214,7 @@ until num_queries == 1 do
       origin: product["origin_translations"]["en"],
       expiration_date: Date.today() + rand(7..30),
       availability: "available",
-      price: Faker::Commerce.price(range: 0..10.0),
+      price: Faker::Commerce.price(range: 1..10.0),
       currency: "CHF",
       nutri_score: nutriscore.capitalize,
       eco_score: ecoscore,
