@@ -11,7 +11,7 @@
 </div>
 
 
-<div class="container-fluid text-center">    
+<div class="container-fluid text-center">
   <div class="row content">
     <div class="col-sm-2 sidenav">
       <h3> <%= @suppliers.count %> Suppliers</h3>
@@ -26,7 +26,7 @@
       <% end %>
     </div>
 
-    <div class="col-sm-10 text-left"> 
+    <div class="col-sm-10 text-left">
       <% @products.each do |product| %>
       <div class="card-product w-75">
         <%= image_tag product.image, class: "mh-100", style: "width: 200px; height: 300px;"  %>
@@ -35,7 +35,7 @@
             <h2 data-toggle="modal" data-target="#modal-<%= product.id %>"><%= product.name.capitalize %></h2>
             <h2><%= product.price%><%= product.currency.upcase %></h2>
           </div>
-          <h3><%= product.subcategory.name %></h3>
+          <h3><%= product.category.name %></h3>
           <div class="d-flex justify-content-around badges ">
             <% if product.eco_score == "A" || product.eco_score == "B"%>
               <i class="fas fa-globe-americas fa-2x" style="color: #4CA90C;"></i>
