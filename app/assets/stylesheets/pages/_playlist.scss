@@ -14,6 +14,7 @@
   width: 110%;
   margin-right: 0px;
   margin-left: -60px;
+  margin-top: -72px;
 }
 
 .container {
@@ -88,3 +89,34 @@
     width: 350px;
   }
 }
+
+.playlist-page-title {
+  margin-top: -72px;
+  margin-left: 125px;
+  position: absolute;
+  margin-bottom: 120px;
+}
+
+.playlist-page-title:hover {
+   h1:hover {
+  -webkit-transform: scale(1.2);
+  }
+}
+
+
+.btn-products-redirection {
+  color: white;
+  background: #DA3A0A;
+  transition: opacity 0.3s ease;
+  font-family: "Roboto";
+  font-weight: medium;
+  padding: 8px 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-products-redirection:hover{
+  text-decoration: none;
+  color: white;
+}
+
