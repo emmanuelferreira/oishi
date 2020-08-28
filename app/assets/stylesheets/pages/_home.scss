@@ -17,12 +17,13 @@
 
 .rectangle {
   background: $yellow;
-  width: 600px;
-  height: 600px;
+  width: 50%;
+  height: 50%;
   top:0;
   right:0;
   position: absolute;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%);
+  z-index: -10;
   
 }
 
@@ -39,12 +40,12 @@
   width: 5%;
   height:65%;
   overflow: hidden;
-  background-size: 80px;
+  background-size: 80%;
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;
-  bottom: 180px;
-  left: 1100px;
+  bottom: 50%;
+  left: 65%;
 
   animation: leeks 3s infinite;
 }
@@ -54,13 +55,13 @@
   width: 4%;
   height:34%;
   overflow: hidden;
-  background-size: 50px;
+  background-size: 80%;
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;
   -webkit-transform: rotate(-30deg);
-  top: 450px;
-  left: 750px;
+  top: 50%;
+  left: 40%;
   z-index: -10;
 
   animation: beacon 4s infinite;
@@ -71,12 +72,12 @@
   width: 11%;
   height:18%;
   overflow: hidden;
-  background-size: 140px;
+  background-size: 80%;
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;
-  left: 840px;
-  top: 400px;
+  left: 50%;
+  top: 40%;
   z-index: -10;
 
   animation: watermelon 2s infinite;
@@ -87,12 +88,12 @@
   width: 9%;
   height: 34%;
   overflow: hidden;
-  background-size: 100px;
+  background-size: 65%;
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;
-  bottom: 430px;
-  left: 680px;
+  bottom: 60%;
+  left: 35%;
   -webkit-transform: rotate(40deg);
   z-index: -10;
 
@@ -104,13 +105,13 @@
   width: 13%;
   height:12%;
   overflow: hidden;
-  background-size: 180px;
+  background-size: 80%;
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;
   -webkit-transform: rotate(15deg);
-  bottom: 100px;
-  left: 1000px;
+  bottom: 35%;
+  left: 65%;
   z-index: -10;
 
   animation: cumcumber 5s infinite;
@@ -121,13 +122,13 @@
   width: 14%;
   height:18%;
   overflow: hidden;
-  background-size: 180px;
+  background-size: 80%;
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;
   -webkit-transform: rotate(10deg);
-  bottom: 400px;
-  left: 800px;
+  bottom: 60%;
+  left: 45%;
   z-index: -10;
 
   animation: fish 3s infinite;
