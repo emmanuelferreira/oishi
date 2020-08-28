@@ -11,9 +11,9 @@
 </div>
 
 
-<div class="container d-flex suppliers">
-  <div class="d-flex flex-column suppliers">
-    <div class="ml-4">
+<div class="container-fluid text-center">    
+  <div class="row content">
+    <div class="col-sm-2 sidenav">
       <h3> <%= @suppliers.count %> Suppliers</h3>
       <br>
       <br>
@@ -25,10 +25,9 @@
         </div>
       <% end %>
     </div>
-  </div>
 
-  <div class="container-products col-lg-12">
-    <% @products.each do |product| %>
+    <div class="col-sm-10 text-left"> 
+      <% @products.each do |product| %>
       <div class="card-product w-75" data-toggle="modal" data-target="#modal-<%= product.id %>">
         <%= image_tag product.image, class: "mh-100", style: "width: 200px; height: 300px;"  %>
         <div class="card-product-infos flex-grow-1">
@@ -63,12 +62,12 @@
               <%= f.text_field :quantity, value: 1, min: 1, size: 2 %>
               <%= f.submit "Add", size: 10 %>
             <% end %>
-          </span>
+            </span>
           </div>
         </div>
       </div>
       <%= render 'shared/popup', product: product%>
     <% end %>
+    </div>
   </div>
 </div>
-

@@ -1,0 +1,47 @@
+.form-actions-login {
+  font-family: Roboto;
+  color: white !important;
+  text-align: center;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.form-actions-login:hover {
+  -webkit-transform: scale(1.2);
+}
+
+.col-login {
+  h2 {
+    text-align:center;
+    margin-bottom: 20px;
+  }
+}
+
+.container-login {
+  margin-top: 200px;
+}
+
+.links-login {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+}
+
+.links-login:hover {
+  text-decoration: none;
+}
+
+.btn {
+  color: white;
+  font-family: Roboto;
+  font-size: 18px;
+}
+
+.form-control {
+  height: calc(1.5em + 1rem + 2px);
+}
