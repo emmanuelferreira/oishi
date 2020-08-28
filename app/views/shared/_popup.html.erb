@@ -48,10 +48,10 @@
 
                 <div class="col-4">
                   <div class="list-group" id="list-tab" role="tablist">
-                    <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
-                    <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
-                    <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a>
-                    <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">Settings</a>
+                    <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Description</a>
+                    <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Nutritional value</a>
+                    <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Eco Impact</a>
+                    <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">About</a>
                   </div>
                 </div>
                 <div class="col-8">
@@ -91,20 +91,3 @@
   </div>
 </div>
 
-<script>
-  const minusButton = document.getElementById('minus');
-  const plusButton = document.getElementById('plus');
-  const inputField = document.getElementById('input');
-
-  minusButton.addEventListener('click', event => {
-    event.preventDefault();
-    const currentValue = Number(inputField.value) || 0;
-    inputField.value = currentValue - 1;
-  });
-
-  plusButton.addEventListener('click', event => {
-    event.preventDefault();
-    const currentValue = Number(inputField.value) || 0;
-    inputField.value = currentValue + 1;
-  });
-</script>
