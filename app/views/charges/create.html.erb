@@ -1,1 +1,4 @@
-<h2>Thanks, you for your purchase. Your payment of <strong>$5.00</strong> was successfull!</h2>
+<h2>Thanks, you for your purchase. Your payment of <strong><%= @current_cart.inject(0) do |sum, (key, quantity)|
+           @product = Product.find(key)
+           sum += @product.price * quantity
+         end %></strong> was successfull!</h2>
