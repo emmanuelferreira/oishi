@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_27_071063) do
+
+ActiveRecord::Schema.define(version: 2020_08_27_153933) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,7 +112,9 @@ ActiveRecord::Schema.define(version: 2020_08_27_071063) do
     t.float "unit_price"
     t.float "total_price"
     t.bigint "cart_id", null: false
+    t.bigint "order_id", null: false
     t.index ["cart_id"], name: "index_order_products_on_cart_id"
+    t.index ["order_id"], name: "index_order_products_on_order_id"
     t.index ["product_id"], name: "index_order_products_on_product_id"
   end
 
@@ -1352,6 +1356,7 @@ ActiveRecord::Schema.define(version: 2020_08_27_071063) do
   add_foreign_key "inventories", "products"
   add_foreign_key "inventories", "suppliers"
   add_foreign_key "order_products", "carts"
+  add_foreign_key "order_products", "orders"
   add_foreign_key "order_products", "products"
   add_foreign_key "orders", "addresses"
   add_foreign_key "orders", "users"
