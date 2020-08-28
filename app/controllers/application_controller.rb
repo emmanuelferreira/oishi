@@ -6,14 +6,15 @@ class ApplicationController < ActionController::Base
   def current_cart
     if session[:cart].present?
       @current_cart = session[:cart]
+      @cart_amount = @current_cart.inject(0) do |sum, (key, quantity)|
+      @product = Product.find(key)
+      sum += @product.price * quantity
+    end
     else
       @current_cart = {}
     end
 
-    @cart_amount = @current_cart.inject(0) do |sum, (key, quantity)|
-      @product = Product.find(key)
-      sum += @product.price * quantity
-    end
+
   end
 
   protected
