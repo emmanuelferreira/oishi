@@ -2,7 +2,7 @@
   width: 200px;
 }
 
-.col-md {
+.col-playlist {
     flex-basis: 0;
     flex-grow: 1;
     max-width: 100%;
@@ -10,14 +10,14 @@
     justify-content: space-evenly;
 }
 
-.row {
+.row-playlist {
   width: 110%;
   margin-right: 0px;
   margin-left: -60px;
   margin-top: -72px;
 }
 
-.container {
+.container-playlist {
     position: relative;
     margin-bottom: 20px;
     margin-top: 210px;
@@ -32,13 +32,13 @@
   height: 800px;
 }
 
-.row:hover .playlist{
+.row-playlist:hover .playlist{
   filter:blur(3px);
   opacity:.5;
   transform: scale(.98);
   box-shadow:none;
 }
-.row:hover .playlist:hover{
+.row-playlist:hover .playlist:hover{
   transform:scale(1);
   filter:blur(0px);
   opacity:1;
