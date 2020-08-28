@@ -12,7 +12,7 @@
 }
 
 .paper {
-  background-image: url("paper.png");
+  background-image: asset-url("paper.png");
   z-index: -9;
   opacity: 0.95;
 }

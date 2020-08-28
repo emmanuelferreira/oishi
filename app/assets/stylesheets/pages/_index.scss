@@ -2,7 +2,7 @@
 @import "home";
 
 .index-banner{
-  background-image: linear-gradient(rgba(245, 245, 245, 0.4),rgba(245,245,245,0.4)), url("index-banner.png");
+  background-image: linear-gradient(rgba(245, 245, 245, 0.4),rgba(245,245,245,0.4)), asset-url("index-banner.png");
   opacity: 0.7;
   height: 250px;
   width: 100%;
@@ -29,5 +29,5 @@
 .add-button{
   position: relative;
   z-index: 10;
-  
+
 }
