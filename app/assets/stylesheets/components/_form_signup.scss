@@ -31,8 +31,12 @@
   }
 }
 
-.form-actions {
+.form-actions-sign-up {
   background-color: #DA3A0A;
+}
+
+.form-actions-sign-up:hover {
+  -webkit-transform: scale(1.2);
 }
 
 .form-group label {
