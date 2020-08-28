@@ -74,19 +74,19 @@ puts 'Done creating categories'
 # -------------------------------Sub-Category creation-----------------------------------
 puts 'Creating subcategories'
 fruits = %w(Apples Pears Grapes Berries Bananas Kiwi Melons
-            Pineapple Mangoes Citrus Exotic)
+            Pineapples Mangoes Citrus Exotic)
 vegetables = %w(Potatoes Carrots Parsnips Celeriac Kohlrabi Beetroots Cabbage
                 Broccoli Cauliflower Brussel Sprouts Cabbage Sauerkraut Red\ Cabbage
                 Salad Vegetables Tomatoes Radishes Cucumbers Peppers Avocadoes Leaf Lettuce
                 Courgettes Aubergine Sweetcorn Peas Bean Leek Fenne
                 Mushroom Onions)
-dairy = %w(Cheese Milk Creams Butter Margarine Yogurt Desserts Eggs )
+dairy = %w(Cheeses Milks Creams Butters Margarines Yogurts Desserts Eggs )
 meat = %w(Pork Beef Veal Lamb Chicken Seafood Fish Sausage Terrines Sausage Insects)
 bakery = %w(Bread Tortillas Cookies Cakes Toast Pastry Tarts)
 sweets =  %w(Crisps Popcorn Nuts Dried\ Fruit  Cereal\ Bars Chocolate Caramel & nougat)
 drinks = %w(Mineral\ Water Sparkling\ Water Soft\ Drinks Fruit\ Juices Beer Cider Coffee Tea)
 other_stuff = %w(Miscellenneous)
-categories = [fruits, vegetables, dairy, meat, bakery, sweets, drinks]
+categories = [fruits, vegetables, dairy, meat, bakery, sweets, drinks, other_stuff]
 categories.each do |category|
   category.each do |subcategory|
     subcat = Subcategory.new(
@@ -158,17 +158,19 @@ until num_queries == 1 do
 
     next if product['name_translations']["en"].nil?
     next if product["origin_translations"]["en"].nil?
-    next if prod.categories.nil?
     next if prod.nutriscore_grade.nil?
+    next if prod.image_small_url.nil?
+    next if prod.categories_tags.nil?
+    next if prod.nutriscore_grade.nil?
+    next if prod.image_small_url.nil?
 
-
-    prod_categories = prod.categories.split(",").map(&:strip)
+    prod_categories = prod.categories_tags
     nutriscore = prod.nutriscore_grade
 
     # Get Subcategory id by comparing the subcategory array to a converted array (previously string) parsed with open foods api
     Subcategory.pluck(:name).each do |sub_category|
-      if prod_categories.include?(sub_category)
-        @subcat = Subcategory.find_by("name ILIKE ?", "%#{sub_category}%")
+      if prod_categories.include?(sub_category.sub('en:',''))
+        @subcat = Subcategory.find_by("name ILIKE ?", "%#{sub_category.sub('en:','')}%")
       end
     end
     @subcat = Subcategory.last if @subcat.nil?
@@ -205,7 +207,7 @@ until num_queries == 1 do
     Supplier.all.each { |supplier| supplier_name << supplier.name}
     rand_name = supplier_name.sample
 
-    prod = Product.new(
+    produit = Product.new(
       barcode: product['barcode'],
       name: product['name_translations']["en"],
       category_id: cat_id,
@@ -220,11 +222,11 @@ until num_queries == 1 do
       eco_score: ecoscore,
       supplier_id: Supplier.find_by(name: rand_name).id
     )
-    unless product["images"][1].nil?
-      prod.image = product["images"][1]["thumb"]
+    unless prod.image_small_url.nil?
+      produit.image = prod.image_small_url
     end
-    unless prod.barcode.blank? ||  prod.name.blank? || prod.image.blank?
-      prod.save!
+    unless produit.barcode.blank? ||  produit.name.blank? || produit.image.blank?
+      produit.save!
     end
   end
 end
@@ -232,28 +234,28 @@ end
 puts "\n#{products.length} products fetched from #{num_queries} queries."
 puts "Time taken: #{(Time.now - START_TIME).round(1)} seconds"
 
-# ----------------------Orders creation----------------------------------------#
-stat = ["pending","delivered"].sample
-d = Date.today
-ord = Order.new(
-  status: stat,
-  user_id: User.first.id,
-  deliver_date: stat == "delivered" ? d - rand(1..10) : d + 1,
-  address_id: User.first.address.id,
-)
-prdct = Product.all
-prd = prdct.sample
-qte = rand(1..3)
-ord_prd= OrderProduct.new(
-  order_id: ord[:id],
-  product_id: prd[:id],
-  quantity: qte,
-  unit_price: prd[:price],
-  total_price: qte*prd[:price],
-)
-ord.order_products = OrderProduct.all
-amt=0
-order.order_products.each do |product|
-amt= amt + product[total_price]
-end
-ord[:payment_amount]=amt
+# # ----------------------Orders creation----------------------------------------#
+# stat = ["pending","delivered"].sample
+# d = Date.today
+# ord = Order.new(
+#   status: stat,
+#   user_id: User.first.id,
+#   deliver_date: stat == "delivered" ? d - rand(1..10) : d + 1,
+#   address_id: User.first.address.id,
+# )
+# prdct = Product.all
+# prd = prdct.sample
+# qte = rand(1..3)
+# ord_prd= OrderProduct.new(
+#   order_id: ord[:id],
+#   product_id: prd[:id],
+#   quantity: qte,
+#   unit_price: prd[:price],
+#   total_price: qte*prd[:price],
+# )
+# ord.order_products = OrderProduct.all
+# amt=0
+# order.order_products.each do |product|
+# amt= amt + product[total_price]
+# end
+# ord[:payment_amount]=amt

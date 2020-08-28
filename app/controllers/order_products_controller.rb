@@ -1,5 +1,5 @@
 class OrderProductsController < ApplicationController
-  skip_before_action :authenticate_user!
+  skip_before_action :authenticate_user!, only: [:create, :remove_from_cart, :delete_from_cart]
 
 
   def create
@@ -11,19 +11,20 @@ class OrderProductsController < ApplicationController
     session[:cart] = @current_cart
   end
 
-  def update
-    @cart = @current_cart
-    @order_product = @cart.order_products.find(params[:id])
-    @order_product.update_attributes(order_product_params)
-    @order_products = @cart.order_products
+  def remove_from_cart
+    if @current_cart.key?(order_product_params[:product_id])
+      @current_cart[order_product_params[:product_id]] = order_product_params[:quantity].to_i
+    end
+    session[:cart] = @current_cart
   end
 
-  def destroy
-    @cart = @current_cart
-    @order_product = @cart.order_products.find(params[:id])
-    @order_product.destroy
-    @order_products = @cart.order_products
+  def delete_from_cart
+    if @current_cart.key?(params[:product_id])
+      @current_cart.delete(params[:product_id])
+    end
+    session[:cart] = @current_cart
   end
+
 
   private
 

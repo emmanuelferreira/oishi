@@ -1,0 +1,63 @@
+<div class="container">
+  <% if @current_cart.values.reduce(:+) > 0 %>
+    <div id="cart-item">
+      <% @order_products.each do |item| %>
+        <ul>
+          <li>
+            <h3> <%= item.product.name %> </h3>
+            <%= form_for(item, url: remove_from_cart_path(item.product.id), remote: true) do |f| %>
+              <%= f.hidden_field :product_id, value: item.product.id %>
+              <h5><%= item.product.price %> CHF</h5>
+              <%= f.text_field :quantity, value: item.quantity, min: 1, class: 'form-control', style: 'w-1' %>
+              <%= f.submit "Update", class: 'btn btn-transparent-sm'  %>
+              <%= link_to "Delete", delete_from_cart_path(item.product.id), method: :post, remote: true, class: 'btn btn-danger-sm' %>
+            <% end %>
+          </li>
+        </ul>
+      <% end %>
+    </div>
+
+    <div class="container">
+      <%= form_tag charges_path do %>
+      <article>
+        <% if flash[:error].present? %>
+          <div id="error_explanation">
+            <p><%= flash[:error] %></p>
+          </div>
+        <% end %>
+        <label class="amount">
+          <span>Total Amount:
+                <%= @current_cart.inject(0) do |sum, (key, quantity)| %>
+                  <% @product = Product.find(key) %>
+                  <% sum += @product.price * quantity %>
+                <% end  %>
+              CHF
+            <% end %>
+          </span>
+        </label>
+      </article>
+
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+              data-description="Current Order"
+              data-amount="500"
+              data-locale="auto">
+      </script>
+    </div>
+  <% end %>
+
+
+  <% if false %>
+    <%= form_for @order do |order_form| %>
+      First name: <%= order_form.text_field :first_name %>
+      Last name : <%= order_form.text_field :last_name %>
+
+      <%= fields_for :permission, @person.permission do |permission_fields| %>
+        Admin?  : <%= permission_fields.check_box :admin %>
+      <% end %>
+
+      <%= person_form.submit %>
+    <% end %>
+  <% end %>
+
+</div>
