@@ -72,7 +72,7 @@
 }
 
 .paper {
-  background-image: url("paper.png");
+  background-image: asset-url("paper.png");
   z-index: -9;
   opacity: 0.95;
 }
@@ -80,7 +80,7 @@
 
 // Illustrations
 #leeks-sign-up{
-  background-image: url("leeks.png");
+  background-image: asset-url("leeks.png");
   width: 5%;
   height:65%;
   overflow: hidden;
@@ -95,7 +95,7 @@
 }
 
 #beacon-sign-up{
-  background-image: url("beacon.png");
+  background-image: asset-url("beacon.png");
   width: 4%;
   height:34%;
   overflow: hidden;
@@ -112,7 +112,7 @@
 }
 
 #watermelon-sign-up{
-  background-image: url("watermelon.png");
+  background-image: asset-url("watermelon.png");
   width: 20%;
   height:18%;
   overflow: hidden;
@@ -128,7 +128,7 @@
 }
 
 #cherries-sign-up{
-  background-image: url("cherries.png");
+  background-image: asset-url("cherries.png");
   width: 9%;
   height: 34%;
   overflow: hidden;
@@ -146,7 +146,7 @@
 }
 
 #cumcumber-sign-up{
-  background-image: url("cumcumber.png");
+  background-image: asset-url("cumcumber.png");
   overflow: hidden;
   background-size: 180px;
   background-position: center;
@@ -163,7 +163,7 @@
 }
 
 #fish-sign-up{
-  background-image: url("fish.png");
+  background-image: asset-url("fish.png");
   width: 14%;
   height:18%;
   overflow: hidden;
