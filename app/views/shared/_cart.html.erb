@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container shopping">
   <div class="row">
   <i class="fas fa-cart-arrow-down fa-lg shop-logo"></i>
     <%= link_to " #{@current_cart.values.reduce(:+)}  items - total #{@cart_amount}", carts_path, class: "nav-link" %>
