@@ -29,15 +29,15 @@
 
   <div class="container-products col-lg-12">
     <% @products.each do |product| %>
-      <div class="card-product w-75">
+      <div class="card-product w-75" data-toggle="modal" data-target="#<%= product.id %>">
         <%= image_tag product.image, class: "mh-100", style: "width: 200px; height: 300px;"  %>
         <div class="card-product-infos flex-grow-1">
           <div class="d-flex justify-content-between ">
             <h2><%= product.name.capitalize %></h2>
             <h2><%= product.price%><%= product.currency.upcase %></h2>
-          </div>
+          </div>  
           <h3><%= product.subcategory.name %></h3>
-          <div class="d-flex justify-content-start badges">
+          <div class="d-flex justify-content-around badges ">
             <% if product.eco_score == "A" || product.eco_score == "B"%>
               <i class="fas fa-globe-americas fa-2x" style="color: #4CA90C;"></i>
             <%elsif  product.eco_score == "C" || product.eco_score == "D"%>
@@ -67,7 +67,7 @@
           </div>
         </div>
       </div>
-
+      <%= render 'shared/popup', product: product%>
     <% end %>
   </div>
 </div>

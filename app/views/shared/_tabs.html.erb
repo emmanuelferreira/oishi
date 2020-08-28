@@ -1,53 +1,268 @@
 <ul class="list-inline tabs-underlined">
   <li>
-    <%= link_to "ALL", "#", class: "btn btn-flat btn-all tablinks", onclick: "openCity(event, 'All')" %>
+    <%= link_to "ALL", "#", class: "btn btn-flat btn-all tablinks", data: { tab: 'All' } %>
   </li>
   <li>
-    <%= link_to "FRUITS", "#", class: "tab-underlined tablinks active", onclick: "openCity(event, 'Fruits')" %>
+    <%= link_to "FRUITS", "#", class: "tab-underlined tablinks", data: { tab: 'Fruits' } %>
   </li>
   <li>
-    <%= link_to "VEGETABLES", "#", class: "tab-underlined tablinks", onclick: "openCity(event, 'Vegetables')" %>
+    <%= link_to "VEGETABLES", "#", class: "tab-underlined tablinks", data: { tab: 'Vegetables' } %>
   </li>
   <li>
-    <%= link_to "MEAT", "#", class: "tab-underlined tablinks", onclick: "openCity(event, 'Meat')" %>
+    <%= link_to "MEAT & FISH", "#", class: "tab-underlined tablinks", data: { tab: 'Meat-and-fish' } %>
   </li>
   <li>
-    <%= link_to "FISH", "#", class: "tab-underlined tablinks", onclick: "openCity(event, 'Fish')" %>
+    <%= link_to "BAKERY", "#", class: "tab-underlined tablinks", data: { tab: 'Bakery' } %>
   </li>
   <li>
-    <%= link_to "BAKERY", "#", class: "tab-underlined tablinks", onclick: "openCity(event, 'Bakery')" %>
+    <%= link_to "DRINKS", "#", class: "tab-underlined tablinks", data: { tab: 'Drinks' } %>
   </li>
   <li>
-    <%= link_to "SWEET", "#", class: "tab-underlined tablinks", onclick: "openCity(event, 'Sweet')" %>
+    <%= link_to "DAIRY", "#", class: "tab-underlined tablinks", data: { tab: 'Dairy' } %>
   </li>
   <li>
-    <%= link_to "LISTS", "#", class: "btn btn-flat btn-lists tablinks", onclick: "openCity(event, 'Lists')" %>
+    <%= link_to "OTHER", "#", class: "tab-underlined tablinks", data: { tab: 'Other' } %>
   </li>
+  <li>
+    <%= link_to "LISTS", "#", class: "btn btn-flat btn-lists tablinks", data: { tab: 'Lists' } %>
+  </li>
+  
 </ul>
 
 <div id="Fruits" class="tabcontent">
   <ul class="list-inline tabs-underlined second-tabs">
     <li>
-      <%= link_to "APPLE", "#", class: "btn btn-flat btn-all" %>
+      <%= link_to "APPLES", "#", class: "tab-underlined-second" %>
+
+
     </li>
     <li>
-      <%= link_to "CHERRY", "#", class: "tab-underlined-second" %>
+      <%= link_to "PEARS", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "GRAPES", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "BERRIES", "#", class: "tab-underlined-second" %>
     </li>
     <li>
       <%= link_to "BANANA", "#", class: "tab-underlined-second" %>
     </li>
     <li>
-      <%= link_to "HIMBER", "#", class: "tab-underlined-second" %>
+      <%= link_to "KIWIS", "#", class: "tab-underlined-second" %>
     </li>
     <li>
-      <%= link_to "PEACH", "#", class: "tab-underlined-second" %>
+      <%= link_to "MELONS", "#", class: "tab-underlined-second" %>
     </li>
     <li>
-      <%= link_to "WATERMELON", "#", class: "tab-underlined-second" %>
+      <%= link_to "PINEAPPLE", "#", class: "tab-underlined-second" %>
     </li>
     <li>
-      <%= link_to "ORANGE", "#", class: "tab-underlined-second" %>
+      <%= link_to "MANGOES", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "CITRUS", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "EXOTIC", "#", class: "tab-underlined-second" %>
     </li>
   </ul>
 </div>
 
+<div id="Vegetables" class="tabcontent">
+  <ul class="list-inline tabs-underlined second-tabs">
+    <li>
+      <%= link_to "POTATOES", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "CARROTS", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "PARSNIPS", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "CELERIAC", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "BEETROOTS", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "SALAD", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "TOMATOES", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "LETTUCE", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "AVOCADOES", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "MUSHROOMS", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "ONIONS", "#", class: "tab-underlined-second" %>
+    </li>
+  </ul>
+</div>
+
+<div id="Meat-and-fish" class="tabcontent">
+  <ul class="list-inline tabs-underlined second-tabs">
+    <li>
+      <%= link_to "PORK", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "BEEF", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "VEAL", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "LAMB", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "CHICKEN", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "SEAFOOD", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "FISH", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "SAUSAGE", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "TERRINES", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "SAUSAGE", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "INSECTS", "#", class: "tab-underlined-second" %>
+    </li>
+  </ul>
+</div>
+
+<div id="Bakery" class="tabcontent">
+  <ul class="list-inline tabs-underlined second-tabs">
+    <li>
+      <%= link_to "BREAD", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "TORTILLAS", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "COOKIES", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "CAKES", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "TOAST", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "PASTRY", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "TARTS", "#", class: "tab-underlined-second" %>
+    </li>
+  </ul>
+</div>
+
+<div id="Drinks" class="tabcontent">
+  <ul class="list-inline tabs-underlined second-tabs">
+    <li>
+      <%= link_to "MINERAL", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "SPARKLING WATER", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "WATER", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "SOFT DRINKS", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "JUICES", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "BEERS", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "CIDER", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "COFFEE", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "TEA", "#", class: "tab-underlined-second" %>
+    </li>
+  </ul>
+</div>
+
+<div id="Drinks" class="tabcontent">
+  <ul class="list-inline tabs-underlined second-tabs">
+    <li>
+      <%= link_to "MINERAL", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "SPARKLING WATER", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "WATER", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "SOFT DRINKS", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "JUICES", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "BEERS", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "CIDER", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "COFFEE", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "TEA", "#", class: "tab-underlined-second" %>
+    </li>
+  </ul>
+</div>
+
+<div id="Dairy" class="tabcontent">
+  <ul class="list-inline tabs-underlined second-tabs">
+    <li>
+      <%= link_to "CHEESE", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "MILK", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "CREAMS", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "CREAMS", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "BUTTER", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "MARGARINE", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "YOGURTS", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "DESSERTS", "#", class: "tab-underlined-second" %>
+    </li>
+    <li>
+      <%= link_to "EGGS", "#", class: "tab-underlined-second" %>
+    </li>
+  </ul>
+</div>

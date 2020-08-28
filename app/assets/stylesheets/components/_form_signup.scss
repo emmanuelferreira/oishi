@@ -1,0 +1,224 @@
+.container {
+  position: relative;
+  margin-bottom: 20px;
+  margin-top: 120px;
+}
+
+.title_create_account {
+  margin-left: 240px;
+  width: 300px;
+  position: absolute;
+  margin-top: -40px;
+}
+
+.form-sign_up {
+  background: white;
+  padding: 10px 20px;
+  border-radius: 3px;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  h2 {
+    font-size: 25px;
+    font-weight: normal;
+    margin-bottom: 30px;
+    text-align: center;
+    font-family: Roboto;
+  }
+  .btn {
+    width: 100%;
+    // margin-bottom: 20px
+    font-family: Roboto;
+    color: white;
+  }
+}
+
+.form-actions {
+  background-color: #DA3A0A;
+}
+
+.form-group label {
+  font-family: Roboto;
+  color: #525252;
+  font-size: 18px;
+  font-weight: lighter;
+}
+
+.sign_up_form_layout {
+  display: flex;
+  justify-content: center;
+}
+
+.rectangle_top {
+  background: $yellow;
+  width: 600px;
+  height: 600px;
+  top:0;
+  right:0;
+  position: absolute;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%);
+}
+
+.rectangle_bottom {
+  background: #ECE5D3;
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  left: 0;
+  bottom: -100px;
+  clip-path: polygon(0 0, 0% 100%, 100% 100%);
+}
+
+.paper {
+  background-image: url("paper.png");
+  z-index: -9;
+  opacity: 0.95;
+}
+
+
+// Illustrations
+#leeks-sign-up{
+  background-image: url("leeks.png");
+  width: 5%;
+  height:65%;
+  overflow: hidden;
+  background-size: 80px;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: -60px;
+  left: 1600px;
+
+  animation: leeks 3s infinite;
+}
+
+#beacon-sign-up{
+  background-image: url("beacon.png");
+  width: 4%;
+  height:34%;
+  overflow: hidden;
+  background-size: 50px;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  -webkit-transform: rotate(-30deg);
+  top: 180px;
+  left: 300px;
+  z-index: -10;
+
+  animation: beacon 4s infinite;
+}
+
+#watermelon-sign-up{
+  background-image: url("watermelon.png");
+  width: 11%;
+  height:18%;
+  overflow: hidden;
+  background-size: 140px;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  left: 1300px;
+  top: 400px;
+  z-index: -10;
+
+  animation: watermelon 2s infinite;
+}
+
+#cherries-sign-up{
+  background-image: url("cherries.png");
+  width: 9%;
+  height: 34%;
+  overflow: hidden;
+  background-size: 100px;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  bottom: 260px;
+  left: 360px;
+  top: 560px;
+  -webkit-transform: rotate(40deg);
+  z-index: -10;
+
+  animation: cherries 6s infinite;
+}
+
+#cumcumber-sign-up{
+  background-image: url("cumcumber.png");
+  overflow: hidden;
+  background-size: 180px;
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-transform: rotate(15deg);
+  position: absolute;
+  width: 800px;
+  height: 240px;
+  left: 1150px;
+  top: 65px;
+  z-index: 10;
+
+  animation: cumcumber 5s infinite;
+}
+
+#fish-sign-up{
+  background-image: url("fish.png");
+  width: 14%;
+  height:18%;
+  overflow: hidden;
+  background-size: 180px;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  -webkit-transform: rotate(10deg);
+  bottom: 400px;
+  left: 800px;
+  z-index: -10;
+
+  animation: fish 3s infinite;
+}
+
+@keyframes leeks{
+  0% { transform: rotate(0deg); }
+  80% { transform: rotate(0deg); }
+  85% { transform: rotate(5deg); }
+  95% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes beacon{
+  0%{transform: rotate(-30deg)}
+  80%{transform: rotate(-30deg)}
+  85%{transform: rotate(-25deg)}
+  95%{transform: rotate(-35deg)}
+  100%{transform: rotate(-30deg)}
+}
+
+@keyframes watermelon{
+  0%{transform: rotate(0deg)}
+  80%{transform: rotate(0deg)}
+  85%{transform: rotate(5deg)}
+  95%{transform: rotate(-5deg)}
+  100%{transform: rotate(0deg)}
+}
+
+@keyframes cherries{
+  0%{transform: rotate(40deg)}
+  80%{transform: rotate(40deg)}
+  85%{transform: rotate(35deg)}
+  95%{transform: rotate(45deg)}
+  100%{transform: rotate(40deg)}
+}
+
+@keyframes cumcumber{
+  0%{transform: rotate(15deg)}
+  80%{transform: rotate(15deg)}
+  85%{transform: rotate(10deg)}
+  95%{transform: rotate(20deg)}
+  100%{transform: rotate(15deg)}
+}
+
+@keyframes fish{
+  0%{transform: rotate(10deg)}
+  80%{transform: rotate(10deg)}
+  85%{transform: rotate(5deg)}
+  95%{transform: rotate(15deg)}
+  100%{transform: rotate(10deg)}
+}
