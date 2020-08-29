@@ -106,7 +106,7 @@ products = []
 num_queries = 0
 puts 'Fetching products from FoodRepo API...'
 
-until num_queries == 1 do
+until num_queries == 2 do
   response = HTTParty.get(url, headers: headers)
   num_queries += 1
   raise unless response.code == 200 # HTTP OK
@@ -123,13 +123,17 @@ until num_queries == 1 do
     # open food data parsing
     barcode = product['barcode']
     prod = Openfoodfacts::Product.get(barcode, locale: 'world')
-
+    next if Product.exists?(barcode: product['barcode'])
     next if product['name_translations']["en"].nil?
     next if product["origin_translations"]["en"].nil?
     next if prod.nutriscore_grade.nil?
     next if prod.image_url.nil?
     next if prod.categories_tags.nil?
     next if prod.origins.nil?
+    next if prod.image_nutrition_small_url.nil?
+    next if prod.quantity.nil?
+    next if prod.nutriments.nil?
+
 
     prod_category = prod.categories_tags.map{|element| element.sub('en:','')}.first.capitalize #or .pnns_groups_2_tags.first   .pnns_groups_1 without any mehtod after
     nutriscore = prod.nutriscore_grade
@@ -148,20 +152,20 @@ until num_queries == 1 do
 
 
     #ecoscore basic calculation
-    ecoscore = "A" if prod.origins.capitalize == "Switzerland" && nutriscore == "A"
-    ecoscore = "B" if nutriscore == "B" || nutriscore == "A"
-    ecoscore = "D" if nutriscore == "C"
-    ecoscore = "E" if nutriscore == "D"
-    ecoscore = "F" if nutriscore == "F" || nutriscore == "E"
+    ecoscore = "A" if prod.origins.capitalize == "Switzerland"
+    ecoscore = "B" if nutriscore.capitalize == "A" && prod.origins.capitalize != "Switzerland"
+    ecoscore = "C" if nutriscore.capitalize == "B" && prod.origins.capitalize != "Switzerland"
+    ecoscore = "D" if nutriscore.capitalize == "C" && prod.origins.capitalize != "Switzerland"
+    ecoscore = "E" if nutriscore.capitalize == "D" && prod.origins.capitalize != "Switzerland"
+    ecoscore = "F" if nutriscore.capitalize == "F" || nutriscore == "E" && prod.origins.capitalize != "Switzerland"
     ecoscore = "C" if ecoscore.nil?
+
 
     # Supplier name random attribution
     supplier_name = []
     Supplier.all.each { |supplier| supplier_name << supplier.name}
     rand_name = supplier_name.sample
-    # .nutrient_levels_tags -- array with nutrition tags
-    # .packaging
-    # .image_nutrition_small_url
+
     produit = Product.new(
       barcode: product['barcode'],
       name: product['name_translations']["en"],
@@ -174,7 +178,10 @@ until num_queries == 1 do
       currency: "CHF",
       nutri_score: nutriscore.capitalize,
       eco_score: ecoscore,
-      supplier_id: Supplier.find_by(name: rand_name).id
+      supplier_id: Supplier.find_by(name: rand_name).id,
+      nutriments: prod.nutriments,
+      quantity_product: prod.quantity,
+      image_nutrition: prod.image_nutrition_small_url
     )
 
     produit.image = prod.image_url
@@ -188,29 +195,67 @@ end
 puts "\n#{products.length} products fetched from #{num_queries} queries."
 puts "Time taken: #{(Time.now - START_TIME).round(1)} seconds"
 
-# ----------------------Orders creation----------------------------------------#
-# status = ["pending","delivered"].sample
-# d = Date.today
-# order = Order.new(
-#   status: status,
-#   user_id: User.first.id,
-#   deliver_date: status == "delivered" ? d - rand(1..10) : d + 1,
-#   address_id: User.first.address.id,
-# )
-# order.save!
-# puts "ord create"
-# products = Product.all
-# product = products.sample
-# quantity = rand(1..3)
-# order_product= OrderProduct.new(
-#   order: order,
-#   product: product,
-#   quantity: quantity,
-#   unit_price: product.price,
-#   total_price: quantity*product.price
-# )
-# order_product.save!
-# puts "ord_prd create"
-# order.total = order_product.total_price
-# order.payment_amount = order_product.total_price
-# order.save!
+# ----------------------Orders creation this month----------------------------------------#
+3.times do
+  status = ["pending","delivered"].sample
+  d = Date.today
+  ord = Order.new(
+    status: status,
+    user_id: User.first.id,
+    deliver_date: status == "delivered" ? d - rand(1..10) : d + 1,
+    address_id: User.first.address.id,
+  )
+  ord.save!
+  rand(3..10).times do
+    products = Product.all
+    product = products.sample
+    quantity = rand(1..3)
+    ord_prod = OrderProduct.new(
+      order_id: ord.id,
+      product_id: product.id,
+      quantity: quantity,
+      unit_price: product.price,
+      total_price: quantity * product.price
+    )
+    ord_prod.save!
+  end
+  ord.total = OrderProduct.where(order_id: ord.id).map(&:total_price).inject(0, &:+)
+  ord.payment_amount = ord.total
+
+  puts "Order Poduct create"
+  ord.save!
+  puts "Order created"
+end
+
+
+# ----------------------Orders creation this month----------------------------------------#
+7.times do
+  status = ["delivered"].sample
+  d = Date.today
+  ord = Order.new(
+    status: status,
+    user_id: User.first.id,
+    deliver_date: status == "delivered" ? d - rand(31..50) : d + 1,
+    address_id: User.first.address.id,
+  )
+  ord.save!
+  rand(3..10).times do
+    products = Product.all
+    product = products.sample
+    quantity = rand(1..3)
+    ord_prod = OrderProduct.new(
+      order_id: ord.id,
+      product_id: product.id,
+      quantity: quantity,
+      unit_price: product.price,
+      total_price: quantity * product.price
+    )
+    ord_prod.save!
+  end
+  ord.total = OrderProduct.where(order_id: ord.id).map(&:total_price).inject(0, &:+)
+  ord.payment_amount = ord.total
+
+  puts "Order Poduct create"
+  ord.save!
+  puts "Order created"
+end
