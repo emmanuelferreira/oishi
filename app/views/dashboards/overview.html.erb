@@ -1,17 +1,7 @@
 
-
-
-
-
 <div class="grid-container">
 
 <h1 class="overview-title">Dashboard</h1>
-<nav class="navbar-overview navbar-light d-flex justify-content-center">
-  <form class="form-inline">
-    <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
-    <button class="btn btn-primary" type="submit">Search</button>
-  </form>
-</nav>
 <br>
 
 <div class="current-order">
@@ -20,7 +10,7 @@
       <ul>
         <li>
           <div class="card-product-dashboard">
-            <%= image_tag order_product.product.image %>
+           <!--  <%= image_tag order_product.product.image %> -->
             <div class="card-product-dashboard-infos">
               <h2><%= order_product.product.name.capitalize %></h2>
 
@@ -48,7 +38,7 @@
         </li>
       </ul>
     <% end %>
-    <span><%= @order.total %></span>
+    <span><%= @last_order.total %></span>
   </div>
 
 
@@ -67,7 +57,7 @@
 
   <div class="eco-chart">
     <div class="eco-chart chart">
-      <%= column_chart(a:3, b:9, c:4, d:5) %>
+      <%= bar_chart @last_order.products.group(:eco_score).count %>
     </div>
   </div>
 
@@ -77,59 +67,21 @@
     </div>
   </div>
 
-  <div class="last-orders">
-    <h4>last Orders</h4>
-      <ul>
-        <li>
-          <div class="badge badge-pill">8</div>Order 1
-        </li>
-        <li>
-          <div class="badge badge-pill">7</div>Order 1
-        </li>
-        <li>
-          <div class="badge badge-pill">5</div>Order 1
-        </li>
-      </ul>
-  </div>
-
-
-  <div class="eco-stats">
-    <h4>Eco Impact</h4>
-      <ul>
-        <li>Order 1</li>
-        <li>Order 1</li>
-        <li>Order 1</li>
-      </ul>
-  </div>
-
-  <div class="details-stats">
-    <h4>Nutrionnal Details</h4>
-      <ul>
-        <li>Order 1</li>
-        <li>Order 1</li>
-        <li>Order 1</li>
-      </ul>
-  </div>
-
-  <div class="spendings">
-    <h4>Spendings</h4>
-
   <div class="row justify-content-end top-buffer">
     <div class="col-4">
       <h4>Last Month Consumption Overview</h4>
       <ul>
-        <li>Global Ecoscore: </li>
-        <li>Global Nutriscore: </li>
-        <li>Total Spendings: </li>
+        <li>Global Ecoscore:  <%= @last_eco_score_avg %></li>
+        <li>Global Nutriscore: <%= @last_nutri_score_avg %></li>
+        <li>Total Spendings: <%= @last_month_orders.pluck(:total).inject(0) {|sum, ele| sum += ele}.to_f.round(2) %></li>
       </ul>
     </div>
     <div class="col-4">
       <h4>Current Month Consumption Overview</h4>
-
       <ul>
-        <li>Order 1</li>
-        <li>Order 1</li>
-        <li>Order 1</li>
+        <li>Global Ecoscore:  <%= @current_eco_score_avg %></li>
+        <li>Global Nutriscore: <%= @current_nutri_score_avg %></li>
+        <li>Total Spendings: <%= @current_month_orders.pluck(:total).inject(0) {|sum, ele| sum += ele}.to_f.round(2) %></li>
       </ul>
   </div>
 
