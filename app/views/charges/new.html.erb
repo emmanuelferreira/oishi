@@ -8,7 +8,7 @@
             <h2><%= item.product.name.capitalize %></h2>
             <h2><%= item.product.price%><%= item.product.currency.upcase %></h2>
           </div>
-          <h3><%= item.product.subcategory.name %></h3>
+          <h3><%= item.product.category.name %></h3>
           <div class="d-flex justify-content-around badges ">
             <% if item.product.eco_score == "A" || item.product.eco_score == "B"%>
               <i class="fas fa-globe-americas fa-2x" style="color: #4CA90C;"></i>

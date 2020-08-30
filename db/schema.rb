@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_28_090648) do
+ActiveRecord::Schema.define(version: 2020_08_29_193315) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "hstore"
   enable_extension "plpgsql"
 
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
@@ -157,9 +158,10 @@ ActiveRecord::Schema.define(version: 2020_08_28_090648) do
     t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "subcategory_id", null: false
+    t.hstore "nutriments", default: {}, null: false
+    t.string "quantity_product"
+    t.string "image_nutrition"
     t.index ["category_id"], name: "index_products_on_category_id"
-    t.index ["subcategory_id"], name: "index_products_on_subcategory_id"
     t.index ["supplier_id"], name: "index_products_on_supplier_id"
   end
 
@@ -1351,7 +1353,6 @@ ActiveRecord::Schema.define(version: 2020_08_28_090648) do
   add_foreign_key "playlist_products", "playlists"
   add_foreign_key "playlist_products", "products"
   add_foreign_key "products", "categories"
-  add_foreign_key "products", "subcategories"
   add_foreign_key "products", "suppliers"
   add_foreign_key "spree_promotion_code_batches", "spree_promotions", column: "promotion_id"
   add_foreign_key "spree_promotion_codes", "spree_promotion_code_batches", column: "promotion_code_batch_id"

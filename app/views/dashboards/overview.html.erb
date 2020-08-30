@@ -14,11 +14,40 @@
 
 <div class="current-order">
   <h3>Previous Order</h3>
-  <ul>
-    <li>order_porduct 1 NO PICTURE</li>
-  </ul>
-</div>
+    <% @order_products.each do |order_product|%>
+      <ul>
+        <li>
+          <div class="card-product-dashboard">
+            <%= image_tag order_product.product.image %>
+            <div class="card-product-dashboard-infos">
+              <h2><%= order_product.product.name.capitalize %></h2>
 
+              <div class="d-flex justify-content-around badges ">
+                <% if order_product.product.eco_score == "A" || order_product.product.eco_score == "B"%>
+                  <i class="fas fa-globe-americas fa-2x" style="color: #4CA90C;"></i>
+                <%elsif  order_product.product.eco_score == "C" || order_product.product.eco_score == "D"%>
+                  <i class="fas fa-globe-americas fa-2x" style="color: #FFC400;"></i>
+                <% else %>
+                  <i class="fas fa-globe-americas fa-2x" style="color: #EB5757;"></i>
+                <% end %>
+
+                <% if order_product.product.nutri_score == "A" || order_product.product.nutri_score == "B"%>
+                  <i class="fas fa-heartbeat fa-2x pl-3" style="color: #4CA90C;"></i>
+                <%elsif  order_product.product.nutri_score == "C" || order_product.product.nutri_score == "D"%>
+                  <i class="fas fa-heartbeat fa-2x pl-3" style="color: #FFC400;"></i>
+                <% else %>
+                  <i class="fas fa-heartbeat fa-2x pl-3" style="color: #EB5757;"></i>
+                <% end %>
+                <span><%= order_product.product.price%><%= order_product.product.currency.upcase %></span>
+                <!-- <i class="fas fa-money-bill-wave fa-2x pl-3"></i>  money icon removed as we have random prices, add again when we can compare with average price -->
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    <% end %>
+    <span><%= @order.total %></span>
+  </div>
 
 
 
@@ -51,23 +80,15 @@
   </div>
   <div class="row justify-content-end top-buffer">
     <div class="col-4">
-      <h4>Eco Impact</h4>
+      <h4>Last Month Consumption Overview</h4>
       <ul>
-        <li>Order 1</li>
-        <li>Order 1</li>
-        <li>Order 1</li>
+        <li>Global Ecoscore: </li>
+        <li>Global Nutriscore: </li>
+        <li>Total Spendings: </li>
       </ul>
     </div>
     <div class="col-4">
-      <h4>Nutrionnal Details</h4>
-      <ul>
-        <li>Order 1</li>
-        <li>Order 1</li>
-        <li>Order 1</li>
-      </ul>
-    </div>
-    <div class="col-4">
-      <h4>Spendings</h4>
+      <h4>Current Month Consumption Overview</h4>
       <ul>
         <li>Order 1</li>
         <li>Order 1</li>

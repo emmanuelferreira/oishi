@@ -62,8 +62,42 @@ while ord < 3 do
 end
 
 
+#-------------------------------- Category creation----------------------------------
+puts 'Creating categories'
+categories = %w(Drinks Fruits Vegetables Bakery Meat\ &\ Fish Dairy Sweets Other\ Stuff)
+categories.each do |category|
+  cat = Category.new(
+    name: category
+    )
+  cat.save!
+end
+puts 'Done creating categories'
 
-
+# -------------------------------Sub-Category creation-----------------------------------
+puts 'Creating subcategories'
+fruits = %w(Apples Pears Grapes Berries Bananas Kiwi Melons
+            Pineapples Mangoes Citrus Exotic)
+vegetables = %w(Potatoes Carrots Parsnips Celeriac Kohlrabi Beetroots Cabbage
+                Broccoli Cauliflower Brussel Sprouts Cabbage Sauerkraut Red\ Cabbage
+                Salad Vegetables Tomatoes Radishes Cucumbers Peppers Avocadoes Leaf Lettuce
+                Courgettes Aubergine Sweetcorn Peas Bean Leek Fenne
+                Mushroom Onions)
+dairy = %w(Cheeses Milks Creams Butters Margarines Yogurts Desserts Eggs )
+meat = %w(Pork Beef Veal Lamb Chicken Seafood Fish Sausage Terrines Sausage Insects)
+bakery = %w(Bread Tortillas Cookies Cakes Toast Pastry Tarts)
+sweets =  %w(Crisps Popcorn Nuts Dried\ Fruit  Cereal\ Bars Chocolate Caramel & nougat)
+drinks = %w(Mineral\ Water Sparkling\ Water Soft\ Drinks Fruit\ Juices Beer Cider Coffee Tea)
+other_stuff = %w(Miscellenneous)
+categories = [fruits, vegetables, dairy, meat, bakery, sweets, drinks, other_stuff]
+categories.each do |category|
+  category.each do |subcategory|
+    subcat = Subcategory.new(
+      name: subcategory,
+      )
+    subcat.save!
+  end
+end
+puts 'Done creating subcategories'
 
 # ----------------------------Supplier creation--------------------------------------
 puts 'Creating suppliers'
@@ -106,7 +140,7 @@ products = []
 num_queries = 0
 puts 'Fetching products from FoodRepo API...'
 
-until num_queries == 2 do
+until num_queries == 1 do
   response = HTTParty.get(url, headers: headers)
   num_queries += 1
   raise unless response.code == 200 # HTTP OK
@@ -123,43 +157,52 @@ until num_queries == 2 do
     # open food data parsing
     barcode = product['barcode']
     prod = Openfoodfacts::Product.get(barcode, locale: 'world')
-    next if Product.exists?(barcode: product['barcode'])
+
     next if product['name_translations']["en"].nil?
     next if product["origin_translations"]["en"].nil?
     next if prod.nutriscore_grade.nil?
-    next if prod.image_url.nil?
+    next if prod.image_small_url.nil?
     next if prod.categories_tags.nil?
-    next if prod.origins.nil?
-    next if prod.image_nutrition_small_url.nil?
-    next if prod.quantity.nil?
-    next if prod.nutriments.nil?
+    next if prod.nutriscore_grade.nil?
+    next if prod.image_small_url.nil?
 
-
-    prod_category = prod.categories_tags.map{|element| element.sub('en:','')}.first.capitalize #or .pnns_groups_2_tags.first   .pnns_groups_1 without any mehtod after
+    prod_categories = prod.categories_tags
     nutriscore = prod.nutriscore_grade
 
-    #-------------------------------- Category creation----------------------------------
-    puts 'Creating categories'
-    if Category.find_by(name: prod_category).nil?
-      cat = Category.new(
-        name: prod_category
-      )
-      cat.save!
-    else
-      cat = Category.find_by(name: prod_category)
+    # Get Subcategory id by comparing the subcategory array to a converted array (previously string) parsed with open foods api
+    Subcategory.pluck(:name).each do |sub_category|
+      if prod_categories.map{|element| element.sub('en:','').capitalize}.include?(sub_category)
+        @subcat = Subcategory.find_by("name ILIKE ?", "%#{sub_category}%")
+      end
     end
-    puts 'Done creating categories'
+    @subcat = Subcategory.last if @subcat.nil?
 
+    # Get category id based on subcategory
+    if fruits.include?(@subcat.name)
+      cat_id = Category.find_by(name: "Fruits").id
+    elsif vegetables.include?(@subcat.name)
+      cat_id = Category.find_by(name: "Vegetables").id
+    elsif dairy.include?(@subcat.name)
+      cat_id = Category.find_by(name: "Bakery").id
+    elsif meat.include?(@subcat.name)
+      cat_id = Category.find_by(name: "Meat & Fish").id
+    elsif bakery.include?(@subcat.name)
+      cat_id = Category.find_by(name: "Dairy").id
+    elsif sweets.include?(@subcat.name)
+      cat_id = Category.find_by(name: "Sweets").id
+    elsif drinks.include?(@subcat.name)
+      cat_id = Category.find_by(name: "Drinks").id
+    else
+      cat_id = Category.find_by(name: "Other Stuff").id
+    end
 
     #ecoscore basic calculation
-    ecoscore = "A" if prod.origins.capitalize == "Switzerland"
-    ecoscore = "B" if nutriscore.capitalize == "A" && prod.origins.capitalize != "Switzerland"
-    ecoscore = "C" if nutriscore.capitalize == "B" && prod.origins.capitalize != "Switzerland"
-    ecoscore = "D" if nutriscore.capitalize == "C" && prod.origins.capitalize != "Switzerland"
-    ecoscore = "E" if nutriscore.capitalize == "D" && prod.origins.capitalize != "Switzerland"
-    ecoscore = "F" if nutriscore.capitalize == "F" || nutriscore == "E" && prod.origins.capitalize != "Switzerland"
+    ecoscore = "A" if product["origin_translations"]["en"].capitalize == "[\"Switzerland\"]" && nutriscore == "A"
+    ecoscore = "B" if nutriscore == "B" || nutriscore == "A"
+    ecoscore = "D" if nutriscore == "C"
+    ecoscore = "E" if nutriscore == "D"
+    ecoscore = "F" if nutriscore == "F" || nutriscore == "E"
     ecoscore = "C" if ecoscore.nil?
-
 
     # Supplier name random attribution
     supplier_name = []
@@ -169,23 +212,21 @@ until num_queries == 2 do
     produit = Product.new(
       barcode: product['barcode'],
       name: product['name_translations']["en"],
-      category_id: cat.id,
+      category_id: cat_id,
+      subcategory_id: @subcat.id,
       description: product["ingredients_translations"]["en"],
-      origin: prod.origins,
+      origin: product["origin_translations"]["en"],
       expiration_date: Date.today() + rand(7..30),
       availability: "available",
-      price: Faker::Commerce.price(range: 1..5.0).round(2),
+      price: Faker::Commerce.price(range: 1..10.0),
       currency: "CHF",
       nutri_score: nutriscore.capitalize,
       eco_score: ecoscore,
-      supplier_id: Supplier.find_by(name: rand_name).id,
-      nutriments: prod.nutriments,
-      quantity_product: prod.quantity,
-      image_nutrition: prod.image_nutrition_small_url
+      supplier_id: Supplier.find_by(name: rand_name).id
     )
-
-    produit.image = prod.image_url
-
+    unless prod.image_small_url.nil?
+      produit.image = prod.image_small_url
+    end
     unless produit.barcode.blank? ||  produit.name.blank? || produit.image.blank?
       produit.save!
     end
@@ -195,67 +236,29 @@ end
 puts "\n#{products.length} products fetched from #{num_queries} queries."
 puts "Time taken: #{(Time.now - START_TIME).round(1)} seconds"
 
-# ----------------------Orders creation this month----------------------------------------#
-3.times do
-  status = ["pending","delivered"].sample
-  d = Date.today
-  ord = Order.new(
-    status: status,
-    user_id: User.first.id,
-    deliver_date: status == "delivered" ? d - rand(1..10) : d + 1,
-    address_id: User.first.address.id,
-  )
-  ord.save!
-  rand(3..10).times do
-    products = Product.all
-    product = products.sample
-    quantity = rand(1..3)
-    ord_prod = OrderProduct.new(
-      order_id: ord.id,
-      product_id: product.id,
-      quantity: quantity,
-      unit_price: product.price,
-      total_price: quantity * product.price
-    )
-    ord_prod.save!
-  end
-  ord.total = OrderProduct.where(order_id: ord.id).map(&:total_price).inject(0, &:+)
-  ord.payment_amount = ord.total
-
-  puts "Order Poduct create"
-  ord.save!
-  puts "Order created"
-end
-
-
-# ----------------------Orders creation this month----------------------------------------#
-7.times do
-  status = ["delivered"].sample
-  d = Date.today
-  ord = Order.new(
-    status: status,
-    user_id: User.first.id,
-    deliver_date: status == "delivered" ? d - rand(31..50) : d + 1,
-    address_id: User.first.address.id,
-  )
-  ord.save!
-  rand(3..10).times do
-    products = Product.all
-    product = products.sample
-    quantity = rand(1..3)
-    ord_prod = OrderProduct.new(
-      order_id: ord.id,
-      product_id: product.id,
-      quantity: quantity,
-      unit_price: product.price,
-      total_price: quantity * product.price
-    )
-    ord_prod.save!
-  end
-  ord.total = OrderProduct.where(order_id: ord.id).map(&:total_price).inject(0, &:+)
-  ord.payment_amount = ord.total
-
-  puts "Order Poduct create"
-  ord.save!
-  puts "Order created"
-end
+# ----------------------Orders creation----------------------------------------#
+# status = ["pending","delivered"].sample
+# d = Date.today
+# order = Order.new(
+#   status: status,
+#   user_id: User.first.id,
+#   deliver_date: status == "delivered" ? d - rand(1..10) : d + 1,
+#   address_id: User.first.address.id,
+# )
+# order.save!
+# puts "ord create"
+# products = Product.all
+# product = products.sample
+# quantity = rand(1..3)
+# order_product= OrderProduct.new(
+#   order: order,
+#   product: product,
+#   quantity: quantity,
+#   unit_price: product.price,
+#   total_price: quantity*product.price
+# )
+# order_product.save!
+# puts "ord_prd create"
+# order.total = order_product.total_price
+# order.payment_amount = order_product.total_price
+# order.save!
