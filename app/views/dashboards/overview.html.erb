@@ -1,41 +1,32 @@
-<section class="rectangle-overview paper">
-</section>
-
-
-
-<h1 class="overview-title">Dashboard</h1>
-<nav class="navbar-overview navbar-light d-flex justify-content-center">
-  <form class="form-inline">
-    <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
-    <button class="btn btn-primary" type="submit">Search</button>
-  </form>
-</nav>
-<br>
-
-<div class="current-order">
-  <h3>Previous Order</h3>
-  <ul>
-    <li>order_porduct 1 NO PICTURE</li>
-  </ul>
-</div>
 
 
 
 
-<div class="container pl-10 ">
-  <div class="row justify-content-end top-buffer">
-    <div class="col-4">
-      <div class="eco-chart chart">
-        <%= column_chart(a:3, b:9, c:4, d:5) %>
-      </div>
+<div class="grid-container">
+
+  <div class="current-order paper">
+    <div class="current-order">
+      <h3>Previous Order</h3>
+      <ul>
+        <li>order_porduct 1 NO PICTURE</li>
+      </ul>
     </div>
-    <div class="col-4">
-      <div class="nutritionnal-chart chart">
-        <%= column_chart(a:3, b:7, c:1, d:6) %>
-      </div>
+  </div>
+
+  <div class="eco-chart">
+    <div class="eco-chart chart">
+      <%= column_chart(a:3, b:9, c:4, d:5) %>
     </div>
-    <div class="col-4">
-      <h4>last Orders</h4>
+  </div>
+
+  <div class="details-chart">
+    <div class="nutritionnal-chart chart">
+      <%= column_chart(a:3, b:7, c:1, d:6) %>
+    </div>
+  </div>
+
+  <div class="last-orders">
+    <h4>last Orders</h4>
       <ul>
         <li>
           <div class="badge badge-pill">8</div>Order 1
@@ -47,34 +38,33 @@
           <div class="badge badge-pill">5</div>Order 1
         </li>
       </ul>
-    </div>
   </div>
-  <div class="row justify-content-end top-buffer">
-    <div class="col-4">
-      <h4>Eco Impact</h4>
+
+  <div class="eco-stats">
+    <h4>Eco Impact</h4>
       <ul>
         <li>Order 1</li>
         <li>Order 1</li>
         <li>Order 1</li>
       </ul>
-    </div>
-    <div class="col-4">
-      <h4>Nutrionnal Details</h4>
+  </div>
+
+  <div class="details-stats">
+    <h4>Nutrionnal Details</h4>
       <ul>
         <li>Order 1</li>
         <li>Order 1</li>
         <li>Order 1</li>
       </ul>
-    </div>
-    <div class="col-4">
-      <h4>Spendings</h4>
+  </div>
+
+  <div class="spendings">
+    <h4>Spendings</h4>
       <ul>
         <li>Order 1</li>
         <li>Order 1</li>
         <li>Order 1</li>
       </ul>
-    </div>
   </div>
-  </div>
-  </div>
+
 </div>
