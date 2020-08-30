@@ -1,5 +1,7 @@
+<section class="rectangle paper"></section>
+
 <div class="container py-6">
-  <div class="container-products col-lg-12 cart-item">
+  <div class="container-products col-lg-12 cart-item overflow-auto">
     <% @order_products.each do |item| %>
       <div class="card-product w-100 h-100" data-toggle="modal" data-target="#modal-<%= item.product.id %>">
         <%= image_tag item.product.image, class: "mh-100", style: "width: 200px; height: 300px;"  %>
@@ -29,13 +31,13 @@
           <div class="d-flex justify-content-between">
             <p class="flex-grow overflow-auto"><%= item.product.description%></p>
             <div class="container-payment-btn">
-              <h3> <%= item.product.name %> </h3>
+              <%# <h3> <%= item.product.name </h3> %>
               <%= form_for(item, url: remove_from_cart_path(item.product.id), remote: true) do |f| %>
                 <%= f.hidden_field :product_id, value: item.product.id %>
                 <h5><%= item.product.price %> CHF</h5>
-                <%= f.text_field :quantity, value: item.quantity, min: 1, class: 'form-control', style: 'w-1' %>
-                <%= f.submit "Update", class: 'btn btn-transparent-sm'  %>
-                <%= link_to "Delete", delete_from_cart_path(item.product.id), method: :post, remote: true, class: 'btn btn-danger-sm' %>
+                <%= f.text_field :quantity, value: item.quantity, min: 1, class: 'form-control', width: "100px" %>
+                <%= f.submit "Update", class: 'btn btn-warning btn-sm'  %>
+                <%= link_to "Delete", delete_from_cart_path(item.product.id), method: :post, remote: true, class: 'btn btn-danger btn-sm' %>
               <% end %>
           </div>
           </div>
@@ -44,7 +46,7 @@
       <%= render 'shared/popup', product: item.product%>
     <% end %>
     <div class="container-link-to-strip py-3">
-      <%= link_to "Process Order", new_charge_path, class: "btn btn-primary" %>
+      <%= link_to "Process Order", new_charge_path, class: "btn btn-info" %>
     </div>
 
   </div>
