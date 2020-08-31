@@ -1,0 +1,27 @@
+.rectangle {
+  background: $yellow;
+  width: 50%;
+  height: 50%;
+  top:0;
+  right:0;
+  position: absolute;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 100% 100%);
+  z-index: -10;
+  
+}
+
+.paper {
+  background-image: asset-url("paper.png");
+  z-index: -9;
+  opacity: 0.95;
+}
+
+// .cart{
+//   height: 50px;
+// }
+
+// .card-cart{
+//   height: 80vh;
+//   overflow-y: scroll;
+// }
+

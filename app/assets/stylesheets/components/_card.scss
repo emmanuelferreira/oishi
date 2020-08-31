@@ -13,8 +13,8 @@
 }
 
 .card-product img {
-  height: 100%;
-  width: 200px;
+  height: 200px !important;
+  width: 200px !important;
   object-fit: cover;
 }
 
@@ -28,7 +28,7 @@
 .card-product h3 {
   padding-top: 4px;
   font-size: 16px;
-  color: $light-gray;
+  color: $dark-gray;
   margin: 0;
 }
 
@@ -36,6 +36,10 @@
   padding-top: 16px;
   color: $gray;
   vertical-align: text-bottom;
+  word-wrap: break-word;
+  width: 85%;
+  overflow: scroll !important;
+
 }
 
 .badges{
