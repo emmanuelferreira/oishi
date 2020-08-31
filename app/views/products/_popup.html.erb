@@ -78,17 +78,19 @@
                 <div class="col-8">
                   <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+                      <h4>Quantity: <%= product["quantity-product"] %> </h4>
+                    </div>
+                    <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
                       <h4>Proteins: <%= product["nutriments"]["proteins"] %> gr</h4>
                       <br>
                       <h4>Sugar: <%= product["nutriments"]["sugars"] %> gr </h4>
                       <br>
                       <h4>Energie: <%= product["nutriments"]["energy-kcal"] %> Kcal </h4>
                     </div>
-                    <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-                      <h2>Nutri-score: <%= product.nutri_score %></h2>
-                    </div>
                     <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
-                      <h2>Eco-score: <%= product.eco_score %></h2>
+                      <h3>Eco-score: <%= product.eco_score %></h3>
+                      <br>
+                      <h4>Origin: <%= product["origin"] %> </h4>
                     </div>
                   </div>
                 </div>
