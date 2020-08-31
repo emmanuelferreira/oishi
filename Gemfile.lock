@@ -106,7 +106,11 @@ GEM
       sassc (>= 1.11)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    groupdate (5.1.0)
+      activesupport (>= 5)
     hashie (3.6.0)
+    highcharts-rails (6.0.3)
+      railties (>= 3.1)
     http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
@@ -296,6 +300,8 @@ DEPENDENCIES
   dotenv-rails
   faker
   font-awesome-sass
+  groupdate
+  highcharts-rails
   httparty
   jbuilder (~> 2.7)
   listen (~> 3.2)

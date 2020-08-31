@@ -13,8 +13,8 @@
 }
 
 .card-product img {
-  height: 100%;
-  width: 200px;
+  height: 200px !important;
+  width: 200px !important;
   object-fit: cover;
 }
 
@@ -28,7 +28,7 @@
 .card-product h3 {
   padding-top: 4px;
   font-size: 16px;
-  color: $light-gray;
+  color: $dark-gray;
   margin: 0;
 }
 
@@ -36,6 +36,10 @@
   padding-top: 16px;
   color: $gray;
   vertical-align: text-bottom;
+  word-wrap: break-word;
+  width: 84%;
+  overflow: scroll !important;
+
 }
 
 .badges{
@@ -51,5 +55,50 @@
 }
 
 
-// Dashboard card
+// cart card
+.card-product-cart {
+  // margin-right: 24px;
+  margin-top:10px;
+  overflow: hidden;
+  height: 165px;
+  width: 90% !important;
+  background: white;
+  display: flex;
+  // align-items: stretch;
+  font-family: $body-font;
+  border: 1px solid $light-gray;
+}
 
+.card-product-cart img {
+  height: 165px !important;
+  width: 165px !important;
+  object-fit: cover;
+}
+
+.card-product-cart h2 {
+  color: $gray;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 8px;
+}
+
+.card-product-cart h3 {
+  padding-top: 4px;
+  font-size: 16px;
+  color: $dark-gray;
+  margin: 8px;
+}
+
+.card-product-cart p {
+  padding-top: 16px;
+  color: $gray;
+  vertical-align: text-bottom;
+  word-wrap: break-word;
+  width: 75%;
+  margin-left: 8px;
+}
+
+.new_order_product {
+  display: flex !important;
+  margin: 8px;
+}

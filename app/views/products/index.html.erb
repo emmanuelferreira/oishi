@@ -3,23 +3,23 @@
 
 <div class="container-fluid text-center">
   <div class="row content">
-    <div class="col-sm-2 sidenav">
+    <div class="col-sm-2"> 
       <h3> Search Product </h3>
       <br>
       <br>
         <div class="search-form d-flex justify-content-center p-3">
           <%= form_tag products_path, method: :get, :class => 'form-inline' do %>
             <%= text_field_tag :search,
-              params[:search],class: "form-control",placeholder: "7610809001066"%>
-            <%= submit_tag "Search", class: "btn btn-primary" %>
+              params[:search],class: "form-control sidenav col-lg-8",placeholder: "7610809001066"%>
+            <%= submit_tag "Search", class: "btn btn-primary sidenav col-lg-8" %>
           <% end %>
         </div>
     </div>
 
-    <div class="col-sm-10 text-left">
+    <div class="card-index col-sm-10 text-left">
       <% @products.each do |product| %>
       <div class="card-product w-75">
-        <%= image_tag product.image, class: "mh-100", style: "width: 200px; height: 300px;"  %>
+        <%= image_tag product.image, class: "", style: "width: 200px; height: 300px;"  %>
         <div class="card-product-infos flex-grow-1">
           <div class="d-flex justify-content-between ">
             <h2 data-toggle="modal" data-target="#modal-<%= product.id %>"><%= product.name.capitalize %></h2>
@@ -27,17 +27,17 @@
           </div>
           <h3><%= product.category.name %></h3>
           <div class="d-flex justify-content-around badges ">
-            <% if product.eco_score == "A" || product.eco_score == "B"%>
+            <% if product.eco_score == "A" || product.eco_score == "B" %>
               <i class="fas fa-globe-americas fa-2x" style="color: #4CA90C;"></i>
-            <%elsif  product.eco_score == "C" || product.eco_score == "D"%>
+            <%elsif  product.eco_score == "C" || product.eco_score == "D" %>
               <i class="fas fa-globe-americas fa-2x" style="color: #FFC400;"></i>
             <% else %>
               <i class="fas fa-globe-americas fa-2x" style="color: #EB5757;"></i>
             <% end %>
 
-            <% if product.nutri_score == "A" || product.nutri_score == "B"%>
+            <% if product.nutri_score == "A" || product.nutri_score == "B" %>
               <i class="fas fa-heartbeat fa-2x pl-3" style="color: #4CA90C;"></i>
-            <%elsif  product.nutri_score == "C" || product.nutri_score == "D"%>
+            <%elsif  product.nutri_score == "C" || product.nutri_score == "D" %>
               <i class="fas fa-heartbeat fa-2x pl-3" style="color: #FFC400;"></i>
             <% else %>
               <i class="fas fa-heartbeat fa-2x pl-3" style="color: #EB5757;"></i>
@@ -45,14 +45,21 @@
 
 
             <!-- <i class="fas fa-money-bill-wave fa-2x pl-3"></i>  money icon removed as we have random prices, add again when we can compare with average price -->
+            <% if product.price == "" || product.price == "" %>
+              <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #4CA90C;"></i>
+            <% elsif product.price == "" || product.price == "" %>
+              <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #FFC400;"></i>
+            <% else %>
+              <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #EB5757;"></i>
+            <% end %>
           </div>
           <div class="d-flex justify-content-between">
-            <p class="flex-grow overflow-auto"><%= product.description%></p>
+            <p class="flex-grow"><%= product.description %></p>
             <span id= "add-button">
             <%= form_for @order_product , class: "form-inline add-button", remote: true do |f| %>
-              <%= f.hidden_field :product_id, value: product.id%>
-              <%= f.text_field :quantity, value: 1, min: 1, size: 2 %>
-              <%= f.submit "Add", size: 10 %>
+              <%= f.hidden_field :product_id, value: product.id %>
+              <%= f.text_field :quantity, value: 1, min: 1, size: 2, class: "btn-add"%>
+              <%= f.submit "Add", size: 1, class: "btn-add" %>
             <% end %>
             </span>
           </div>
