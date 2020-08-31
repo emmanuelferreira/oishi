@@ -2,12 +2,6 @@
 <div class="grid-container">
   <h1 class="overview-title"> Dashboard </h1>
 
-  <nav class="navbar-overview navbar-light d-flex justify-content-center">
-    <form class="form-inline">
-      <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
-      <button class="btn btn-primary" type="submit">Search</button>
-    </form>
-  </nav>
   <br>
 
   <div class="current-order">
@@ -33,31 +27,39 @@
     <h2>Dashboard</h2>
   </div>
 
-
-
   <div class="eco-chart">
     <div class="eco-chart chart">
       <%= column_chart [
               {
                   name: "A",
-                  data: PotentialViolator.where(confirmation_status: 1).group_by_week(:capture_time).count,
+                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'A'").group(:orders).count ,
                   stack: "stack 1"
               },
               {
-                  name: "Rejected AI-PWD Operated Data",
-                  data: ,
+                  name: "B",
+                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'B'").group(:orders).count ,
                   stack: "stack 1"
               },
               {
-                  name: "Unverified AI-PWD  Operated Data",
-                  data: PotentialViolator.where(confirmation_status: -1).group_by_week(:capture_time).count,
+                  name: "C",
+                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'C'").group(:orders).count ,
                   stack: "stack 1"
               },
               {
-                  name: "PWD-Operated Data",
-                  data: ManuallyCaughtViolator.group_by_week(:capture_time).count,
+                  name: "D",
+                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'D'").group(:orders).count ,
                   stack: "stack 1"
-              }
+              },
+              {
+                  name: "E",
+                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'E'").group(:orders).count ,
+                  stack: "stack 1"
+              },
+              {
+                  name: "F",
+                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'F'").group(:orders).count ,
+                  stack: "stack 1"
+              },
           ], stacked: true
       %>
     </div>
@@ -65,7 +67,39 @@
 
   <div class="details-chart">
     <div class="nutritionnal-chart chart">
-
+      <%= column_chart [
+              {
+                  name: "A",
+                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'A'").group(:orders).count ,
+                  stack: "stack 1"
+              },
+              {
+                  name: "B",
+                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'B'").group(:orders).count ,
+                  stack: "stack 1"
+              },
+              {
+                  name: "C",
+                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'C'").group(:orders).count ,
+                  stack: "stack 1"
+              },
+              {
+                  name: "D",
+                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'D'").group(:orders).count ,
+                  stack: "stack 1"
+              },
+              {
+                  name: "E",
+                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'E'").group(:orders).count ,
+                  stack: "stack 1"
+              },
+              {
+                  name: "F",
+                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'F'").group(:orders).count ,
+                  stack: "stack 1"
+              },
+          ], stacked: true
+      %>
     </div>
   </div>
 
