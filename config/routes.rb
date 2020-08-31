@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :charges
 
   resources :playlists, only: [:index, :create, :new]
-  resources :orders, only: [:create]
+  resources :orders, only: [:create, :show]
 
 
   get "dashboard", to: "dashboards#overview"

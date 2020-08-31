@@ -1,54 +1,31 @@
 
-
-
-
-
 <div class="grid-container">
+  <h1 class="overview-title"> Dashboard </h1>
 
-<h1 class="overview-title">Dashboard</h1>
-<nav class="navbar-overview navbar-light d-flex justify-content-center">
-  <form class="form-inline">
-    <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
-    <button class="btn btn-primary" type="submit">Search</button>
-  </form>
-</nav>
-<br>
+  <nav class="navbar-overview navbar-light d-flex justify-content-center">
+    <form class="form-inline">
+      <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
+      <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+  </nav>
+  <br>
 
-<div class="current-order">
-  <h3>Previous Order</h3>
-    <% @order_products.each do |order_product|%>
+  <div class="current-order">
+    <h3>Last 5 Purchases</h3>
+    <% Order.where(user_id: current_user.id).limit(5).each do |order|%>
       <ul>
         <li>
-          <div class="card-product-dashboard">
-            <%= image_tag order_product.product.image %>
-            <div class="card-product-dashboard-infos">
-              <h2><%= order_product.product.name.capitalize %></h2>
-
-              <div class="d-flex justify-content-around badges ">
-                <% if order_product.product.eco_score == "A" || order_product.product.eco_score == "B"%>
-                  <i class="fas fa-globe-americas fa-2x" style="color: #4CA90C;"></i>
-                <%elsif  order_product.product.eco_score == "C" || order_product.product.eco_score == "D"%>
-                  <i class="fas fa-globe-americas fa-2x" style="color: #FFC400;"></i>
-                <% else %>
-                  <i class="fas fa-globe-americas fa-2x" style="color: #EB5757;"></i>
-                <% end %>
-
-                <% if order_product.product.nutri_score == "A" || order_product.product.nutri_score == "B"%>
-                  <i class="fas fa-heartbeat fa-2x pl-3" style="color: #4CA90C;"></i>
-                <%elsif  order_product.product.nutri_score == "C" || order_product.product.nutri_score == "D"%>
-                  <i class="fas fa-heartbeat fa-2x pl-3" style="color: #FFC400;"></i>
-                <% else %>
-                  <i class="fas fa-heartbeat fa-2x pl-3" style="color: #EB5757;"></i>
-                <% end %>
-                <span><%= order_product.product.price%><%= order_product.product.currency.upcase %></span>
-                <!-- <i class="fas fa-money-bill-wave fa-2x pl-3"></i>  money icon removed as we have random prices, add again when we can compare with average price -->
-              </div>
+          <div class="list-dashboard">
+            <div class="list-product-dashboard-infos">
+              <h1></h1>
+              <h2>Order n°<%=order.id %> - <%= order.products.count %> items ordered</h2>
+              <span><strong>Deliver Date:</strong> <%= order.deliver_date %> - <strong>Total:</strong> <%= order.total.round(2) %> CHF</span>
+              <%= link_to "Show Order details", order_path(order) %>
             </div>
           </div>
         </li>
       </ul>
     <% end %>
-    <span><%= @order.total %></span>
   </div>
 
 
@@ -56,81 +33,67 @@
     <h2>Dashboard</h2>
   </div>
 
-  <div class="current-order paper">
-    <div class="current-order-infos">
-      <h3>Previous Order</h3>
-      <ul>
-        <li>order_porduct 1 NO PICTURE</li>
-      </ul>
-    </div>
-  </div>
+
 
   <div class="eco-chart">
     <div class="eco-chart chart">
-      <%= column_chart(a:3, b:9, c:4, d:5) %>
+      <%= column_chart [
+              {
+                  name: "A",
+                  data: PotentialViolator.where(confirmation_status: 1).group_by_week(:capture_time).count,
+                  stack: "stack 1"
+              },
+              {
+                  name: "Rejected AI-PWD Operated Data",
+                  data: ,
+                  stack: "stack 1"
+              },
+              {
+                  name: "Unverified AI-PWD  Operated Data",
+                  data: PotentialViolator.where(confirmation_status: -1).group_by_week(:capture_time).count,
+                  stack: "stack 1"
+              },
+              {
+                  name: "PWD-Operated Data",
+                  data: ManuallyCaughtViolator.group_by_week(:capture_time).count,
+                  stack: "stack 1"
+              }
+          ], stacked: true
+      %>
     </div>
   </div>
 
   <div class="details-chart">
     <div class="nutritionnal-chart chart">
-      <%= column_chart(a:3, b:7, c:1, d:6) %>
+
     </div>
   </div>
 
-  <div class="last-orders">
-    <h4>last Orders</h4>
-      <ul>
-        <li>
-          <div class="badge badge-pill">8</div>Order 1
-        </li>
-        <li>
-          <div class="badge badge-pill">7</div>Order 1
-        </li>
-        <li>
-          <div class="badge badge-pill">5</div>Order 1
-        </li>
-      </ul>
+  <div class="details-chart">
+    <div class="spendings-chart chart">
+      <%= column_chart Order.where(user_id: current_user.id).pluck(:id, :total), xtitle: "Orders", ytitle: "Total spent (CHF)" %>
+    </div>
   </div>
 
 
-  <div class="eco-stats">
-    <h4>Eco Impact</h4>
-      <ul>
-        <li>Order 1</li>
-        <li>Order 1</li>
-        <li>Order 1</li>
-      </ul>
-  </div>
-
-  <div class="details-stats">
-    <h4>Nutrionnal Details</h4>
-      <ul>
-        <li>Order 1</li>
-        <li>Order 1</li>
-        <li>Order 1</li>
-      </ul>
-  </div>
-
-  <div class="spendings">
-    <h4>Spendings</h4>
 
   <div class="row justify-content-end top-buffer">
     <div class="col-4">
       <h4>Last Month Consumption Overview</h4>
       <ul>
-        <li>Global Ecoscore: </li>
-        <li>Global Nutriscore: </li>
-        <li>Total Spendings: </li>
+        <li>Global Ecoscore:  <%= @last_eco_score_avg %></li>
+        <li>Global Nutriscore: <%= @last_nutri_score_avg %></li>
+        <li>Total Spendings: <%= @last_month_orders.pluck(:total).inject(0) {|sum, ele| sum += ele}.to_f.round(2) %> CHF</li>
       </ul>
     </div>
     <div class="col-4">
       <h4>Current Month Consumption Overview</h4>
-
       <ul>
-        <li>Order 1</li>
-        <li>Order 1</li>
-        <li>Order 1</li>
+        <li>Global Ecoscore:  <%= @current_eco_score_avg %></li>
+        <li>Global Nutriscore: <%= @current_nutri_score_avg %></li>
+        <li>Total Spendings: <%= @current_month_orders.pluck(:total).inject(0) {|sum, ele| sum += ele}.to_f.round(2) %> CHF</li>
       </ul>
+    </div>
   </div>
 
 </div>
