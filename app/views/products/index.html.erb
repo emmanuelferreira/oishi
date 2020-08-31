@@ -42,6 +42,8 @@
             <% else %>
               <i class="fas fa-heartbeat fa-2x pl-3" style="color: #EB5757;"></i>
             <% end %>
+
+
             <!-- <i class="fas fa-money-bill-wave fa-2x pl-3"></i>  money icon removed as we have random prices, add again when we can compare with average price -->
             <% if product.price == "" || product.price == "" %>
               <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #4CA90C;"></i>
@@ -63,7 +65,7 @@
           </div>
         </div>
       </div>
-      <%= render 'shared/popup', product: product%>
+      <%= render 'popup', product: product%>
     <% end %>
     </div>
   </div>
