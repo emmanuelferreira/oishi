@@ -207,8 +207,9 @@ puts "Time taken: #{(Time.now - START_TIME).round(1)} seconds"
   )
   ord.save!
   rand(3..10).times do
-    products = Product.all
-    product = products.shuffle.each{|x|}
+    n = 0
+    products = Product.all.shuffle.each{|x|}
+    product = products[n]
     quantity = rand(1..3)
     ord_prod = OrderProduct.new(
       order_id: ord.id,
@@ -240,8 +241,9 @@ end
   )
   ord.save!
   rand(3..10).times do
-    products = Product.all
-    product = products.shuffle.each{|x|}
+    n = 0
+    products = Product.all.shuffle.each{|x|}
+    product = products[n]
     quantity = rand(1..3)
     ord_prod = OrderProduct.new(
       order_id: ord.id,
