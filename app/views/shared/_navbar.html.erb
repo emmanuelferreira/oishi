@@ -9,9 +9,11 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active " id ="cart">
-        <%= render 'shared/cart' %>
-      </li>
+      <% if session[:cart].present? %>
+        <li class="nav-item active " id ="cart">
+          <%= render 'shared/cart' %>
+        </li>
+      <% end %>
       <% if user_signed_in? %>
         <li class="nav-item active">
           <%= link_to "Products", products_path, class: "btn btn-primary " %>
@@ -19,7 +21,7 @@
         <li class="nav-item dropdown">
 
 
-          <%= image_tag "https://kitt.lewagon.com/placeholder/users/random", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          <%= image_tag "https://kitt.lewagon.com/placeholder/users/emmanuelferreira", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
 
 
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
