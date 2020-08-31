@@ -12,7 +12,7 @@
             <h2><%= item.product.price%><%= item.product.currency.upcase %></h2>
           </div>
           <h3><%= item.product.category.name %></h3>
-          <div class="d-flex justify-content-around badges ">
+          <div class="d-flex justify-content-around badges pb-4">
             <% if item.product.eco_score == "A" || item.product.eco_score == "B"%>
               <i class="fas fa-globe-americas fa-2x" style="color: #4CA90C;"></i>
             <%elsif  item.product.eco_score == "C" || item.product.eco_score == "D"%>
@@ -27,15 +27,15 @@
             <% else %>
               <i class="fas fa-heartbeat fa-2x pl-3" style="color: #EB5757;"></i>
             <% end %>
-            <i class="fas fa-money-bill-wave fa-2x pl-3"></i>
+              <i class="fas fa-money-bill-wave fa-2x pl-3"></i>
           </div>
           <div class="d-flex justify-content-between">
             <p class="flex-grow overflow-auto"><%= item.product.description%></p>
             <div class="container-payment-btn">
-              <h3> <%= item.product.name %> </h3>
+              <%# <%= item.product.name %>
               <%= form_for(item, url: remove_from_cart_path(item.product.id), remote: true) do |f| %>
                 <%= f.hidden_field :product_id, value: item.product.id %>
-                <h5><%= item.product.price %> CHF</h5>
+                <%# <><%= item.product.price %>
                 <%= f.text_field :quantity, value: item.quantity, min: 1, class: 'form-control', style: 'w-1' %>
                 <%= f.submit "Update", class: 'btn btn-warning btn-sm'  %>
                 <%= link_to "Delete", delete_from_cart_path(item.product.id), method: :post, remote: true, class: 'btn btn-info btn-sm' %>
@@ -47,7 +47,7 @@
       <%= render 'shared/popup', product: item.product%>
     <% end %>
     <div class="container-link-to-strip py-3">
-      <%= link_to "Process Order", new_charge_path, class: "btn btn-primary" %>
+      <%= link_to "Process Order", new_charge_path, class: "btn btn-info btn-lg" %>
     </div>
 
   </div>
