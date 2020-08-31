@@ -15,6 +15,7 @@ class ProductsController < ApplicationController
         @products << Product.find_by(barcode: params[:search])
       end
     end
+
   end
 
   def show
