@@ -208,7 +208,7 @@ puts "Time taken: #{(Time.now - START_TIME).round(1)} seconds"
   ord.save!
   rand(3..10).times do
     products = Product.all
-    product = products.sample
+    product = products.shuffle.each{|x|}
     quantity = rand(1..3)
     ord_prod = OrderProduct.new(
       order_id: ord.id,
@@ -228,7 +228,7 @@ puts "Time taken: #{(Time.now - START_TIME).round(1)} seconds"
 end
 
 
-# ----------------------Orders creation this month----------------------------------------#
+# ----------------------Orders creation last month----------------------------------------#
 7.times do
   status = ["delivered"].sample
   d = Date.today
@@ -241,7 +241,7 @@ end
   ord.save!
   rand(3..10).times do
     products = Product.all
-    product = products.sample
+    product = products.shuffle.each{|x|}
     quantity = rand(1..3)
     ord_prod = OrderProduct.new(
       order_id: ord.id,
