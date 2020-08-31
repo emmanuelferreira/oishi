@@ -24,9 +24,12 @@
                   <div class="quantity-show">
                     <p>Quantity</p>
                     <%= form_for @order_product, class: "form-inline add-button", remote: true do |f| %>
-                      <%= f.hidden_field :product_id, value: product.id%>
-                      <%= f.text_field :quantity, value: 1, min: 1, size: 2 %>
-                      <%= f.submit "Add", size: 10, class: "btn btn-info" %>
+
+                    <%= f.hidden_field :product_id, value: product.id%>
+                    <%= f.text_field :quantity, value: 1, min: 1, size: 2 %>
+                    <%= f.submit "Add to basket", size: 10 %>
+
+                 
                     <% end %>
                   </div>
                 </div>
@@ -50,15 +53,20 @@
                 <div class="col-8">
                   <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-                      <p>Origin: <%= product.origin %></p>
-                      <p>Supplier: <%= product.supplier_id %></p>
-                      <p>Expiration date: <%= product.expiration_date %></p>
+                      <h4>Quantity: <%= product["quantity-product"] %> </h4>
                     </div>
                     <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-                      <p>Nutri-score: <%= product.nutri_score %></p>
+                      <h4>Proteins: <%= product["nutriments"]["proteins"] %> gr</h4>
+                      <br>
+                      <h4>Sugar: <%= product["nutriments"]["sugars"] %> gr </h4>
+                      <br>
+                      <h4>Energie: <%= product["nutriments"]["energy-kcal"] %> Kcal </h4>
                     </div>
                     <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
-                      <p>Eco-score: <%= product.eco_score %></p>
+                      <h3>Eco-score: <%= product.eco_score %></h3>
+                      <br>
+                      <h4>Origin: <%= product["origin"] %> </h4>
+
                     </div>
                   </div>
                 </div>
