@@ -12,15 +12,24 @@
       <div class="modal-body">
         <div class="container-fluid">
           <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 category-name">
               <h6><%=product.category.name %></h6>
-             
               <img src="<%= product.image %>" class="img-show">
             </div>
 
-            <div class="col-md-8 ml-auto">
-              <div class="row basket-selection justify-content-between">
+
+              <div class="row">
                 <div class="col-4">
+                  <div class="list-group list-group-flush" id="list-tab" role="tablist">
+                    <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Description</a>
+                    <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Nutri Score</a>
+                    <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Eco Score</a>
+                  </div>
+                </div>
+
+                <div class="col-8 ml-auto">
+              <div class="row basket-selection justify-content-between">
+                <div class="">
                   <div class="quantity-show">
                     <p>Quantity</p>
                     <%= form_for @order_product, class: "form-inline add-button", remote: true do |f| %>
@@ -40,16 +49,7 @@
                   </div>
                 </div>
               </div>
-
-              <div class="row">
-                <div class="col-4">
-                  <div class="list-group" id="list-tab" role="tablist">
-                    <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Description</a>
-                    <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Nutri Score</a>
-                    <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Eco Score</a>
-                  </div>
-                </div>
-
+                
                 <div class="col-8">
                   <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
