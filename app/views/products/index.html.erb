@@ -3,7 +3,7 @@
 
 <div class="container-fluid text-center">
   <div class="row content">
-    <div class="col-sm-2"> 
+    <div class="col-sm-2">
       <h3> Search Product </h3>
       <br>
       <br>
@@ -44,10 +44,9 @@
             <% end %>
 
 
-            <!-- <i class="fas fa-money-bill-wave fa-2x pl-3"></i>  money icon removed as we have random prices, add again when we can compare with average price -->
-            <% if product.price == "" || product.price == "" %>
+            <% if product.price < 0.8 * ((Product.where(category_id: product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: product.category.id).size) %>
               <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #4CA90C;"></i>
-            <% elsif product.price == "" || product.price == "" %>
+            <% elsif product.price >= 0.8 * ((Product.where(category_id: product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: product.category.id).size) && product.price <= 1.2 * ((Product.where(category_id: product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: product.category.id).size) %>
               <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #FFC400;"></i>
             <% else %>
               <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #EB5757;"></i>

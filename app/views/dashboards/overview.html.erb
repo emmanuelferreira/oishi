@@ -33,6 +33,7 @@
               {
                   name: "A",
                   data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'A'").group(:orders).count ,
+                  color: ["green"],
                   stack: "stack 1"
               },
               {
