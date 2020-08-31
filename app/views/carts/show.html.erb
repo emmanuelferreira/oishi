@@ -1,10 +1,13 @@
 <section class="rectangle paper"></section>
 
+<div class="cart-title">
+  <h2>Cart</h2>
+</div>
 
 <div class="container py-6">
-  <div class="container-products col-lg-12 cart-item">
+  <div class="card-cart container-products col-lg-12 cart-item">
     <% @order_products.each do |item| %>
-      <div class="card-product w-100 h-100" data-toggle="modal" data-target="#modal-<%= item.product.id %>">
+      <div class="card-product-cart" data-toggle="modal" data-target="#modal-<%= item.product.id %>">
         <%= image_tag item.product.image, class: "", style: "width: 200px; height: 300px;"  %>
         <div class="card-product-infos flex-grow-1">
           <div class="d-flex justify-content-between ">
@@ -12,13 +15,13 @@
             <h2><%= item.product.price.round(2)%><%= item.product.currency.upcase %></h2>
           </div>
           <h3><%= item.product.category.name %></h3>
-          <div class="d-flex justify-content-around badges pb-4">
+          <div class="d-flex justify-content-around">
             <% if item.product.eco_score == "A" || item.product.eco_score == "B"%>
-              <i class="fas fa-globe-americas fa-2x" style="color: #4CA90C;"></i>
+              <i class="fas fa-globe-americas fa-2x pl-3" style="color: #4CA90C;"></i>
             <%elsif  item.product.eco_score == "C" || item.product.eco_score == "D"%>
-              <i class="fas fa-globe-americas fa-2x" style="color: #FFC400;"></i>
+              <i class="fas fa-globe-americas fa-2x pl-3" style="color: #FFC400;"></i>
             <% else %>
-              <i class="fas fa-globe-americas fa-2x" style="color: #EB5757;"></i>
+              <i class="fas fa-globe-americas fa-2x pl-3" style="color: #EB5757;"></i>
             <% end %>
             <% if item.product.nutri_score == "A" || item.product.nutri_score == "B"%>
               <i class="fas fa-heartbeat fa-2x pl-3" style="color: #4CA90C;"></i>
@@ -27,21 +30,32 @@
             <% else %>
               <i class="fas fa-heartbeat fa-2x pl-3" style="color: #EB5757;"></i>
             <% end %>
-              <i class="fas fa-money-bill-wave fa-2x pl-3"></i>
+            <% if item.product.price == "" || item.product.price == "" %>
+              <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #4CA90C;"></i>
+            <% elsif item.product.price == "" || item.product.price == "" %>
+              <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #FFC400;"></i>
+            <% else %>
+              <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #EB5757;"></i>
+            <% end %>
           </div>
-          <div class="d-flex justify-content-between">
-            <p class="flex-grow overflow-auto"><%= item.product.description%></p>
-            <div class="container-payment-btn">
+
+          <div class="d-flex justify-content-end">
+            <div class="">
               <%# <%= item.product.name %>
-              <%= form_for(item, url: remove_from_cart_path(item.product.id), remote: true) do |f| %>
-                <%= f.hidden_field :product_id, value: item.product.id %>
-                <%# <><%= item.product.price %>
-                <%= f.text_field :quantity, value: item.quantity, min: 1, class: 'form-control', style: 'w-1' %>
-                <%= f.submit "Update", class: 'btn btn-warning btn-sm'  %>
-                <%= link_to "Delete", delete_from_cart_path(item.product.id), method: :post, remote: true, class: 'btn btn-info btn-sm' %>
-              <% end %>
+              <div>
+                <%= form_for(item, url: remove_from_cart_path(item.product.id), remote: true) do |f| %>
+                  <%= f.hidden_field :product_id, value: item.product.id, class: "form-control" %>
+                  <%# <><%= item.product.price %>
+                  <%= f.submit "Update", class: 'btn btn-secondary btn-sm btn-cart'  %>
+                  <%= link_to "Delete", delete_from_cart_path(item.product.id), method: :post, remote: true, class: 'btn btn-secondary btn-sm btn-cart' %>
+                  <%= f.text_field :quantity, value: item.quantity, min: 1, class: 'form-control quantity-cart' %>
+                <% end %>
+              </div>
+            </div>
           </div>
-          </div>
+
+        
+
         </div>
       </div>
       <%= render 'shared/popup', product: item.product%>
