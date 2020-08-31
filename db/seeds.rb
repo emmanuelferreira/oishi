@@ -239,7 +239,7 @@ end
     address_id: User.first.address.id,
   )
   ord.save!
-  rand(3..10).times d o
+  rand(3..10).times do
     products = Product.all
     product = products.sample
     quantity = rand(1..3)
