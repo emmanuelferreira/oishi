@@ -4,7 +4,7 @@
     <li>
       <%= form_tag products_path, method: :get, :class => 'form-inline' do %>
         <%= hidden_field_tag :query, category.name %>
-        <%= submit_tag "#{category.name.capitalize}", class: "btn btn-flat btn-all d-flex justify-content-center"  %>
+        <%= submit_tag "#{category.name.upcase}", class: "btn btn-flat btn-all d-flex justify-content-center"  %>
       <% end %>
     </li>
   <% end %>
