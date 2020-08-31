@@ -1,11 +1,15 @@
 .list-inline{
   overflow-x: auto;
+  margin-bottom: 24px !important;
+  height: 80px;
 }
 
 .tabs-underlined {
+  width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
+  overflow: auto;
   background-color: #ECE5D3;
   padding-left: 24px;
   padding-right: 24px;
@@ -87,4 +91,15 @@
 
 .chevron{
   color: $gray;
+}
+
+.sidenav{
+  // width: 200px;
+  margin-left: 48px;
+}
+
+.paper {
+  background-image: asset-url("paper.png");
+  z-index: -9;
+  opacity: 0.95;
 }
