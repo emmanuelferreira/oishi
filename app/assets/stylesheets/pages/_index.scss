@@ -1,6 +1,17 @@
 // Import page-specific CSS files here.
 @import "home";
 
+.grid-container-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 1px 1px;
+  grid-template-areas:
+    ". . ."
+    ". . ."
+    ". . .";
+}
+
 .index-banner{
   background-image: linear-gradient(rgba(245, 245, 245, 0.4),rgba(245,245,245,0.4)), asset-url("index-banner.png");
   opacity: 0.7;
@@ -26,8 +37,8 @@
   margin: 24px;
 }
 
+
 .add-button{
-  position: relative;
   z-index: 10;
 }
 
