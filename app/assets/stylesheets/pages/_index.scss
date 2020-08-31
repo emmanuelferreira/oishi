@@ -29,5 +29,14 @@
 .add-button{
   position: relative;
   z-index: 10;
+}
 
+.btn-add{
+  border: solid 1px $light-gray;
+  transition: all 0.3s ease;
+}
+
+.btn-add:hover{
+  border: solid 1px $light-gray;
+  opacity: 0.7;
 }

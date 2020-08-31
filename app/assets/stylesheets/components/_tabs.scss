@@ -1,3 +1,7 @@
+.list-inline{
+  overflow-x: auto;
+}
+
 .tabs-underlined {
   display: flex;
   align-items: center;
@@ -78,4 +82,9 @@
 .tabs-underlined .tab-underlined-second:hover {
   // background-color: $dark-green;
   color: $yellow;
+}
+
+
+.chevron{
+  color: $gray;
 }

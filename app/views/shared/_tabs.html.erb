@@ -1,4 +1,5 @@
 <ul class="list-inline tabs-underlined">
+  <i class="fas fa-chevron-left chevron"></i>
   <% Category.all.each do |category| %>
     <li>
       <%= form_tag products_path, method: :get, :class => 'form-inline' do %>
@@ -7,5 +8,6 @@
       <% end %>
     </li>
   <% end %>
+  <i class="fas fa-chevron-right chevron"></i>
 </ul>
 
