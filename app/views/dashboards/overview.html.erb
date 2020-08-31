@@ -32,34 +32,40 @@
       <%= column_chart [
               {
                   name: "A",
-                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'A'").group(:orders).count ,
-                  color: ["green"],
-                  stack: "stack 1"
+
+                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'A'").group('orders.id').count ,
+                  stack: "stack 1",
+                  color: ["#008000"],
               },
               {
                   name: "B",
-                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'B'").group(:orders).count ,
-                  stack: "stack 1"
+                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'B'").group('orders.id').count ,
+                  stack: "stack 1",
+                  color: ["#00FF00"],
               },
               {
                   name: "C",
-                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'C'").group(:orders).count ,
-                  stack: "stack 1"
+                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'C'").group('orders.id').count ,
+                  stack: "stack 1",
+                  color: ["#FFC300"],
               },
               {
                   name: "D",
-                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'D'").group(:orders).count ,
-                  stack: "stack 1"
+                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'D'").group('orders.id').count ,
+                  stack: "stack 1",
+                  color: ["#FFC300"],
               },
               {
                   name: "E",
-                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'E'").group(:orders).count ,
-                  stack: "stack 1"
+                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'E'").group('orders.id').count ,
+                  stack: "stack 1",
+                  color: ["#FF0000"],
               },
               {
                   name: "F",
-                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'F'").group(:orders).count ,
-                  stack: "stack 1"
+                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'F'").group('orders.id').count ,
+                  stack: "stack 1",
+                  color: ["#800000"],
               },
           ], stacked: true
       %>
@@ -71,33 +77,40 @@
       <%= column_chart [
               {
                   name: "A",
-                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'A'").group(:orders).count ,
-                  stack: "stack 1"
+                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'A'").group('orders.id').count ,
+                  stack: "stack 1",
+                  color: ["#008000"],
               },
               {
                   name: "B",
-                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'B'").group(:orders).count ,
-                  stack: "stack 1"
+                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'B'").group('orders.id').count ,
+                  stack: "stack 1",
+                  color: ["#00FF00"],
+
               },
               {
                   name: "C",
-                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'C'").group(:orders).count ,
-                  stack: "stack 1"
+                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'C'").group('orders.id').count ,
+                  stack: "stack 1",
+                  color: ["#FFC300"],
               },
               {
                   name: "D",
-                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'D'").group(:orders).count ,
-                  stack: "stack 1"
+                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'D'").group('orders.id').count ,
+                  stack: "stack 1",
+                  color: ["#FFC300"],
               },
               {
                   name: "E",
-                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'E'").group(:orders).count ,
-                  stack: "stack 1"
+                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'E'").group('orders.id').count ,
+                  stack: "stack 1",
+                  color: ["#FF0000"],
               },
               {
                   name: "F",
-                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'F'").group(:orders).count ,
-                  stack: "stack 1"
+                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'F'").group('orders.id').count ,
+                  stack: "stack 1",
+                  color: ["#800000"],
               },
           ], stacked: true
       %>
