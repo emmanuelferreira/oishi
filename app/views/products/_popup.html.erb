@@ -2,7 +2,7 @@
 <div class="modal fade" id="modal-<%= product.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
 
-    <div class="modal-content">
+    <div class="modal-content d-flex justify-content-around">
       <div class="modal-header">
         <h2 class="modal-title" id="exampleModalLabel"><%= product.name.capitalize %></h2>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -13,68 +13,43 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col-md-4">
-              <h5><%=product.category.name %></h5>
-              <div class="show-emotes">
-                 <% if product.eco_score == "A" || product.eco_score == "B"%>
-                  <i class="fas fa-globe-americas fa-2x" style="color: #4CA90C;"></i>
-                <%elsif product.eco_score == "C" || product.eco_score == "D"%>
-                  <i class="fas fa-globe-americas fa-2x" style="color: #FFC400;"></i>
-                <% else %>
-                  <i class="fas fa-globe-americas fa-2x" style="color: #EB5757;"></i>
-                <% end %>
-
-                 <% if product.nutri_score == "A" || product.nutri_score == "B"%>
-                  <i class="fas fa-heartbeat fa-2x pl-3" style="color: #4CA90C;"></i>
-                <%elsif  product.nutri_score == "C" || product.nutri_score == "D"%>
-                  <i class="fas fa-heartbeat fa-2x pl-3" style="color: #FFC400;"></i>
-                <% else %>
-                  <i class="fas fa-heartbeat fa-2x pl-3" style="color: #EB5757;"></i>
-                <% end %>
-
-                <% if product.eco_score == "A" || product.eco_score == "B"%>
-                  <i class="fas fa-dollar-sign" style="color: #4CA90C;"></i>
-                <%elsif product.eco_score == "C" || product.eco_score == "D"%>
-                  <i class="fas fa-dollar-sign" style="color: #FFC400;"></i>
-                <% else %>
-                  <i class="fas fa-dollar-sign" style="color: #EB5757;"></i>
-                <% end %>
-              </div>
-              <img src="<%= product.image %>" style="height:300px;" alt="" class="img-show">
+              <h6><%=product.category.name %></h6>
+             
+              <img src="<%= product.image %>" class="img-show">
             </div>
+
             <div class="col-md-8 ml-auto">
-              <div class="row basket-selection">
+              <div class="row basket-selection justify-content-between">
                 <div class="col-4">
                   <div class="quantity-show">
                     <p>Quantity</p>
                     <%= form_for @order_product, class: "form-inline add-button", remote: true do |f| %>
+
                     <%= f.hidden_field :product_id, value: product.id%>
                     <%= f.text_field :quantity, value: 1, min: 1, size: 2 %>
                     <%= f.submit "Add to basket", size: 10 %>
+
+                 
                     <% end %>
                   </div>
                 </div>
                 <div class="col-4">
                   <div class="price-show">
                     <p>Price</p>
-                    <h4><%=product.price  %></h4>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="btn-basket-show">
-
+                    <h4><%=product.price  %>CHF</h4>
                   </div>
                 </div>
               </div>
 
               <div class="row">
-
                 <div class="col-4">
                   <div class="list-group" id="list-tab" role="tablist">
                     <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Description</a>
-                    <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Nutritional value</a>
-                    <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Eco Impact</a>
+                    <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Nutri Score</a>
+                    <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Eco Score</a>
                   </div>
                 </div>
+
                 <div class="col-8">
                   <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
@@ -91,6 +66,7 @@
                       <h3>Eco-score: <%= product.eco_score %></h3>
                       <br>
                       <h4>Origin: <%= product["origin"] %> </h4>
+
                     </div>
                   </div>
                 </div>
@@ -100,22 +76,16 @@
           </div>
 
           <div class="row suggestion-title">
-            <h1>Suggestions</h1>
+            <h6>Suggestions</h6>
           </div>
 
-          <div class="row">
+          <div class="row suggestions-list">
             <% Product.where(category: product.category).order(eco_score: :asc).take(3).each do |product_suggestion| %>
-            <div class="col img-suggestions">
-              <%= image_tag product_suggestion.image, class: "mh-100", style: "width: 200px; height: 300px;"  %>
+            <div class="col img-suggestions d-flex align-items-end ">
+              <%= image_tag product_suggestion.image %>
             </div>
             <% end %>
-            <!-- <div class="col img-suggestions">
-              <img src="https://images.unsplash.com/photo-1584306670957-acf935f5033c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=666&q=80" style="height:300px;" alt="" class="img-show">
-            </div>
-            <div class="col img-suggestions">
-              <img src="https://images.unsplash.com/photo-1584306670957-acf935f5033c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=666&q=80" style="height:300px;" alt="" class="img-show">
-            </div> -->
-          </div>
+          </div>  
         </div>
       </div>
       <div class="modal-footer">
