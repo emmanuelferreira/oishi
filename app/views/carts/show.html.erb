@@ -1,3 +1,6 @@
+<section class="rectangle paper"></section>
+
+
 <div class="container py-6">
   <div class="container-products col-lg-12 cart-item">
     <% @order_products.each do |item| %>
@@ -34,8 +37,8 @@
                 <%= f.hidden_field :product_id, value: item.product.id %>
                 <h5><%= item.product.price %> CHF</h5>
                 <%= f.text_field :quantity, value: item.quantity, min: 1, class: 'form-control', style: 'w-1' %>
-                <%= f.submit "Update", class: 'btn btn-transparent-sm'  %>
-                <%= link_to "Delete", delete_from_cart_path(item.product.id), method: :post, remote: true, class: 'btn btn-danger-sm' %>
+                <%= f.submit "Update", class: 'btn btn-warning btn-sm'  %>
+                <%= link_to "Delete", delete_from_cart_path(item.product.id), method: :post, remote: true, class: 'btn btn-info btn-sm' %>
               <% end %>
           </div>
           </div>
