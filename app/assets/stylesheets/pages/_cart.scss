@@ -16,12 +16,23 @@
   opacity: 0.95;
 }
 
-// .cart{
-//   height: 50px;
-// }
+.btn-cart{
+  width: 80px;
+  margin-right: 8px;
+}
 
-// .card-cart{
-//   height: 80vh;
-//   overflow-y: scroll;
-// }
+.quantity-cart{
+  width: 50px;
+}
 
+.card-cart{
+  height: 90vh;
+  overflow-y: scroll;
+}
+
+.cart-title{
+  margin-left: 5%;
+  margin-top: 4%;
+  position: absolute;
+
+}
