@@ -60,30 +60,17 @@
           </div>
         </div>
 
-        <div class="popup-product-description-section d-flex justify-content-between">
-          <div class="list-group list-group-flush" id="list-tab" role="tablist">
-            <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Description</a>
-            <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Nutri Score</a>
-            <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Eco Score</a>
-          </div>
-          <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-              <h6>Quantity: <%= product["quantity-product"] %> </h6>
-            </div>
-            <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-              <h6>Proteins: <%= product["nutriments"]["proteins"] %> gr</h6>
-              <br>
-              <h6>Sugar: <%= product["nutriments"]["sugars"] %> gr </h6>
-              <br>
-              <h6>Energie: <%= product["nutriments"]["energy-kcal"] %> Kcal </h6>
-            </div>
-            <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
-              <h6>Eco-score: <%= product.eco_score %></h6>
-              <br>
-              <h6>Origin: <%= product["origin"] %> </h6>
-            </div>
-          </div>
-        </div>
+
+        <!-- Tab content -->
+
+          <p><%= product.description %></p>
+          <p>Energie: <%= product["nutriments"]["energy-kcal"] %> Kcal</p>
+          <p> Proteins: <%= product["nutriments"]["proteins"] %> </p>
+          <p>Sugar: <%= product["nutriments"]["sugars"] %> gr </p>
+
+
+          <p>Product Origin: <%= product["origin"] %> </p>
+          <p>Eco-score: <%= product.eco_score %></p>
 
         <% if product.eco_score == "A" || product.eco_score == "B" %>
           <div class="suggestion">
@@ -109,7 +96,6 @@
     </div>
   </div>
 </div>
-
 
 
 
