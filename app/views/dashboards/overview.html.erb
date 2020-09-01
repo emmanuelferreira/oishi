@@ -3,16 +3,16 @@
     Dashboard
   </h2>
   <div class="current-order">
-    <h4 class="last-title">Last 5 Purchases</h4>
+    <h4 class="last-title mb-5">Last 5 Purchases</h4>
     <% Order.where(user_id: current_user.id).limit(5).each do |order|%>
       <ul>
         <li>
           <div class="list-dashboard">
             <div class="list-product-dashboard-infos">
-              <h1></h1>
-              <h2>Order n°<%=order.id %> - <%= order.products.count %> items ordered</h2>
+              <h5>Order n°<%=order.id %> - <%= order.products.count %> items ordered</h5>
               <span><strong>Deliver Date:</strong> <%= order.deliver_date %> - <strong>Total:</strong> <%= order.total.round(2) %> CHF</span>
-              <%= link_to "Show Order details", order_path(order) %>
+              <br>
+              <%= link_to "Order details", order_path(order) %>
             </div>
           </div>
         </li>
@@ -63,7 +63,7 @@
                     stack: "stack 1",
                     color: ["#800000"],
                 },
-            ], stacked: true, discrete: true
+            ], stacked: true, legend: "left", title: "Eco Score"
         %>
       </div>
     </div>
@@ -108,14 +108,14 @@
                     stack: "stack 1",
                     color: ["#800000"],
                 },
-            ], stacked: true
+            ], stacked: true, legend: "left", title: "Nutri Score"
         %>
       </div>
     </div>
 
     <div class="spending-chart">
       <div class="spendings-chart chart">
-        <%= column_chart Order.where(user_id: current_user.id).pluck(:id, :total), xtitle: "Orders", ytitle: "Total spent (CHF)" %>
+        <%= column_chart Order.where(user_id: current_user.id).pluck(:id, :total), ytitle: "Total spent (CHF)", title: "Orders" %>
       </div>
     </div>
   </div>
