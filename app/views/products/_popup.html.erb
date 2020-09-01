@@ -1,92 +1,124 @@
 
 <div class="modal fade" id="modal-<%= product.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
+    <div class="modal-content ">
 
-    <div class="modal-content d-flex justify-content-around">
       <div class="modal-header">
-        <h2 class="modal-title" id="exampleModalLabel"><%= product.name.capitalize %></h2>
+        <div class="modal-header-details">
+          <h2 class="modal-title" id="exampleModalLabel"> <%= product.name.capitalize %></h2>
+          <h3><%=product.category.name %></h3>
+        </div>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-4 category-name">
-              <img src="<%= product.image %>" class="img-show">
-              <h6><%=product.category.name %></h6>
+
+      <div class="modal-body d-flex flex-column justify-content-between">
+
+        <div class="popup-product-details d-flex justify-content-between align-items-start">
+          <%= image_tag product.image, class: "img-show" %>
+          <div class="popup-product-details-section w-50">
+            <div class="d-flex justify-content-between">
+              <% if product.eco_score == "A" || product.eco_score == "B"%>
+                <i class="fas fa-globe-americas fa-2x pl-3" style="color: #4CA90C;"></i>
+              <%elsif  product.eco_score == "C" || product.eco_score == "D"%>
+                <i class="fas fa-globe-americas fa-2x pl-3" style="color: #FFC400;"></i>
+              <% else %>
+                <i class="fas fa-globe-americas fa-2x pl-3" style="color: #EB5757;"></i>
+              <% end %>
+              <% if product.nutri_score == "A" || product.nutri_score == "B"%>
+                <i class="fas fa-heartbeat fa-2x pl-3" style="color: #4CA90C;"></i>
+              <%elsif  product.nutri_score == "C" || product.nutri_score == "D"%>
+                <i class="fas fa-heartbeat fa-2x pl-3" style="color: #FFC400;"></i>
+              <% else %>
+                <i class="fas fa-heartbeat fa-2x pl-3" style="color: #EB5757;"></i>
+              <% end %>
+              <% if product.price < 0.8 * ((Product.where(category_id: product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: product.category.id).size) %>
+                <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #4CA90C;"></i>
+              <% elsif product.price >= 0.8 * ((Product.where(category_id: product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: product.category.id).size) && product.price <= 1.2 * ((Product.where(category_id: product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: product.category.id).size) %>
+                <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #FFC400;"></i>
+              <% else %>
+                <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #EB5757;"></i>
+              <% end %>
             </div>
 
+            <div class= "popup-product-details-price d-flex justify-content-between align-items-center">
+              <h3>Price</h3>
+              <p> <strong><%= product.price %> CHF</strong>  </p>
+            </div>
 
-              <div class="row">
-                <div class="col-4">
-                  <div class="list-group list-group-flush" id="list-tab" role="tablist">
-                    <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Description</a>
-                    <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Nutri Score</a>
-                    <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Eco Score</a>
-                  </div>
-                </div>
+            <% if @order_product.present? %>
+              <div class="quantity-show d-flex justify-content-between align-items-center">
+                <h3>Quantity</h3>
+                <%= form_for @order_product, class: "form-group add-button", remote: true, redirect_to: products_path do |f| %>
+                  <%= f.hidden_field :product_id, value: product.id%>
+                  <%= f.text_field :quantity, value: 1, min: 1, size: 2 %>
+              </div>
+                <%= f.submit "Add to basket", size: 10, class:"btn btn-info" %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
 
-                <div class="col-8 ml-auto">
-              <div class="row basket-selection justify-content-between">
-                <div class="">
-                  <div class="quantity-show">
-                    <p>Quantity</p>
-                    <%= form_for @order_product, class: "form-inline add-button", remote: true do |f| %>
-                      <%= f.hidden_field :product_id, value: product.id%>
-                      <%= f.text_field :quantity, value: 1, min: 1, size: 2 %>
-                      <%= f.submit "Add", size: 10, class:"btn btn-info" %>
-                    <% end %>
-                  </div>
-                </div>
-                <div class="col-4">
-                  <div class="price-show">
-                    <p>Price</p>
-                    <h4><%=product.price  %>CHF</h4>
-                  </div>
-                </div>
-              </div>
-                
-                <div class="col-8">
-                  <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
-                      <h6>Quantity: <%= product["quantity-product"] %> </h6>
-                    </div>
-                    <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-                      <h6>Proteins: <%= product["nutriments"]["proteins"] %> gr</h6>
-                      <br>
-                      <h6>Sugar: <%= product["nutriments"]["sugars"] %> gr </h6>
-                      <br>
-                      <h6>Energie: <%= product["nutriments"]["energy-kcal"] %> Kcal </h6>
-                    </div>
-                    <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
-                      <h6>Eco-score: <%= product.eco_score %></h6>
-                      <br>
-                      <h6>Origin: <%= product["origin"] %> </h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        <div class="popup-product-description-section d-flex justify-content-between">
+          <div class="list-group list-group-flush" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Description</a>
+            <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Nutri Score</a>
+            <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Eco Score</a>
+          </div>
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+              <h6>Quantity: <%= product["quantity-product"] %> </h6>
+            </div>
+            <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+              <h6>Proteins: <%= product["nutriments"]["proteins"] %> gr</h6>
+              <br>
+              <h6>Sugar: <%= product["nutriments"]["sugars"] %> gr </h6>
+              <br>
+              <h6>Energie: <%= product["nutriments"]["energy-kcal"] %> Kcal </h6>
+            </div>
+            <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
+              <h6>Eco-score: <%= product.eco_score %></h6>
+              <br>
+              <h6>Origin: <%= product["origin"] %> </h6>
             </div>
           </div>
+        </div>
 
+        <% if product.eco_score == "A" || product.eco_score == "B" %>
           <div class="suggestion">
-              <h6 class="suggestion-title">Suggestions</h6>
+            <h6 class="suggestion-title">You rock<i class="fasfa-grin-alt" style="color:green; margin-left: 10px;"></i></h6>
+            <div class="row suggestions-list d-flex justify-content-around">
+              <p> By purchasing this product you are doing a great gesture for the future generations! Cheers from Greta... she is already in love with you <i class="fas fa-fw fa-heart" style="color: red;"></i></p>
+            </div>
+          </div>
+        <% else %>
+          <div class="suggestion">
+            <h6 class="suggestion-title">Ecological Friendly Suggestions</h6>
             <div class="row suggestions-list d-flex justify-content-around">
               <% Product.where(category: product.category).order(eco_score: :asc).take(3).each do |product_suggestion| %>
-              <div class="img-suggestions">
-                <%= image_tag product_suggestion.image %>
-              </div>
+                <div class="img-suggestions">
+                  <%= image_tag product_suggestion.image %>
+                </div>
               <% end %>
-            </div> 
-          </div> 
-        </div>
+            </div>
+          </div>
+        <% end %>
       </div>
-      <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
+
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
 
 

@@ -14,7 +14,7 @@
             <h2><%= item.product.name.capitalize %></h2>
             <h2><%= item.product.price.round(2)%><%= item.product.currency.upcase %></h2>
           </div>
-          <h3><%= item.product.category.name %></h3>
+          <h3> <%= item.product.category.name %> </h3>
           <div class="d-flex justify-content-around">
             <% if item.product.eco_score == "A" || item.product.eco_score == "B"%>
               <i class="fas fa-globe-americas fa-2x pl-3" style="color: #4CA90C;"></i>
@@ -30,9 +30,9 @@
             <% else %>
               <i class="fas fa-heartbeat fa-2x pl-3" style="color: #EB5757;"></i>
             <% end %>
-            <% if item.product.price == "" || item.product.price == "" %>
+            <% if item.product.price < 0.8 * ((Product.where(category_id: item.product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: item.product.category.id).size) %>
               <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #4CA90C;"></i>
-            <% elsif item.product.price == "" || item.product.price == "" %>
+            <% elsif item.product.price >= 0.8 * ((Product.where(category_id: item.product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: item.product.category.id).size) && item.product.price <= 1.2 * ((Product.where(category_id: item.product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: item.product.category.id).size) %>
               <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #FFC400;"></i>
             <% else %>
               <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #EB5757;"></i>
@@ -45,7 +45,7 @@
               <div>
                 <%= form_for(item, url: remove_from_cart_path(item.product.id), remote: true) do |f| %>
                   <%= f.hidden_field :product_id, value: item.product.id, class: "form-control" %>
-                  <%# <><%= item.product.price %>
+                  <%# <> <%= item.product.price %>
                   <%= f.submit "Update", class: 'btn btn-secondary btn-sm btn-cart'  %>
                   <%= link_to "Delete", delete_from_cart_path(item.product.id), method: :post, remote: true, class: 'btn btn-secondary btn-sm btn-cart' %>
                   <%= f.text_field :quantity, value: item.quantity, min: 1, class: 'form-control quantity-cart' %>
@@ -53,17 +53,15 @@
               </div>
             </div>
           </div>
-
-
-
         </div>
       </div>
-      <%= render 'products/popup', product: item.product%>
+      <%= render 'products/popup', product: item.product %>
     <% end %>
-    <div class="container-link-to-strip py-3">
-      <%= link_to "Process Order", new_charge_path, class: "btn btn-info btn-lg" %>
-    </div>
-
+    <% if @order_products.present? %>
+      <div class="container-link-to-strip py-3">
+        <%= link_to "Process Order", new_charge_path, class: "btn btn-info btn-lg" %>
+      </div>
+    <% end %>
   </div>
 </div>
 

@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
       @suppliers = Supplier.all
       @order_product = OrderProduct.new
     else
-      @products = Product.includes(:category)
+      @products = Product.includes(:category).sort_by(&:eco_score)
       @suppliers = Supplier.all
       @order_product = OrderProduct.new
       if params[:search].present?
