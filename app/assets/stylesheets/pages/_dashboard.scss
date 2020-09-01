@@ -53,79 +53,9 @@
   margin-left: 260px;
 }
 
-// .current-order {
-//   position: absolute;
-//   margin-left: 32px;
-// }
-
-// .chart {
-//   margin-right: 32px !important;
-// }
-
-
-
-// .grid-container {
-//   display: grid;
-//   grid-template-columns: 1fr 1fr 1fr 1fr;
-//   grid-template-rows: 1fr 1fr 1fr;
-//   gap: 5% 1px;
-//   grid-template-areas:  "header header header header" 
-//                         "current-order eco-chart details-chart last-orders"
-//                         "current-order eco-stats details-stats spendings";
-// }
-
-  
-//   .header{
-//     grid-area: header;
-//     align-self: start;
-//     margin-top: 48px;
-//     margin-left: 8%;
-//   }
-
-//   .current-order { 
-//     align-self: end;
-//     grid-area: current-order;
-//     background: $alt-white;
-//     width: 25%;
-//     height: 100%;
-//     position: absolute;
-//     background-image: asset-url("paper.png"); 
-//   }
-  
-//   .current-order-infos{
-//     margin-top: 20%;
-//     margin: 30% !important;
-//   }
-
-//   .eco-chart { 
-//     place-self: center;
-//     grid-area: eco-chart;
-//   }
-  
-//   .details-chart { 
-//     place-self: center;
-//     grid-area: details-chart; 
-//   }
-  
-//   .last-orders { 
-//     place-self: center;
-//     grid-area: last-orders;
-//   }
-  
-//   .eco-stats {
-//     place-self: center;
-//     grid-area: eco-stats;
-//   }
-  
-//   .details-stats {
-//     place-self: center;
-//     grid-area: details-stats;
-//   }
-  
-//   .spendings { 
-//     place-self: center;
-//     grid-area: spendings; 
-//   }
+.list-dashboard{
+  margin-top: 5%;
+}
 
 // .card-product-dashboard {
 //   overflow: hidden;
