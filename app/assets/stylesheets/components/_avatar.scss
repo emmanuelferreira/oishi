@@ -3,6 +3,8 @@
   height: 40px;
   object-fit: cover;
   border-radius: 50%;
+  border: white 1px solid;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 .avatar-large {
   width: 56px;
