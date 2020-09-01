@@ -38,7 +38,7 @@ gem 'omniauth-stripe-connect'
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass'
 gem 'simple_form'
-gem "chartkick"
+gem 'chartkick'
 gem 'highcharts-rails'
 gem 'groupdate'
 

@@ -4,31 +4,22 @@
 <div class="container-fluid text-center">
   <div class="row content">
     <div class="col-sm-2">
-      <h3> Search Product </h3>
-      <br>
-      <br>
-        <div class="search-form d-flex justify-content-center p-3">
-          <%= form_tag products_path, method: :get, :class => 'form-inline' do %>
-            <%= text_field_tag :search,
-              params[:search],class: "form-control sidenav col-lg-8",placeholder: "7610809001066"%>
-            <%= submit_tag "Search", class: "btn btn-primary sidenav col-lg-8" %>
-          <% end %>
-        </div>
-        <br>
       <h3>Sorted by</h3>
+      <br>
+      <br>
       <%= form_tag products_path, method: :get, :class => 'form-inline' do %>
           <%= hidden_field_tag :sort_eco, "ecoscore"%>
-          <%= submit_tag "Ecoscore", class: "btn btn-primary sidenav col-lg-8"  %>
+          <%= submit_tag "Ecoscore", class: "btn btn-info sidenav col-lg-8"  %>
       <% end %>
       <br>
       <%= form_tag products_path, method: :get, :class => 'form-inline' do %>
           <%= hidden_field_tag :sort_nutri, "nutriscore"%>
-          <%= submit_tag "Nutriscore", class: "btn btn-primary sidenav col-lg-8"  %>
+          <%= submit_tag "Nutriscore", class: "btn btn-info sidenav col-lg-8"  %>
       <% end %>
       <br>
       <%= form_tag products_path, method: :get, :class => 'form-inline' do %>
           <%= hidden_field_tag :sort_price, "price"%>
-          <%= submit_tag "Price", class: "btn btn-primary sidenav col-lg-8"  %>
+          <%= submit_tag "Price", class: "btn btn-info sidenav col-lg-8"  %>
       <% end %>
     </div>
 

@@ -1,11 +1,12 @@
 <section class="rectangle paper"></section>
+<section class="rectangle_bottom paper"></section>
 
 <div class="cart-title">
   <h2>Cart</h2>
 </div>
 
-<div class="container py-6">
-  <div class="card-cart container-products col-lg-12 cart-item">
+<div class="container py-6 d-flex justify-content-center">
+  <div class="card-cart container-products col-10 cart-item">
     <% @order_products.each do |item| %>
       <div class="card-product-cart" data-toggle="modal" data-target="#modal-<%= item.product.id %>">
         <%= image_tag item.product.image, class: "", style: "width: 200px; height: 300px;"  %>
@@ -46,8 +47,8 @@
                 <%= form_for(item, url: remove_from_cart_path(item.product.id), remote: true) do |f| %>
                   <%= f.hidden_field :product_id, value: item.product.id, class: "form-control" %>
                   <%# <> <%= item.product.price %>
-                  <%= f.submit "Update", class: 'btn btn-secondary btn-sm btn-cart'  %>
-                  <%= link_to "Delete", delete_from_cart_path(item.product.id), method: :post, remote: true, class: 'btn btn-secondary btn-sm btn-cart' %>
+                  <%= f.submit "Update", class: 'btn btn-secondary btn-cart'  %>
+                  <%= link_to "Delete", delete_from_cart_path(item.product.id), method: :post, remote: true, class: 'btn btn-secondary btn-cart' %>
                   <%= f.text_field :quantity, value: item.quantity, min: 1, class: 'form-control quantity-cart' %>
                 <% end %>
               </div>
