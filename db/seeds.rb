@@ -284,3 +284,26 @@ end
     end
   end
 end
+
+# -------------------------nutri----------------------------------------------#
+  
+nutri = Playlist.new(
+  name: "nutri_score"  
+)
+nutri.save!
+
+  2.times do
+    n = 0
+    quantity = rand(1..3)
+    products = Product.where(nutri_score:"A").shuffle.each{|x|}
+    product = products[n]
+    playlist_prod = PlaylistProduct.new(
+      playlist_id: nutri.id,
+      product_id: product.id,
+      quantity: quantity,
+    )
+    playlist_prod.save!
+  end
+
+  
+end
