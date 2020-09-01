@@ -88,10 +88,11 @@
             </div>
         <% else %>
             <h4 class="suggestion-title">Eco-friendly Suggestions</h4>
-            <div class="row suggestions-list d-flex justify-content-around">
+            <div class="row suggestions-list d-flex justify-content-around ">
               <% Product.where(category: product.category).order(eco_score: :asc).take(3).each do |product_suggestion| %>
                 <div class="img-suggestions">
                   <%= image_tag product_suggestion.image %>
+                  <%= link_to "LINK TO", product_path(product_suggestion)  %>
                 </div>
               <% end %>
             </div>
