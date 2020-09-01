@@ -16,7 +16,7 @@
       <% end %>
       <% if user_signed_in? %>
         <li class="nav-item active">
-          <%= link_to "Products", products_path, class: "btn btn-primary " %>
+          <%= link_to "Products", products_path, class: "btn btn-primary mr-2" %>
         </li>
         <li class="nav-item dropdown">
 
@@ -31,11 +31,11 @@
         </li>
       <% else %>
           <ul class="navbar-nav">
-            <li class="nav-item active">
-              <%= link_to "Sign up", new_user_registration_path, class: "btn btn-ghost btn-lg" %>
+            <li class="nav-item active d-flex">
+              <%= link_to "Sign up", new_user_registration_path, class: "btn btn-info btn-lg mr-2" %>
             </li>
             <li class="nav-item">
-              <%= link_to "Login", new_user_session_path, class: "btn btn-primary btn-lg" %>
+              <%= link_to "Login", new_user_session_path, class: "btn btn-primary btn-lg ml-2" %>
             </li>
           </ul>
       <% end %>

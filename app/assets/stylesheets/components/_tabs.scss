@@ -7,7 +7,7 @@
 .tabs-underlined {
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-around;
   overflow: auto;
   background-color: #ECE5D3;
@@ -102,4 +102,14 @@
   background-image: asset-url("paper.png");
   z-index: -9;
   opacity: 0.95;
+}
+
+.scrollmenu{
+  overflow: auto;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.scrollmenu li{
+  display: inline-block;
 }

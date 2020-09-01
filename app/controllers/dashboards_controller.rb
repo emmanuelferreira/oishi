@@ -2,8 +2,8 @@ class DashboardsController < ApplicationController
 
 
   def overview
-    @last_order = Order.where(user_id: current_user.id).last
-    @order_products = OrderProduct.where(order_id: @last_order.id)
+    # @last_order = Order.where(user_id: current_user.id).last
+    # @order_products = OrderProduct.where(order_id: @last_order.id)
 
     # Current month orders
     @current_month_orders = Order.where('deliver_date >= ? and deliver_date <= ?', Time.now.beginning_of_month, Time.now.end_of_month)
