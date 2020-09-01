@@ -262,3 +262,4 @@ end
   ord.save!
   puts "Order created"
 end
+# ----------------------Display list----------------------------------------#
