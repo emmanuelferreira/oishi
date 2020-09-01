@@ -24,7 +24,7 @@
           <%= f.error_notification %>
 
 
-          <form >
+          <form class="form-inputs">
             <div class="form-row">
               <div class="col">
                 <%= f.input :firstname,
@@ -38,8 +38,6 @@
                   input_html: { autocomplete: "lastname" }%>
               </div>
             </div>
-          </form>
-          <div class="form-inputs">
             <%= f.input :username,
             required: true,
             input_html: { autocomplete: "username" } %>
@@ -58,12 +56,15 @@
             <%= f.input :password_confirmation,
             required: true,
             input_html: { autocomplete: "new-password" } %>
-          </div>
 
-          <div class="form-actions form-actions-sign-up">
-            <%= f.button :submit, "SAVE", class: "btn btn-info btn-lg" %>
-          </div>
-        <% end %>
+            <div class="form-actions form-actions-sign-up">
+            <%= f.button :submit, "SAVE", class: "btn btn-info" %>
+            </div>
+            <% end %>
+          </form>
+
+
+          
       </div>
     </div>
   </div>
