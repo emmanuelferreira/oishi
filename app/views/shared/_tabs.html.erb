@@ -1,13 +1,16 @@
-<ul class="list-inline tabs-underlined paper">
-  <i class="fas fa-chevron-left chevron"></i>
-  <% Category.all.each do |category| %>
-    <li>
-      <%= form_tag products_path, method: :get, :class => 'form-inline' do %>
-        <%= hidden_field_tag :query, category.name %>
-        <%= submit_tag "#{category.name.upcase}", class: "btn btn-flat btn-all d-flex justify-content-center"  %>
-      <% end %>
-    </li>
-  <% end %>
-  <i class="fas fa-chevron-right chevron"></i>
-</ul>
+
+<div class="tabs-container">
+  <ul class="list-inline tabs-underlined paper scrollmenu">
+    <% Category.all.each do |category| %>
+      <li>
+        <%= form_tag products_path, method: :get, :class => 'form-inline' do %>
+          <%= hidden_field_tag :query, category.name %>
+          <%= submit_tag "#{category.name.upcase}", class: "btn btn-flat btn-all d-flex justify-content-center"  %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+</div>
+  
 

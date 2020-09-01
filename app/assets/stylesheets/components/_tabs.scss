@@ -103,3 +103,13 @@
   z-index: -9;
   opacity: 0.95;
 }
+
+.scrollmenu{
+  overflow: auto;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.scrollmenu li{
+  display: inline-block;
+}
