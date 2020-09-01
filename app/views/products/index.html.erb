@@ -16,44 +16,42 @@
         </div>
     </div>
 
-
-
     <div class="card-index col-sm-10 text-left">
       <div class="grid-container-card">
         <% @products.each do |product| %>
-        <div class="card-product w-75">
-          <div class="card-product-header d-flex justify-content-between align-items-center"">
-            <div class="card-product-header-details">
+        <div class="card-product w-75 d-flex flex-column justify-content-between">
+          <div class="card-product-header" data-toggle="modal" data-target="#modal-<%= product.id %>">
+            <div class="card-product-header-details d-flex justify-content-between align-items-center">
               <h2 class="ml-2"><%= product.name.capitalize %></h2>
+              <%= image_tag product.image %>
             </div>
-            <%= image_tag product.image %>
-          </div>
-          <div class="card-product-infos flex-grow-1" data-toggle="modal" data-target="#modal-<%= product.id %>">
-            <h3 class="mt-2"><%= product.category.name %></h3>
-            <div class="d-flex justify-content-around badges ">
-              <% if product.eco_score == "A" || product.eco_score == "B" %>
-                <i class="fas fa-globe-americas fa-2x" style="color: #4CA90C;"></i>
-              <%elsif  product.eco_score == "C" || product.eco_score == "D" %>
-                <i class="fas fa-globe-americas fa-2x" style="color: #FFC400;"></i>
-              <% else %>
-                <i class="fas fa-globe-americas fa-2x" style="color: #EB5757;"></i>
-              <% end %>
+            <div class="card-product-infos flex-grow-1">
+              <h3 class="mt-2"><%= product.category.name %></h3>
+              <div class="d-flex justify-content-around badges ">
+                <% if product.eco_score == "A" || product.eco_score == "B" %>
+                  <i class="fas fa-globe-americas fa-2x" style="color: #4CA90C;"></i>
+                <%elsif  product.eco_score == "C" || product.eco_score == "D" %>
+                  <i class="fas fa-globe-americas fa-2x" style="color: #FFC400;"></i>
+                <% else %>
+                  <i class="fas fa-globe-americas fa-2x" style="color: #EB5757;"></i>
+                <% end %>
 
-              <% if product.nutri_score == "A" || product.nutri_score == "B" %>
-                <i class="fas fa-heartbeat fa-2x pl-3" style="color: #4CA90C;"></i>
-              <%elsif  product.nutri_score == "C" || product.nutri_score == "D" %>
-                <i class="fas fa-heartbeat fa-2x pl-3" style="color: #FFC400;"></i>
-              <% else %>
-                <i class="fas fa-heartbeat fa-2x pl-3" style="color: #EB5757;"></i>
-              <% end %>
+                <% if product.nutri_score == "A" || product.nutri_score == "B" %>
+                  <i class="fas fa-heartbeat fa-2x pl-3" style="color: #4CA90C;"></i>
+                <%elsif  product.nutri_score == "C" || product.nutri_score == "D" %>
+                  <i class="fas fa-heartbeat fa-2x pl-3" style="color: #FFC400;"></i>
+                <% else %>
+                  <i class="fas fa-heartbeat fa-2x pl-3" style="color: #EB5757;"></i>
+                <% end %>
 
-              <% if product.price < 0.8 * ((Product.where(category_id: product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: product.category.id).size) %>
-                <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #4CA90C;"></i>
-              <% elsif product.price >= 0.8 * ((Product.where(category_id: product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: product.category.id).size) && product.price <= 1.2 * ((Product.where(category_id: product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: product.category.id).size) %>
-                <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #FFC400;"></i>
-              <% else %>
-                <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #EB5757;"></i>
-              <% end %>
+                <% if product.price < 0.8 * ((Product.where(category_id: product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: product.category.id).size) %>
+                  <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #4CA90C;"></i>
+                <% elsif product.price >= 0.8 * ((Product.where(category_id: product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: product.category.id).size) && product.price <= 1.2 * ((Product.where(category_id: product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: product.category.id).size) %>
+                  <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #FFC400;"></i>
+                <% else %>
+                  <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #EB5757;"></i>
+                <% end %>
+              </div>
             </div>
           </div>
           <div class="d-flex justify-content-between align-items-center">
@@ -70,6 +68,7 @@
         </div>
       <% end %>
       </div>
+
     </div>
   </div>
 </div>

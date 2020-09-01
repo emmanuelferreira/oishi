@@ -9,6 +9,7 @@ class OrderProductsController < ApplicationController
       @current_cart[order_product_params[:product_id]] = order_product_params[:quantity].to_i
     end
     session[:cart] = @current_cart
+    redirect_to products_path
   end
 
   def remove_from_cart
@@ -17,6 +18,7 @@ class OrderProductsController < ApplicationController
     end
     session[:cart] = @current_cart
     render 'create'
+    redirect_to "carts_path"
   end
 
   def delete_from_cart
