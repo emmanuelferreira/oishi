@@ -262,4 +262,25 @@ end
   ord.save!
   puts "Order created"
 end
-# ----------------------Display list----------------------------------------#
+# ----------------------playlist----------------------------------------#
+# -------------------------eco----------------------------------------------#
+  
+  eco = Playlist.new(
+    name: "eco_score"  
+  )
+  eco.save!
+
+    2.times do
+      n = 0
+      quantity = rand(1..3)
+      products = Product.where(eco_score:"A").shuffle.each{|x|}
+      product = products[n]
+      playlist_prod = PlaylistProduct.new(
+        playlist_id: eco.id,
+        product_id: product.id,
+        quantity: quantity,
+      )
+      playlist_prod.save!
+    end
+  end
+end
