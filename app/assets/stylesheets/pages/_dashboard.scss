@@ -1,130 +1,92 @@
-// .rectangle-overview {
-//   background: $alt-white;
-//   width: 400px;
-//   height: 100%;
-//   top:0;
-//   left:0;
-//   position: absolute;
-// }
-
-// .overview-title{
-//   margin-left: 32px;
-// }
-
-// .paper {
-//   background-image: asset-url("paper.png");
-//   z-index: -9;
-//   opacity: 0.95;
-// }
-
-// .top-buffer{
-//   margin-top: 48px;
-// }
-
-// .current-order {
-//   position: absolute;
-//   margin-left: 32px;
-// }
-
-.chart {
-  margin-right: 32px !important;
-}
-
-
-
-.grid-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 5% 1px;
-  grid-template-areas:  "header header header header" 
-                        "current-order eco-chart details-chart last-orders"
-                        "current-order eco-stats details-stats spendings";
-}
-
-  
-  .header{
-    grid-area: header;
-    align-self: start;
-    margin-top: 48px;
-    margin-left: 8%;
-  }
-
-  .current-order { 
-    align-self: end;
-    grid-area: current-order;
-    background: $alt-white;
-    width: 25%;
-    height: 100%;
-    position: absolute;
-    background-image: asset-url("paper.png"); 
-  }
-  
-  .current-order-infos{
-    margin-top: 20%;
-    margin: 30% !important;
-  }
-
-  .eco-chart { 
-    place-self: center;
-    grid-area: eco-chart;
-  }
-  
-  .details-chart { 
-    place-self: center;
-    grid-area: details-chart; 
-  }
-  
-  .last-orders { 
-    place-self: center;
-    grid-area: last-orders;
-  }
-  
-  .eco-stats {
-    place-self: center;
-    grid-area: eco-stats;
-  }
-  
-  .details-stats {
-    place-self: center;
-    grid-area: details-stats;
-  }
-  
-  .spendings { 
-    place-self: center;
-    grid-area: spendings; 
-  }
-
-.card-product-dashboard {
-  overflow: hidden;
-  height: 120px;
-  background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  display: flex;
-  align-items: center;
-}
-
-.card-product-dashboard img {
+.rectangle-overview {
+  background: $alt-white;
+  width: 400px;
   height: 100%;
-  width: 120px;
-  object-fit: cover;
+  top:0;
+  left:0;
+  position: absolute;
+  z-index: -9;
 }
 
-.card-product-dashboard h2 {
-  font-size: 16px;
-  font-weight: bold;
-  margin: 0;
+.paper {
+  background-image: asset-url("paper.png");
+  z-index: -9;
+  opacity: 0.95;
 }
 
-.card-product-dashboard p {
-  font-size: 12px;
-  line-height: 1.4;
-  opacity: .7;
-  margin-bottom: 0;
-  margin-top: 8px;
+.overview-title{
+  color: $gray;
+  margin-left: 32px;
+  margin-top: 20%;
 }
 
-.card-product-dashboard .card-product-dashboard-infos {
-  padding: 16px;
+.last-title{
+  color: $gray;
+  margin-left: 32px;
+  margin-top:10%;
 }
+
+
+.charts-infos{
+  margin-top: 5%;
+  margin-right: 10%;
+}
+
+
+.top-buffer{
+  margin-left: 30px !important;
+  // margin-top: 10% !important;
+}
+
+.top-buffer p, h4{
+  color: $gray;
+  font-size: 24px;
+  margin-top: 16px;
+  
+}
+
+.price{
+  font-size: 20px;
+}
+
+.top-buffer i{
+  margin-left: 260px;
+}
+
+.list-dashboard{
+  margin-top: 5%;
+}
+
+// .card-product-dashboard {
+//   overflow: hidden;
+//   height: 120px;
+//   background: white;
+//   box-shadow: 0 0 15px rgba(0,0,0,0.2);
+//   display: flex;
+//   align-items: center;
+// }
+
+// .card-product-dashboard img {
+//   height: 100%;
+//   width: 120px;
+//   object-fit: cover;
+// }
+
+// .card-product-dashboard h2 {
+//   font-size: 16px;
+//   font-weight: bold;
+//   margin: 0;
+// }
+
+// .card-product-dashboard p {
+//   font-size: 12px;
+//   line-height: 1.4;
+//   opacity: .7;
+//   margin-bottom: 0;
+//   margin-top: 8px;
+// }
+
+// .card-product-dashboard .card-product-dashboard-infos {
+//   padding: 16px;
+// }
 
