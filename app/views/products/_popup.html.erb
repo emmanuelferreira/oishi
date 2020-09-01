@@ -58,26 +58,17 @@
           </div>
         </div>
 
-          <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade" id="list-description" role="tabpanel" aria-labelledby="list-description-list">
               <p><%= product.description %> </p>
-            </div>
 
-            <div class="tab-pane fade" id="list-nutri" role="tabpanel" aria-labelledby="list-nutri-list">
               <p><strong>Nutri-score:</strong> <%= product.nutri_score %></p>
               <p><strong>Energie:</strong> <%= product["nutriments"]["energy-kcal"] %> Kcal </p>
               <p><strong>Proteins:</strong> <%= product["nutriments"]["proteins_100g"] %> / 100 gr</p>
               <p><strong>Fat:</strong> <%= product["nutriments"]["fat_100g"] %> / 100gr</p>
               <p><strong>Sugar:</strong> <%= product["nutriments"]["sugars_100g"] %>/100gr </p>
-            </div>
-
-            <div class="tab-pane fade" id="list-eco" role="tabpanel" aria-labelledby="list-eco-list">
               <p><strong>Eco-score:</strong> <%= product.eco_score %></p>
               <p><strong>Origin:</strong> <%= product["origin"] %> </p>
-            </div>
-          </div>
-        </div>
 
+        </div>
         <div class="suggestion">
           <% if product.eco_score == "A" || product.eco_score == "B" %>
               <h4 class="suggestion-title">You rock<i class="fas fa-grin-alt" style="color:green; margin-left: 10px;"></i></h4>
@@ -100,7 +91,6 @@
     </div>
   </div>
 </div>
-
 
 
 
