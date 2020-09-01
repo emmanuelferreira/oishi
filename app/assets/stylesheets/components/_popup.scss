@@ -1,7 +1,7 @@
 
 .modal-content {
   width: 800px;
-  height: 700px;
+  padding: 20px;
 }
 
 .img-show{
@@ -78,7 +78,7 @@
 }
 
 .suggestion{
-  margin-top: 100px;
+  margin-top: 20px;
 }
 
 /* Style the tab */
@@ -115,4 +115,22 @@
   padding: 6px 12px;
   border: 1px solid #ccc;
   border-top: none;
+}
+
+.grid-container-ecoscore {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 1px 1px;
+  grid-template-areas:
+    ". .",
+}
+
+.grid-container-nutriscore {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 1px 1px;
+  grid-template-areas:
+    ". . .",
 }

@@ -1,105 +1,102 @@
 
 <div class="modal fade" id="modal-<%= product.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content ">
-
-      <div class="modal-header">
-        <div class="modal-header-details">
-          <h2 class="modal-title" id="exampleModalLabel"> <%= product.name.capitalize %></h2>
-          <h3><%=product.category.name %></h3>
-          <div class="d-flex justify-content-between">
-            <% if product.eco_score == "A" || product.eco_score == "B"%>
-              <i class="fas fa-globe-americas fa-2x pl-3" style="color: #4CA90C;"></i>
-            <%elsif  product.eco_score == "C" || product.eco_score == "D"%>
-              <i class="fas fa-globe-americas fa-2x pl-3" style="color: #FFC400;"></i>
-            <% else %>
-              <i class="fas fa-globe-americas fa-2x pl-3" style="color: #EB5757;"></i>
-            <% end %>
-            <% if product.nutri_score == "A" || product.nutri_score == "B"%>
-              <i class="fas fa-heartbeat fa-2x pl-3" style="color: #4CA90C;"></i>
-            <%elsif  product.nutri_score == "C" || product.nutri_score == "D"%>
-              <i class="fas fa-heartbeat fa-2x pl-3" style="color: #FFC400;"></i>
-            <% else %>
-              <i class="fas fa-heartbeat fa-2x pl-3" style="color: #EB5757;"></i>
-            <% end %>
-            <% if product.price < 0.8 * ((Product.where(category_id: product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: product.category.id).size) %>
-              <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #4CA90C;"></i>
-            <% elsif product.price >= 0.8 * ((Product.where(category_id: product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: product.category.id).size) && product.price <= 1.2 * ((Product.where(category_id: product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: product.category.id).size) %>
-              <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #FFC400;"></i>
-            <% else %>
-              <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #EB5757;"></i>
-            <% end %>
-          </div>
-        </div>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
-      <div class="modal-body d-flex flex-column justify-content-between">
-        <div class="popup-product-details d-flex justify-content-between align-items-start">
-          <%= image_tag product.image, class: "img-show" %>
-          <div class="popup-product-details-section w-50">
-            <div class= "popup-product-details-price d-flex justify-content-between align-items-center">
-              <h3>Price</h3>
-              <p> <strong> <%= product.price %> CHF </strong>  </p>
+    <div class="modal-content">
+      <div class="popup-product-details d-flex justify-content-between">
+        <div class="modal-left-section">
+          <div class="modal-header-details">
+            <%= image_tag product.image, class: "img-show" %>
+            <div class="d-flex justify-content-between" pt-3>
+              <% if product.eco_score == "A" || product.eco_score == "B"%>
+                <i class="fas fa-globe-americas fa-2x" style="color: #4CA90C;"></i>
+              <%elsif  product.eco_score == "C" || product.eco_score == "D"%>
+                <i class="fas fa-globe-americas fa-2x" style="color: #FFC400;"></i>
+              <% else %>
+                <i class="fas fa-globe-americas fa-2x" style="color: #EB5757;"></i>
+              <% end %>
+              <% if product.nutri_score == "A" || product.nutri_score == "B"%>
+                <i class="fas fa-heartbeat fa-2x pl-3" style="color: #4CA90C;"></i>
+              <%elsif  product.nutri_score == "C" || product.nutri_score == "D"%>
+                <i class="fas fa-heartbeat fa-2x pl-3" style="color: #FFC400;"></i>
+              <% else %>
+                <i class="fas fa-heartbeat fa-2x pl-3" style="color: #EB5757;"></i>
+              <% end %>
+              <% if product.price < 0.8 * ((Product.where(category_id: product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: product.category.id).size) %>
+                <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #4CA90C;"></i>
+              <% elsif product.price >= 0.8 * ((Product.where(category_id: product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: product.category.id).size) && product.price <= 1.2 * ((Product.where(category_id: product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: product.category.id).size) %>
+                <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #FFC400;"></i>
+              <% else %>
+                <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #EB5757;"></i>
+              <% end %>
             </div>
-
-            <% if @order_product.present? %>
-              <div class="quantity-show d-flex justify-content-between align-items-center">
-                <h3>Quantity</h3>
-                <%= form_for @order_product, class: "form-group add-button", remote: true, redirect_to: products_path do |f| %>
-                  <%= f.hidden_field :product_id, value: product.id%>
-                  <%= f.text_field :quantity, value: 1, min: 1, size: 2 %>
+          </div>
+          <div class="popup-product-details pt-3">
+            <div class="popup-product-details-section d-flex justify-content-between">
+              <div class= "popup-product-details-price">
+                <h3>Price</h3>
+                <p> <strong> <%= product.price %> CHF </strong>  </p>
               </div>
-                  <%= f.submit "Add to basket", size: 10, class:"btn btn-info" %>
-                <% end %>
+              <% if @order_product.present? %>
+                <div class="quantity-show">
+                  <h3>Quantity</h3>
+                  <%= form_for @order_product, class: "form-group add-button", remote: true, redirect_to: products_path do |f| %>
+                    <%= f.hidden_field :product_id, value: product.id%>
+                    <%= f.text_field :quantity, value: 1, min: 1, size: 2 %>
+                </div>
+            </div>
+                    <%= f.submit "Add to basket", size: 10, class:"btn btn-info m-3" %>
+                  <% end %>
             <% end %>
           </div>
         </div>
-
-              <p><%= product.description %> </p>
-
-              <p><strong>Nutri-score:</strong> <%= product.nutri_score %></p>
-              <p><strong>Energie:</strong> <%= product["nutriments"]["energy-kcal"] %> Kcal </p>
-              <p><strong>Proteins:</strong> <%= product["nutriments"]["proteins_100g"] %> / 100 gr</p>
-              <p><strong>Fat:</strong> <%= product["nutriments"]["fat_100g"] %> / 100gr</p>
-              <p><strong>Sugar:</strong> <%= product["nutriments"]["sugars_100g"] %>/100gr </p>
-              <p><strong>Eco-score:</strong> <%= product.eco_score %></p>
-              <p><strong>Origin:</strong> <%= product["origin"] %> </p>
-
-        </div>
-        <div class="suggestion">
-          <% if product.eco_score == "A" || product.eco_score == "B" %>
-              <h4 class="suggestion-title">You rock<i class="fas fa-grin-alt" style="color:green; margin-left: 10px;"></i></h4>
-              <div class="row suggestions-list d-flex justify-content-around">
-                <p> By purchasing this product you are doing a great gesture for the future generations! Cheers from Greta... she is already in love with you <i class="fas fa-fw fa-heart" style="color: red;"></i></p>
+        <div class="modal-right-section flex-grow-1 pl-4">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h1 class="modal-title" id="exampleModalLabel"> <%= product.name.capitalize %></h1>
+          <h3><%=product.category.name %></h3>
+          <div class="modal-body d-flex flex-column justify-content-between">
+            <h2>Description</h2>
+            <p><%= product.description.capitalize if product.description.present? %> </p>
+            <h2>Data</h2>
+            <div class="product-data">
+              <h3>Ecoscore data</h3>
+              <div class="grid-container-ecoscore">
+                <p><strong>Eco-score:</strong> <%= product.eco_score %></p>
+                <p><strong>Origin:</strong> <%= product["origin"] %> </p>
               </div>
-          <% else %>
-              <h4 class="suggestion-title">Ecological Friendly Suggestions</h4>
-              <div class="row suggestions-list d-flex justify-content-around">
-                <% Product.where(category: product.category).order(eco_score: :asc).take(3).each do |product_suggestion| %>
-                  <div class="img-suggestions">
-                    <%= image_tag product_suggestion.image %>
-                  </div>
-                <% end %>
+              <h3>Nutriscore data <em>(/100g)</em></h3>
+              <div class="grid-container-nutriscore">
+                <p><strong>Nutri-score:</strong> <%= product.nutri_score %></p>
+                <p><strong>Energie:</strong> <%= product["nutriments"]["energy-kcal_100g"] %> Kcal </p>
+                <p><strong>Proteins:</strong> <%= product["nutriments"]["proteins_100g"] %></p>
+                <p><strong>Fat:</strong> <%= product["nutriments"]["fat_100g"] %></p>
+                <p><strong>Carbohydrates:</strong> <%= product["nutriments"]["carbohydrates_100g"] %></p>
+                <p><strong>Saturated fat:</strong> <%= product["nutriments"]["saturated-fat_100g"] %></p>
+                <p><strong>Salt:</strong> <%= product["nutriments"]["salt_100g"] %> </p>
+                <p><strong>Sugards:</strong> <%= product["nutriments"]["sugars_100g"] %> </p>
               </div>
-          <% end %>
+            </div>
+          </div>
         </div>
-
+      </div>
+      <div class="suggestion">
+        <% if product.eco_score == "A" || product.eco_score == "B" %>
+            <h4 class="suggestion-title">You rock<i class="fas fa-grin-alt" style="color:green; margin-left: 10px;"></i></h4>
+            <div class="row suggestions-list d-flex justify-content-around">
+              <p> By purchasing this product you are doing a great gesture for the future generations! Cheers from Greta... she is already in love with you <i class="fas fa-fw fa-heart" style="color: red;"></i></p>
+            </div>
+        <% else %>
+            <h4 class="suggestion-title">Eco-friendly Suggestions</h4>
+            <div class="row suggestions-list d-flex justify-content-around">
+              <% Product.where(category: product.category).order(eco_score: :asc).take(3).each do |product_suggestion| %>
+                <div class="img-suggestions">
+                  <%= image_tag product_suggestion.image %>
+                </div>
+              <% end %>
+            </div>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
