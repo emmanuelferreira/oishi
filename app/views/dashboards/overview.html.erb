@@ -1,11 +1,9 @@
-
-<div class="grid-container">
-  <h1 class="overview-title"> Dashboard </h1>
-
-  <br>
-
+<div class="rectangle-overview paper">
+  <h2 class="overview-title text-left">
+    Dashboard
+  </h2>
   <div class="current-order">
-    <h3>Last 5 Purchases</h3>
+    <h4 class="last-title">Last 5 Purchases</h4>
     <% Order.where(user_id: current_user.id).limit(5).each do |order|%>
       <ul>
         <li>
@@ -21,121 +19,120 @@
       </ul>
     <% end %>
   </div>
+</div>
 
+<div class="container charts-infos">
+  <div class="row all-charts d-flex justify-content-around ">
+    <div class="eco-chart">
+      <div class="eco-chart chart">
+        <%= column_chart [
+                {
+                    name: "A",
 
-  <div class="header">
-    <h2>Dashboard</h2>
-  </div>
+                    data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'A'").group('orders.id').count ,
+                    stack: "stack 1",
+                    color: ["#008000"],
+                },
+                {
+                    name: "B",
+                    data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'B'").group('orders.id').count ,
+                    stack: "stack 1",
+                    color: ["#00FF00"],
+                },
+                {
+                    name: "C",
+                    data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'C'").group('orders.id').count ,
+                    stack: "stack 1",
+                    color: ["#FFC300"],
+                },
+                {
+                    name: "D",
+                    data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'D'").group('orders.id').count ,
+                    stack: "stack 1",
+                    color: ["#FFC300"],
+                },
+                {
+                    name: "E",
+                    data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'E'").group('orders.id').count ,
+                    stack: "stack 1",
+                    color: ["#FF0000"],
+                },
+                {
+                    name: "F",
+                    data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'F'").group('orders.id').count ,
+                    stack: "stack 1",
+                    color: ["#800000"],
+                },
+            ], stacked: true
+        %>
+      </div>
+    </div>
 
-  <div class="eco-chart">
-    <div class="eco-chart chart">
-      <%= column_chart [
-              {
-                  name: "A",
+    <div class="details-chart">
+      <div class="nutritionnal-chart chart">
+        <%= column_chart [
+                {
+                    name: "A",
+                    data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'A'").group('orders.id').count ,
+                    stack: "stack 1",
+                    color: ["#008000"],
+                },
+                {
+                    name: "B",
+                    data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'B'").group('orders.id').count ,
+                    stack: "stack 1",
+                    color: ["#00FF00"],
 
-                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'A'").group('orders.id').count ,
-                  stack: "stack 1",
-                  color: ["#008000"],
-              },
-              {
-                  name: "B",
-                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'B'").group('orders.id').count ,
-                  stack: "stack 1",
-                  color: ["#00FF00"],
-              },
-              {
-                  name: "C",
-                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'C'").group('orders.id').count ,
-                  stack: "stack 1",
-                  color: ["#FFC300"],
-              },
-              {
-                  name: "D",
-                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'D'").group('orders.id').count ,
-                  stack: "stack 1",
-                  color: ["#FFC300"],
-              },
-              {
-                  name: "E",
-                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'E'").group('orders.id').count ,
-                  stack: "stack 1",
-                  color: ["#FF0000"],
-              },
-              {
-                  name: "F",
-                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'F'").group('orders.id').count ,
-                  stack: "stack 1",
-                  color: ["#800000"],
-              },
-          ], stacked: true
-      %>
+                },
+                {
+                    name: "C",
+                    data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'C'").group('orders.id').count ,
+                    stack: "stack 1",
+                    color: ["#FFC300"],
+                },
+                {
+                    name: "D",
+                    data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'D'").group('orders.id').count ,
+                    stack: "stack 1",
+                    color: ["#FFC300"],
+                },
+                {
+                    name: "E",
+                    data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'E'").group('orders.id').count ,
+                    stack: "stack 1",
+                    color: ["#FF0000"],
+                },
+                {
+                    name: "F",
+                    data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'F'").group('orders.id').count ,
+                    stack: "stack 1",
+                    color: ["#800000"],
+                },
+            ], stacked: true
+        %>
+      </div>
+    </div>
+
+    <div class="spending-chart">
+      <div class="spendings-chart chart">
+        <%= column_chart Order.where(user_id: current_user.id).pluck(:id, :total), xtitle: "Orders", ytitle: "Total spent (CHF)" %>
+      </div>
     </div>
   </div>
-
-  <div class="details-chart">
-    <div class="nutritionnal-chart chart">
-      <%= column_chart [
-              {
-                  name: "A",
-                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'A'").group('orders.id').count ,
-                  stack: "stack 1",
-                  color: ["#008000"],
-              },
-              {
-                  name: "B",
-                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'B'").group('orders.id').count ,
-                  stack: "stack 1",
-                  color: ["#00FF00"],
-
-              },
-              {
-                  name: "C",
-                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'C'").group('orders.id').count ,
-                  stack: "stack 1",
-                  color: ["#FFC300"],
-              },
-              {
-                  name: "D",
-                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'D'").group('orders.id').count ,
-                  stack: "stack 1",
-                  color: ["#FFC300"],
-              },
-              {
-                  name: "E",
-                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'E'").group('orders.id').count ,
-                  stack: "stack 1",
-                  color: ["#FF0000"],
-              },
-              {
-                  name: "F",
-                  data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'F'").group('orders.id').count ,
-                  stack: "stack 1",
-                  color: ["#800000"],
-              },
-          ], stacked: true
-      %>
-    </div>
-  </div>
-
-  <div class="details-chart">
-    <div class="spendings-chart chart">
-      <%= column_chart Order.where(user_id: current_user.id).pluck(:id, :total), xtitle: "Orders", ytitle: "Total spent (CHF)" %>
-    </div>
-  </div>
+    
 
 
-
-  <div class="row justify-content-end top-buffer">
-    <div class="col-4">
-      <h4>Last Month Consumption Overview</h4>
+  <div class="row d-flex justify-content-between mt-5 top-buffer">
+    <div class="col-5">
+      <h5>Last Month Consumption Overview</h5>
       <ul>
         <li>Global Ecoscore:  <%= @last_eco_score_avg %></li>
         <li>Global Nutriscore: <%= @last_nutri_score_avg %></li>
         <li>Total Spendings: <%= @last_month_orders.pluck(:total).inject(0) {|sum, ele| sum += ele}.to_f.round(2) %> CHF</li>
       </ul>
     </div>
-    <div class="col-4">
-      <h4>Current Month Consumption Overview</h4>
+    <div class="col-5">
+      <h5>Current Month Consumption Overview</h5>
       <ul>
         <li>Global Ecoscore:  <%= @current_eco_score_avg %></li>
         <li>Global Nutriscore: <%= @current_nutri_score_avg %></li>
@@ -143,5 +140,4 @@
       </ul>
     </div>
   </div>
-
 </div>
