@@ -14,6 +14,22 @@
             <%= submit_tag "Search", class: "btn btn-primary sidenav col-lg-8" %>
           <% end %>
         </div>
+        <br>
+      <h3>Sorted by</h3>
+      <%= form_tag products_path, method: :get, :class => 'form-inline' do %>
+          <%= hidden_field_tag :sort_eco, "ecoscore"%>
+          <%= submit_tag "Ecoscore", class: "btn btn-primary sidenav col-lg-8"  %>
+      <% end %>
+      <br>
+      <%= form_tag products_path, method: :get, :class => 'form-inline' do %>
+          <%= hidden_field_tag :sort_nutri, "nutriscore"%>
+          <%= submit_tag "Nutriscore", class: "btn btn-primary sidenav col-lg-8"  %>
+      <% end %>
+      <br>
+      <%= form_tag products_path, method: :get, :class => 'form-inline' do %>
+          <%= hidden_field_tag :sort_price, "price"%>
+          <%= submit_tag "Price", class: "btn btn-primary sidenav col-lg-8"  %>
+      <% end %>
     </div>
 
     <div class="card-index col-sm-10 text-left">
