@@ -5,6 +5,7 @@
   top:0;
   left:0;
   position: absolute;
+  z-index: -9;
 }
 
 .paper {
@@ -14,25 +15,42 @@
 }
 
 .overview-title{
+  color: $gray;
   margin-left: 32px;
   margin-top: 20%;
 }
 
 .last-title{
+  color: $gray;
   margin-left: 32px;
   margin-top:10%;
 }
 
 
 .charts-infos{
-  margin-top: 10%;
+  margin-top: 5%;
   margin-right: 10%;
 }
 
 
 .top-buffer{
   margin-left: 30px !important;
-  margin-top: 10% !important;
+  // margin-top: 10% !important;
+}
+
+.top-buffer p, h4{
+  color: $gray;
+  font-size: 24px;
+  margin-top: 16px;
+  
+}
+
+.price{
+  font-size: 20px;
+}
+
+.top-buffer i{
+  margin-left: 260px;
 }
 
 // .current-order {

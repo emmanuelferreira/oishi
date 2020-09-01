@@ -63,7 +63,7 @@
                     stack: "stack 1",
                     color: ["#800000"],
                 },
-            ], stacked: true
+            ], stacked: true, discrete: true
         %>
       </div>
     </div>
@@ -124,19 +124,43 @@
 
   <div class="row d-flex justify-content-between mt-5 top-buffer">
     <div class="col-5">
-      <h5>Last Month Consumption Overview</h5>
+      <h4 class="mb-4">Last Month Consumption Overview</h4>
       <ul>
-        <li>Global Ecoscore:  <%= @last_eco_score_avg %></li>
-        <li>Global Nutriscore: <%= @last_nutri_score_avg %></li>
-        <li>Total Spendings: <%= @last_month_orders.pluck(:total).inject(0) {|sum, ele| sum += ele}.to_f.round(2) %> CHF</li>
+        <li><p>Global Ecoscore: <strong><br><% if @last_eco_score_avg == "A" || @last_eco_score_avg == "B" %>
+                                              <i class="fas fa-globe-americas fa-2x" style="color: #4CA90C;"></i>
+                                            <%elsif  @last_eco_score_avg == "C" || @last_eco_score_avg == "D" %>
+                                              <i class="fas fa-globe-americas fa-2x" style="color: #FFC400;"></i>
+                                            <% else %>
+                                              <i class="fas fa-globe-americas fa-2x" style="color: #EB5757;"></i>
+                                            <% end %></strong></p></li>  
+        <li><p>Global Nutriscore: <strong><br><% if @last_nutri_score_avg == "A" || @last_nutri_score_avg == "B" %>
+                                                <i class="fas fa-heartbeat fa-2x" style="color: #4CA90C;"></i>
+                                              <%elsif  @last_nutri_score_avg == "C" || @last_nutri_score_avg == "D" %>
+                                                <i class="fas fa-heartbeat fa-2x" style="color: #FFC400;"></i>
+                                              <% else %>
+                                                <i class="fas fa-heartbeat fa-2x" style="color: #EB5757;"></i>
+                                              <% end %></strong></p></li>
+        <li><p>Total Spendings: <strong><br><%= @last_month_orders.pluck(:total).inject(0) {|sum, ele| sum += ele}.to_f.round(2) %> CHF</strong></p></li>
       </ul>
     </div>
     <div class="col-5">
-      <h5>Current Month Consumption Overview</h5>
+      <h4 class="mb-4">Current Month Consumption Overview</h4>
       <ul>
-        <li>Global Ecoscore:  <%= @current_eco_score_avg %></li>
-        <li>Global Nutriscore: <%= @current_nutri_score_avg %></li>
-        <li>Total Spendings: <%= @current_month_orders.pluck(:total).inject(0) {|sum, ele| sum += ele}.to_f.round(2) %> CHF</li>
+        <li><p>Global Ecoscore: <strong><br><% if @current_eco_score_avg == "A" || @current_eco_score_avg == "B" %>
+                                              <i class="fas fa-globe-americas fa-2x" style="color: #4CA90C;"></i>
+                                            <%elsif  @current_eco_score_avg == "C" || @current_eco_score_avg == "D" %>
+                                              <i class="fas fa-globe-americas fa-2x" style="color: #FFC400;"></i>
+                                            <% else %>
+                                              <i class="fas fa-globe-americas fa-2x" style="color: #EB5757;"></i>
+                                            <% end %></strong></p></li>  
+        <li><p>Global Nutriscore: <strong><br><% if @current_nutri_score_avg == "A" || @current_nutri_score_avg == "B" %>
+                                                <i class="fas fa-heartbeat fa-2x" style="color: #4CA90C;"></i>
+                                              <%elsif  @current_nutri_score_avg == "C" || @current_nutri_score_avg == "D" %>
+                                                <i class="fas fa-heartbeat fa-2x" style="color: #FFC400;"></i>
+                                              <% else %>
+                                                <i class="fas fa-heartbeat fa-2x" style="color: #EB5757;"></i>
+                                              <% end %></strong></p></li>
+        <li><p>Total Spendings: <strong><br><%= @current_month_orders.pluck(:total).inject(0) {|sum, ele| sum += ele}.to_f.round(2) %> CHF</strong></p></li>
       </ul>
     </div>
   </div>
