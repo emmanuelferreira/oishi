@@ -106,7 +106,7 @@ products = []
 num_queries = 0
 puts 'Fetching products from FoodRepo API...'
 
-until num_queries == 2 do
+until num_queries == 5 do
   response = HTTParty.get(url, headers: headers)
   num_queries += 1
   raise unless response.code == 200 # HTTP OK
@@ -139,7 +139,7 @@ until num_queries == 2 do
     nutriscore = prod.nutriscore_grade
 
     #-------------------------------- Category creation----------------------------------
-    
+
     puts 'Creating categories'
     if Category.find_by(name: prod_category).nil?
       cat = Category.new(

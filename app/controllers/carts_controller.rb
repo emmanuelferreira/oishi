@@ -11,6 +11,7 @@ class CartsController < ApplicationController
         )
       @order_products << order_product
     end
+
     if @order_products.empty?
       flash[:notice] = 'Empty Cart, redirecting you to product browsing page...'
       sleep(5)
