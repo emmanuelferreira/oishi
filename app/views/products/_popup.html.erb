@@ -5,8 +5,8 @@
       <div class="popup-product-details d-flex justify-content-between">
         <div class="modal-left-section">
           <div class="modal-header-details">
-            <%= image_tag product.image, class: "img-show" %>
-            <div class="d-flex justify-content-between" pt-3>
+            <%= image_tag product.image, class: "img-show mb-4" %>
+            <div class="d-flex justify-content-between mb-2" pt-3>
               <% if product.eco_score == "A" || product.eco_score == "B"%>
                 <i class="fas fa-globe-americas fa-2x" style="color: #4CA90C;"></i>
               <%elsif  product.eco_score == "C" || product.eco_score == "D"%>
@@ -53,8 +53,8 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-          <h1 class="modal-title" id="exampleModalLabel"> <%= product.name.capitalize %></h1>
-          <h3><%=product.category.name %></h3>
+          <h2 class="modal-title ml-3" id="exampleModalLabel"> <%= product.name.capitalize %></h2>
+          <h3 class="ml-3"><%=product.category.name %></h3>
           <div class="modal-body d-flex flex-column justify-content-between">
             <h2>Description</h2>
             <p><%= product.description.capitalize if product.description.present? %> </p>
@@ -84,7 +84,7 @@
         <% if product.eco_score == "A" || product.eco_score == "B" %>
             <h4 class="suggestion-title">You rock<i class="fas fa-grin-alt" style="color:green; margin-left: 10px;"></i></h4>
             <div class="row suggestions-list d-flex justify-content-around">
-              <p> By purchasing this product you are doing a great gesture for the future generations! Cheers from Greta... she is already in love with you <i class="fas fa-fw fa-heart" style="color: red;"></i></p>
+              <p class="thanks"> By purchasing this product you are doing a great gesture for the future generations! Cheers from Greta... she is already in love with you <i class="fas fa-fw fa-heart text-center" style="color: red;"></i></p>
             </div>
         <% else %>
             <h4 class="suggestion-title">Eco-friendly Suggestions</h4>
