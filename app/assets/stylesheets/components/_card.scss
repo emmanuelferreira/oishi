@@ -1,6 +1,5 @@
 // Product Card
 .card-product {
-  // margin-right: 24px;
   margin-top: 10px;
   overflow: hidden;
   height: 300px;
@@ -8,7 +7,6 @@
   background: white;
   display: flex;
   flex-direction: column;
-  // align-items: stretch;
   font-family: $body-font;
   border: 1px solid $light-gray;
 }
@@ -27,7 +25,6 @@
 }
 
 .card-product h3 {
-  // padding-top: 4px;
   font-size: 16px;
   color: $dark-gray;
   margin: 0;
@@ -38,9 +35,7 @@
   color: $gray;
   vertical-align: text-bottom;
   word-wrap: break-word;
-  // width: 84%;
   overflow: scroll !important;
-
 }
 
 .badges{
@@ -58,14 +53,12 @@
 
 // cart card
 .card-product-cart {
-  // margin-right: 24px;
   margin-top: 10px;
   overflow: hidden;
   height: 165px;
-  width: 90% !important;
+  width: 100% !important;
   background: white;
   display: flex;
-  // align-items: stretch;
   font-family: $body-font;
   border: 1px solid $light-gray;
 }
@@ -73,7 +66,7 @@
 .card-product-cart img {
   height: 65px !important;
   width: 65px !important;
-  object-fit: cover;
+  object-fit: scale-down;
 }
 
 .card-product-cart h2 {
@@ -102,4 +95,79 @@
 .new_order_product {
   display: flex !important;
   margin: 8px;
+}
+
+
+//checkout-card
+.card-checkout {
+  box-shadow: 0 8px 8px rgba(224, 224, 224, 0.2);
+  margin-top: 10px;
+  overflow: hidden;
+  height: 140px !important;
+  width: 100% !important;
+  background: white;
+  display: flex;
+  font-family: $body-font;
+  border: 1px solid $light-gray;
+}
+
+.card-checkout img {
+  height: 65px !important;
+  width: 65px !important;
+  object-fit: scale-down;
+}
+
+.card-checkout h2 {
+  color: $gray;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 8px;
+}
+
+.card-checkout h3 {
+  padding-top: 4px;
+  font-size: 16px;
+  color: $dark-gray;
+  margin: 8px;
+}
+
+.card-checkout p {
+  padding-top: 16px;
+  color: $gray;
+  vertical-align: text-bottom;
+  word-wrap: break-word;
+  width: 75%;
+  margin-left: 8px;
+}
+
+.checkout-info{
+  margin-top: -43px !important;
+}
+
+.checkout-price{
+  margin-top: -80px !important;
+  margin-right: -53px !important;
+}
+
+.stripe-container{
+  margin-top: 24px;
+}
+
+
+.stripe-container span{
+  font-weight: bolder;
+}
+
+.card-cart-checkout{
+  height: 60vh;
+  overflow-y: scroll;
+}
+
+.quantity-checkout{
+  width: 45px;
+  height: 45px;
+}
+
+.stripe-button-el span{
+  background: $orange !important;
 }
