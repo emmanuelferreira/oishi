@@ -4,9 +4,7 @@
 <div class="container-fluid text-center">
   <div class="row content">
     <div class="col-sm-2">
-      <h3>Sorted by</h3>
-      <br>
-      <br>
+      <h3 class="pb-4">Sorted by</h3>
       <%= form_tag products_path, method: :get, :class => 'form-inline' do %>
           <%= hidden_field_tag :sort_eco, "ecoscore"%>
           <%= submit_tag "Ecoscore", class: "btn btn-info sidenav col-lg-8"  %>
@@ -30,12 +28,17 @@
           <div class="card-product w-75 d-flex flex-column justify-content-between">
             <div class="card-product-header" data-toggle="modal" data-target="#modal-<%= product.id %>">
               <div class="card-product-header-details d-flex justify-content-between align-items-center">
-                <h2 class="ml-2"><%= product.name.capitalize %></h2>
-                <%= image_tag product.image %>
+                  <div class="d-flex flex-column bd-highlight mb-3">
+                    <h2 class="p-2 bd-highlight"><%= product.name.capitalize %></h2>
+                    <h3 class="category-title p-2 bd-highlight"><%= product.category.name %></h3>
+                  </div>
+                  
+
+                <%= image_tag product.image, class: "d-flex justify-content-end" %>
               </div>
               <div class="card-product-infos flex-grow-1">
-                <h3 class="mt-2"><%= product.category.name %></h3>
-                <div class="d-flex justify-content-around badges ">
+                
+                <div class="d-flex justify-content-around badges mt-4">
                   <% if product.eco_score == "A" || product.eco_score == "B" %>
                     <i class="fas fa-globe-americas fa-2x" style="color: #4CA90C;"></i>
                   <%elsif  product.eco_score == "C" || product.eco_score == "D" %>
