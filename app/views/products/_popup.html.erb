@@ -50,7 +50,7 @@
           </div>
         </div>
         <div class="modal-right-section flex-grow-1 pl-4">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" data-dismiss="modal" aria-label="close">
             <span aria-hidden="true">&times;</span>
           </button>
           <h2 class="modal-title ml-3" id="exampleModalLabel"> <%= product.name.capitalize %></h2>
@@ -92,7 +92,7 @@
               <% Product.where(category: product.category).order(eco_score: :asc).take(3).each do |product_suggestion| %>
                 <div class="img-suggestions">
                   <%= image_tag product_suggestion.image %>
-                  <%= link_to "LINK TO", product_path(product_suggestion)  %>
+                  <%= link_to "", product_path(product_suggestion)  %>
                 </div>
               <% end %>
             </div>
