@@ -15,6 +15,7 @@
       <%= form_tag products_path, method: :get, :class => 'form-inline' do %>
           <%= hidden_field_tag :sort_nutri, "nutriscore"%>
           <%= submit_tag "Nutriscore", class: "btn btn-info sidenav col-lg-8"  %>
+
       <% end %>
       <br>
       <%= form_tag products_path, method: :get, :class => 'form-inline' do %>
@@ -26,56 +27,55 @@
     <div class="card-index col-sm-10 text-left">
       <div class="grid-container-card">
         <% @products.each do |product| %>
-        <div class="card-product w-75 d-flex flex-column justify-content-between">
-          <div class="card-product-header" data-toggle="modal" data-target="#modal-<%= product.id %>">
-            <div class="card-product-header-details d-flex justify-content-between align-items-center">
-              <h2 class="ml-2"><%= product.name.capitalize %></h2>
-              <%= image_tag product.image %>
-            </div>
-            <div class="card-product-infos flex-grow-1">
-              <h3 class="mt-2"><%= product.category.name %></h3>
-              <div class="d-flex justify-content-around badges ">
-                <% if product.eco_score == "A" || product.eco_score == "B" %>
-                  <i class="fas fa-globe-americas fa-2x" style="color: #4CA90C;"></i>
-                <%elsif  product.eco_score == "C" || product.eco_score == "D" %>
-                  <i class="fas fa-globe-americas fa-2x" style="color: #FFC400;"></i>
-                <% else %>
-                  <i class="fas fa-globe-americas fa-2x" style="color: #EB5757;"></i>
-                <% end %>
+          <div class="card-product w-75 d-flex flex-column justify-content-between">
+            <div class="card-product-header" data-toggle="modal" data-target="#modal-<%= product.id %>">
+              <div class="card-product-header-details d-flex justify-content-between align-items-center">
+                <h2 class="ml-2"><%= product.name.capitalize %></h2>
+                <%= image_tag product.image %>
+              </div>
+              <div class="card-product-infos flex-grow-1">
+                <h3 class="mt-2"><%= product.category.name %></h3>
+                <div class="d-flex justify-content-around badges ">
+                  <% if product.eco_score == "A" || product.eco_score == "B" %>
+                    <i class="fas fa-globe-americas fa-2x" style="color: #4CA90C;"></i>
+                  <%elsif  product.eco_score == "C" || product.eco_score == "D" %>
+                    <i class="fas fa-globe-americas fa-2x" style="color: #FFC400;"></i>
+                  <% else %>
+                    <i class="fas fa-globe-americas fa-2x" style="color: #EB5757;"></i>
+                  <% end %>
 
-                <% if product.nutri_score == "A" || product.nutri_score == "B" %>
-                  <i class="fas fa-heartbeat fa-2x pl-3" style="color: #4CA90C;"></i>
-                <%elsif  product.nutri_score == "C" || product.nutri_score == "D" %>
-                  <i class="fas fa-heartbeat fa-2x pl-3" style="color: #FFC400;"></i>
-                <% else %>
-                  <i class="fas fa-heartbeat fa-2x pl-3" style="color: #EB5757;"></i>
-                <% end %>
+                  <% if product.nutri_score == "A" || product.nutri_score == "B" %>
+                    <i class="fas fa-heartbeat fa-2x pl-3" style="color: #4CA90C;"></i>
+                  <%elsif  product.nutri_score == "C" || product.nutri_score == "D" %>
+                    <i class="fas fa-heartbeat fa-2x pl-3" style="color: #FFC400;"></i>
+                  <% else %>
+                    <i class="fas fa-heartbeat fa-2x pl-3" style="color: #EB5757;"></i>
+                  <% end %>
 
-                <% if product.price < 0.8 * ((Product.where(category_id: product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: product.category.id).size) %>
-                  <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #4CA90C;"></i>
-                <% elsif product.price >= 0.8 * ((Product.where(category_id: product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: product.category.id).size) && product.price <= 1.2 * ((Product.where(category_id: product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: product.category.id).size) %>
-                  <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #FFC400;"></i>
-                <% else %>
-                  <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #EB5757;"></i>
-                <% end %>
+                  <% if product.price < 0.8 * ((Product.where(category_id: product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: product.category.id).size) %>
+                    <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #4CA90C;"></i>
+                  <% elsif product.price >= 0.8 * ((Product.where(category_id: product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: product.category.id).size) && product.price <= 1.2 * ((Product.where(category_id: product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: product.category.id).size) %>
+                    <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #FFC400;"></i>
+                  <% else %>
+                    <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #EB5757;"></i>
+                  <% end %>
+                </div>
               </div>
             </div>
+            <div class="d-flex justify-content-between align-items-center">
+              <span id= "add-button">
+                <%= form_for @order_product , class: "form-inline add-button", remote: true do |f| %>
+                  <%= f.hidden_field :product_id, value: product.id %>
+                  <%= f.text_field :quantity, value: 1, min: 1, size: 2, class: "btn-add"%>
+                  <%= f.submit "Add", size: 1, class: "btn-add" %>
+                <% end %>
+              </span>
+              <h2><%= product.price%> <%= product.currency.upcase %></h2>
+            </div>
+            <%= render 'popup', product: product %>
           </div>
-          <div class="d-flex justify-content-between align-items-center">
-            <span id= "add-button">
-              <%= form_for @order_product , class: "form-inline add-button", remote: true do |f| %>
-                <%= f.hidden_field :product_id, value: product.id %>
-                <%= f.text_field :quantity, value: 1, min: 1, size: 2, class: "btn-add"%>
-                <%= f.submit "Add", size: 1, class: "btn-add" %>
-              <% end %>
-            </span>
-            <h2><%= product.price%> <%= product.currency.upcase %></h2>
-          </div>
-          <%= render 'popup', product: product%>
-        </div>
-      <% end %>
+        <% end %>
       </div>
-
     </div>
   </div>
 </div>
