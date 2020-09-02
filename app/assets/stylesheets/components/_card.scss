@@ -13,10 +13,16 @@
   border: 1px solid $light-gray;
 }
 
+.card-product-charges {
+  display: flex;
+  flex-direction: row;
+}
+
 .card-product img {
   height: 100px ;
   width: 100px;
   object-fit: scale-down;
+  margin-right: 20px;
 }
 
 .card-product h2 {
@@ -30,7 +36,7 @@
   // padding-top: 4px;
   font-size: 16px;
   color: $dark-gray;
-  margin: 0;
+  margin-top: -60px;
 }
 
 .card-product p {
@@ -102,4 +108,30 @@
 .new_order_product {
   display: flex !important;
   margin: 8px;
+}
+
+.card-product-infos {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.container-payment-btn-cart {
+  width: 700px;
+}
+
+.form-control-cart {
+  width: 200px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+
+#new_order_product {
+  justify-content: space-around;
+}
+
+.container-payment {
+  margin-top: -150px;
+  margin-left: 78px;
 }
