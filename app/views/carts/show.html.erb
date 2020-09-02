@@ -55,8 +55,9 @@
             </div>
           </div>
         </div>
+        <%#= render 'products/popup', product: item.product %>
       </div>
-      <%= render 'products/popup', product: item.product %>
+
     <% end %>
     <% if @order_products.present? %>
       <div class="container-link-to-strip py-3">
