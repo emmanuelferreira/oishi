@@ -1,167 +1,170 @@
-<div class="rectangle-overview paper">
-  <h2 class="overview-title text-left">
-    Dashboard
-  </h2>
-  <div class="current-order">
-    <h4 class="last-title mb-5">Last 5 Purchases</h4>
-    <% Order.where(user_id: current_user.id).limit(5).each do |order|%>
-      <ul>
-        <li>
-          <div class="list-dashboard">
-            <div class="list-product-dashboard-infos">
-              <h5>Order n°<%=order.id %> - <%= order.products.count %> items ordered</h5>
-              <span><strong>Deliver Date:</strong> <%= order.deliver_date %> - <strong>Total:</strong> <%= order.total.round(2) %> CHF</span>
-              <br>
-              <%= link_to "Order details", order_path(order) %>
-            </div>
+<div class="container">
+    <div class="rectangle-overview paper">
+      <h2 class="overview-title text-left">
+        Dashboard
+      </h2>
+      <div class="current-order container">
+        <h4 class="last-title mb-5">Last 5 Purchases</h4>
+        <% Order.where(user_id: current_user.id).limit(5).each do |order|%>
+          <ul>
+            <li>
+              <div class="list-dashboard">
+                <div class="list-product-dashboard-infos">
+                  <h5>Order n°<%=order.id %> - <%= order.products.count %> items ordered</h5>
+                  <span><strong>Deliver Date:</strong> <%= order.deliver_date %> - <strong>Total:</strong> <%= order.total.round(2) %> CHF</span>
+                  <br>
+                  <%= link_to "Order details", order_path(order) %>
+                </div>
+              </div>
+            </li>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="container charts-infos">
+      <div class="row all-charts d-flex justify-content-between ">
+        <div class="eco-chart">
+          <div class="eco-chart chart">
+            <%= column_chart [
+                    {
+                        name: "A",
+
+                        data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'A'").group('orders.id').count ,
+                        stack: "stack 1",
+                        color: ["#008000"],
+                    },
+                    {
+                        name: "B",
+                        data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'B'").group('orders.id').count ,
+                        stack: "stack 1",
+                        color: ["#00FF00"],
+                    },
+                    {
+                        name: "C",
+                        data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'C'").group('orders.id').count ,
+                        stack: "stack 1",
+                        color: ["#FFC300"],
+                    },
+                    {
+                        name: "D",
+                        data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'D'").group('orders.id').count ,
+                        stack: "stack 1",
+                        color: ["#FFC300"],
+                    },
+                    {
+                        name: "E",
+                        data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'E'").group('orders.id').count ,
+                        stack: "stack 1",
+                        color: ["#FF0000"],
+                    },
+                    {
+                        name: "F",
+                        data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'F'").group('orders.id').count ,
+                        stack: "stack 1",
+                        color: ["#800000"],
+                    },
+                ], stacked: true, legend: "left", title: "Eco Score"
+            %>
           </div>
-        </li>
-      </ul>
-    <% end %>
-  </div>
-</div>
+        </div>
 
-<div class="container charts-infos">
-  <div class="row all-charts d-flex justify-content-around ">
-    <div class="eco-chart">
-      <div class="eco-chart chart">
-        <%= column_chart [
-                {
-                    name: "A",
+        <div class="details-chart">
+          <div class="nutritionnal-chart chart">
+            <%= column_chart [
+                    {
+                        name: "A",
+                        data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'A'").group('orders.id').count ,
+                        stack: "stack 1",
+                        color: ["#008000"],
+                    },
+                    {
+                        name: "B",
+                        data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'B'").group('orders.id').count ,
+                        stack: "stack 1",
+                        color: ["#00FF00"],
 
-                    data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'A'").group('orders.id').count ,
-                    stack: "stack 1",
-                    color: ["#008000"],
-                },
-                {
-                    name: "B",
-                    data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'B'").group('orders.id').count ,
-                    stack: "stack 1",
-                    color: ["#00FF00"],
-                },
-                {
-                    name: "C",
-                    data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'C'").group('orders.id').count ,
-                    stack: "stack 1",
-                    color: ["#FFC300"],
-                },
-                {
-                    name: "D",
-                    data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'D'").group('orders.id').count ,
-                    stack: "stack 1",
-                    color: ["#FFC300"],
-                },
-                {
-                    name: "E",
-                    data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'E'").group('orders.id').count ,
-                    stack: "stack 1",
-                    color: ["#FF0000"],
-                },
-                {
-                    name: "F",
-                    data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.eco_score = 'F'").group('orders.id').count ,
-                    stack: "stack 1",
-                    color: ["#800000"],
-                },
-            ], stacked: true, legend: "left", title: "Eco Score"
-        %>
+                    },
+                    {
+                        name: "C",
+                        data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'C'").group('orders.id').count ,
+                        stack: "stack 1",
+                        color: ["#FFC300"],
+                    },
+                    {
+                        name: "D",
+                        data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'D'").group('orders.id').count ,
+                        stack: "stack 1",
+                        color: ["#FFC300"],
+                    },
+                    {
+                        name: "E",
+                        data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'E'").group('orders.id').count ,
+                        stack: "stack 1",
+                        color: ["#FF0000"],
+                    },
+                    {
+                        name: "F",
+                        data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'F'").group('orders.id').count ,
+                        stack: "stack 1",
+                        color: ["#800000"],
+                    },
+                ], stacked: true, legend: "left", title: "Nutri Score"
+            %>
+          </div>
+        </div>
+
+        <div class="spending-chart">
+          <div class="spendings-chart chart">
+            <%= column_chart Order.where(user_id: current_user.id).pluck(:id, :total), ytitle: "Total spent (CHF)", title: "Orders" %>
+          </div>
+        </div>
+      </div>
+        
+
+
+      <div class="row d-flex justify-content-between mt-5 top-buffer">
+        <div class="col-5">
+          <h4 class="d-flex align-items-start">Last Month Overview</h4>
+          <ul>
+            <li><p>Global Ecoscore: <strong><% if @last_eco_score_avg == "A" || @last_eco_score_avg == "B" %>
+                                                  <i class="fas fa-globe-americas fa-1x" style="color: #4CA90C;"></i>
+                                                <%elsif  @last_eco_score_avg == "C" || @last_eco_score_avg == "D" %>
+                                                  <i class="fas fa-globe-americas fa-1x" style="color: #FFC400;"></i>
+                                                <% else %>
+                                                  <i class="fas fa-globe-americas fa-1x" style="color: #EB5757;"></i>
+                                                <% end %></strong></p></li>  
+            <li><p>Global Nutriscore: <strong><% if @last_nutri_score_avg == "A" || @last_nutri_score_avg == "B" %>
+                                                    <i class="fas fa-heartbeat fa-1x" style="color: #4CA90C;"></i>
+                                                  <%elsif  @last_nutri_score_avg == "C" || @last_nutri_score_avg == "D" %>
+                                                    <i class="fas fa-heartbeat fa-1x" style="color: #FFC400;"></i>
+                                                  <% else %>
+                                                    <i class="fas fa-heartbeat fa-1x" style="color: #EB5757;"></i>
+                                                  <% end %></strong></p></li>
+            <li><p>Total Spendings: <strong><%= @last_month_orders.pluck(:total).inject(0) {|sum, ele| sum += ele}.to_f.round(2) %> CHF</strong></p></li>
+          </ul>
+        </div>
+        <div class="col-5">
+          <h4 class="d-flex align-items-start">Current Month Overview</h4>
+          <ul>
+            <li><p>Global Ecoscore: <strong><% if @current_eco_score_avg == "A" || @current_eco_score_avg == "B" %>
+                                                  <i class="fas fa-globe-americas fa-1x" style="color: #4CA90C;"></i>
+                                                <%elsif  @current_eco_score_avg == "C" || @current_eco_score_avg == "D" %>
+                                                  <i class="fas fa-globe-americas fa-1x" style="color: #FFC400;"></i>
+                                                <% else %>
+                                                  <i class="fas fa-globe-americas fa-1x" style="color: #EB5757;"></i>
+                                                <% end %></strong></p></li>  
+            <li><p>Global Nutriscore: <strong><% if @current_nutri_score_avg == "A" || @current_nutri_score_avg == "B" %>
+                                                    <i class="fas fa-heartbeat fa-1x" style="color: #4CA90C;"></i>
+                                                  <%elsif  @current_nutri_score_avg == "C" || @current_nutri_score_avg == "D" %>
+                                                    <i class="fas fa-heartbeat fa-1x" style="color: #FFC400;"></i>
+                                                  <% else %>
+                                                    <i class="fas fa-heartbeat fa-1x" style="color: #EB5757;"></i>
+                                                  <% end %></strong></p></li>
+            <li><p>Total Spendings: <strong><%= @current_month_orders.pluck(:total).inject(0) {|sum, ele| sum += ele}.to_f.round(2) %> CHF</strong></p></li>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <div class="details-chart">
-      <div class="nutritionnal-chart chart">
-        <%= column_chart [
-                {
-                    name: "A",
-                    data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'A'").group('orders.id').count ,
-                    stack: "stack 1",
-                    color: ["#008000"],
-                },
-                {
-                    name: "B",
-                    data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'B'").group('orders.id').count ,
-                    stack: "stack 1",
-                    color: ["#00FF00"],
-
-                },
-                {
-                    name: "C",
-                    data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'C'").group('orders.id').count ,
-                    stack: "stack 1",
-                    color: ["#FFC300"],
-                },
-                {
-                    name: "D",
-                    data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'D'").group('orders.id').count ,
-                    stack: "stack 1",
-                    color: ["#FFC300"],
-                },
-                {
-                    name: "E",
-                    data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'E'").group('orders.id').count ,
-                    stack: "stack 1",
-                    color: ["#FF0000"],
-                },
-                {
-                    name: "F",
-                    data: Product.joins(:orders).where("orders.user_id = ?", current_user.id).where("products.nutri_score = 'F'").group('orders.id').count ,
-                    stack: "stack 1",
-                    color: ["#800000"],
-                },
-            ], stacked: true, legend: "left", title: "Nutri Score"
-        %>
-      </div>
-    </div>
-
-    <div class="spending-chart">
-      <div class="spendings-chart chart">
-        <%= column_chart Order.where(user_id: current_user.id).pluck(:id, :total), ytitle: "Total spent (CHF)", title: "Orders" %>
-      </div>
-    </div>
   </div>
-    
-
-
-  <div class="row d-flex justify-content-between mt-5 top-buffer">
-    <div class="col-5">
-      <h4 class="mb-4">Last Month Consumption Overview</h4>
-      <ul>
-        <li><p>Global Ecoscore: <strong><br><% if @last_eco_score_avg == "A" || @last_eco_score_avg == "B" %>
-                                              <i class="fas fa-globe-americas fa-2x" style="color: #4CA90C;"></i>
-                                            <%elsif  @last_eco_score_avg == "C" || @last_eco_score_avg == "D" %>
-                                              <i class="fas fa-globe-americas fa-2x" style="color: #FFC400;"></i>
-                                            <% else %>
-                                              <i class="fas fa-globe-americas fa-2x" style="color: #EB5757;"></i>
-                                            <% end %></strong></p></li>  
-        <li><p>Global Nutriscore: <strong><br><% if @last_nutri_score_avg == "A" || @last_nutri_score_avg == "B" %>
-                                                <i class="fas fa-heartbeat fa-2x" style="color: #4CA90C;"></i>
-                                              <%elsif  @last_nutri_score_avg == "C" || @last_nutri_score_avg == "D" %>
-                                                <i class="fas fa-heartbeat fa-2x" style="color: #FFC400;"></i>
-                                              <% else %>
-                                                <i class="fas fa-heartbeat fa-2x" style="color: #EB5757;"></i>
-                                              <% end %></strong></p></li>
-        <li><p>Total Spendings: <strong><br><%= @last_month_orders.pluck(:total).inject(0) {|sum, ele| sum += ele}.to_f.round(2) %> CHF</strong></p></li>
-      </ul>
-    </div>
-    <div class="col-5">
-      <h4 class="mb-4">Current Month Consumption Overview</h4>
-      <ul>
-        <li><p>Global Ecoscore: <strong><br><% if @current_eco_score_avg == "A" || @current_eco_score_avg == "B" %>
-                                              <i class="fas fa-globe-americas fa-2x" style="color: #4CA90C;"></i>
-                                            <%elsif  @current_eco_score_avg == "C" || @current_eco_score_avg == "D" %>
-                                              <i class="fas fa-globe-americas fa-2x" style="color: #FFC400;"></i>
-                                            <% else %>
-                                              <i class="fas fa-globe-americas fa-2x" style="color: #EB5757;"></i>
-                                            <% end %></strong></p></li>  
-        <li><p>Global Nutriscore: <strong><br><% if @current_nutri_score_avg == "A" || @current_nutri_score_avg == "B" %>
-                                                <i class="fas fa-heartbeat fa-2x" style="color: #4CA90C;"></i>
-                                              <%elsif  @current_nutri_score_avg == "C" || @current_nutri_score_avg == "D" %>
-                                                <i class="fas fa-heartbeat fa-2x" style="color: #FFC400;"></i>
-                                              <% else %>
-                                                <i class="fas fa-heartbeat fa-2x" style="color: #EB5757;"></i>
-                                              <% end %></strong></p></li>
-        <li><p>Total Spendings: <strong><br><%= @current_month_orders.pluck(:total).inject(0) {|sum, ele| sum += ele}.to_f.round(2) %> CHF</strong></p></li>
-      </ul>
-    </div>
-  </div>
-</div>
