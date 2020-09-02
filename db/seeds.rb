@@ -5,7 +5,6 @@ require 'openfoodfacts'
 require 'httparty'
 require 'json'
 require 'faker'
-require 'open-uri'
 
 OrderProduct.destroy_all
 Product.destroy_all
@@ -107,7 +106,7 @@ products = []
 num_queries = 0
 puts 'Fetching products from FoodRepo API...'
 
-until num_queries == 1 do
+until num_queries == 9 do
   response = HTTParty.get(url, headers: headers)
   num_queries += 1
   raise unless response.code == 200 # HTTP OK
