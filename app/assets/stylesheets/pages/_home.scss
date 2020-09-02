@@ -54,7 +54,7 @@ color: $dark-gray;
   background-repeat: no-repeat;
   position: absolute;
   bottom: 45%;
-  left: 65%;
+  left: 75%;
 
   animation: leeks 2.5s infinite;
 }
@@ -70,7 +70,7 @@ color: $dark-gray;
   position: absolute;
   -webkit-transform: rotate(-30deg);
   top: 58%;
-  left: 45%;
+  left: 55%;
   z-index: -10;
 
   animation: beacon 2.2s infinite;
@@ -85,7 +85,7 @@ color: $dark-gray;
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;
-  left: 50%;
+  left: 60%;
   top: 40%;
   z-index: -10;
 
@@ -102,7 +102,7 @@ color: $dark-gray;
   background-repeat: no-repeat;
   position: absolute;
   bottom: 60%;
-  left: 35%;
+  left: 45%;
   -webkit-transform: rotate(40deg);
   z-index: -10;
 
@@ -120,7 +120,7 @@ color: $dark-gray;
   position: absolute;
   -webkit-transform: rotate(15deg);
   bottom: 35%;
-  left: 65%;
+  left: 75%;
   z-index: -10;
 
   animation: cumcumber 5s infinite;
@@ -137,9 +137,8 @@ color: $dark-gray;
   position: absolute;
   -webkit-transform: rotate(10deg);
   bottom: 60%;
-  left: 45%;
+  left: 55%;
   z-index: -10;
-
   animation: fish 2.6s infinite;
 }
 
