@@ -1,6 +1,6 @@
-This file contains all the record creation needed to seed the database with its default values.
-Your OAuth 2.0 Client Secret is: 15f0b6247e5c4f5a9f5fc80da5854a54 -do not remove (fatsecret key)
-(key: d1c88864830c4814a001a305f083b928)
+# This file contains all the record creation needed to seed the database with its default values.
+# Your OAuth 2.0 Client Secret is: 15f0b6247e5c4f5a9f5fc80da5854a54 -do not remove (fatsecret key)
+# (key: d1c88864830c4814a001a305f083b928)
 require 'openfoodfacts'
 require 'httparty'
 require 'json'
@@ -16,7 +16,8 @@ UserPreference.destroy_all
 ShoppingPreference.destroy_all
 User.destroy_all
 Address.destroy_all
-
+# PlaylistProduct.destroy_all
+# Playlist.destroy_all
 
 #-------------------------------------- User creation---------------------------
 #------------- Shopping preferences creation-------------
@@ -262,81 +263,81 @@ end
   ord.save!
   puts "Order created"
 end
-# ----------------------playlist-------------------------------------------------#
-# -------------------------eco----------------------------------------------#
+# # ----------------------playlist-------------------------------------------------#
+# # -------------------------eco----------------------------------------------#
   
-  eco = Playlist.new(
-    name: "eco_score"  
-  )
-  eco.save!
-  categories =Category.all
-  categories.each  do |category|
-    2.times do
-      n = 0
-      quantity = rand(1..3)
-      products = Product.where(category_id:category.id).where(eco_score:"A").shuffle.each{|x|}
-      if !products.empty?
-      product = products[n]
-      playlist_product = PlaylistProduct.new(
-        playlist_id: eco.id,
-        product_id: product.id,
-        quantity: quantity,
-      )
-      playlist_product.save!
-      n=n+1
-      end
-    end
-  end
+#   eco = Playlist.new(
+#     name: "eco_score"  
+#   )
+#   eco.save!
+#   categories =Category.all
+#   categories.each  do |category|
+#     2.times do
+#       n = 0
+#       quantity = rand(1..3)
+#       products = Product.where(category_id:category.id).where(eco_score:"A").shuffle.each{|x|}
+#       if !products.empty?
+#       product = products[n]
+#       playlist_product = PlaylistProduct.new(
+#         playlist_id: eco.id,
+#         product_id: product.id,
+#         quantity: quantity,
+#       )
+#       playlist_product.save!
+#       n=n+1
+#       end
+#     end
+#   end
 
-# -------------------------nutri----------------------------------------------#
+# # -------------------------nutri----------------------------------------------#
   
-nutri = Playlist.new(
-  name: "nutri_score"  
-)
-nutri.save!
-categories =Category.all
-categories.each  do |category|
-  2.times do
-    n = 0
-    quantity = rand(1..3)
-    products = Product.where(category_id:category.id).where(nutri_score:"A").shuffle.each{|x|}
-    if !products.empty?
-    product = products[n]
-    playlist_product = PlaylistProduct.new(
-      playlist_id: nutri.id,
-      product_id: product.id,
-      quantity: quantity,
-    )
-    playlist_product.save!
-    n=n+1
-    end
-  end
-end
+# nutri = Playlist.new(
+#   name: "nutri_score"  
+# )
+# nutri.save!
+# categories =Category.all
+# categories.each  do |category|
+#   2.times do
+#     n = 0
+#     quantity = rand(1..3)
+#     products = Product.where(category_id:category.id).where(nutri_score:"A").shuffle.each{|x|}
+#     if !products.empty?
+#     product = products[n]
+#     playlist_product = PlaylistProduct.new(
+#       playlist_id: nutri.id,
+#       product_id: product.id,
+#       quantity: quantity,
+#     )
+#     playlist_product.save!
+#     n=n+1
+#     end
+#   end
+# end
 
-# -------------------------price----------------------------------------------#
+# # -------------------------price----------------------------------------------#
   
-price = Playlist.new(
-  name: "price_score"  
-)
-price.save!
-categories =Category.all
-categories.each  do |category|
-  2.times do
-    n = 0
-    quantity = rand(1..3)
-    products = Product.where(category_id:category.id).order('price ASC')
-    if !products.empty?
-      product = products[n]
-      playlist_product = PlaylistProduct.new(
-        playlist_id: price.id,
-        product_id: product.id,
-        quantity: quantity,
-      )
+# price = Playlist.new(
+#   name: "price_score"  
+# )
+# price.save!
+# categories =Category.all
+# categories.each  do |category|
+#   2.times do
+#     n = 0
+#     quantity = rand(1..3)
+#     products = Product.where(category_id:category.id).order('price ASC')
+#     if !products.empty?
+#       product = products[n]
+#       playlist_product = PlaylistProduct.new(
+#         playlist_id: price.id,
+#         product_id: product.id,
+#         quantity: quantity,
+#       )
       
-    playlist_product.save!
-    n=n+1
-    end
-  end
-end
+#     playlist_product.save!
+#     n=n+1
+#     end
+#   end
+# end
 
   

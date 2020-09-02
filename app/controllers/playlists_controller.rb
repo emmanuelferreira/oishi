@@ -3,6 +3,10 @@ class PlaylistsController < ApplicationController
 
   def index
     @playlists = Playlist.all
-  end
+    @eco_scores = Playlist.find_by(name: "eco_score")
+    @nutri_scores = Playlist.find_by(name: "nutri_score")
+    @prices = Playlist.find_by(name: "price_score")
 
+    @nutri_products = Product.joins(:category, :comments)
+  end
 end
