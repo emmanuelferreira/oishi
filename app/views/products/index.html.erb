@@ -6,17 +6,20 @@
     <div class="col-sm-2">
       <h3 class="pb-4">Sorted by</h3>
       <%= form_tag products_path, method: :get, :class => 'form-inline' do %>
+          <%= hidden_field_tag :query, params[:query]%>
           <%= hidden_field_tag :sort_eco, "ecoscore"%>
           <%= submit_tag "Ecoscore", class: "btn btn-info sidenav col-lg-8"  %>
       <% end %>
       <br>
       <%= form_tag products_path, method: :get, :class => 'form-inline' do %>
+          <%= hidden_field_tag :query, params[:query]%>
           <%= hidden_field_tag :sort_nutri, "nutriscore"%>
           <%= submit_tag "Nutriscore", class: "btn btn-info sidenav col-lg-8"  %>
 
       <% end %>
       <br>
       <%= form_tag products_path, method: :get, :class => 'form-inline' do %>
+          <%= hidden_field_tag :query, params[:query]%>
           <%= hidden_field_tag :sort_price, "price"%>
           <%= submit_tag "Price", class: "btn btn-info sidenav col-lg-8"  %>
       <% end %>
@@ -32,12 +35,12 @@
                     <h2 class="p-2 bd-highlight"><%= product.name.capitalize %></h2>
                     <h3 class="category-title p-2 bd-highlight"><%= product.category.name %></h3>
                   </div>
-                  
+
 
                 <%= image_tag product.image, class: "d-flex justify-content-end" %>
               </div>
               <div class="card-product-infos flex-grow-1">
-                
+
                 <div class="d-flex justify-content-around badges mt-4">
                   <% if product.eco_score == "A" || product.eco_score == "B" %>
                     <i class="fas fa-globe-americas fa-2x" style="color: #4CA90C;"></i>
