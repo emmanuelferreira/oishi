@@ -8,7 +8,7 @@
       <%= form_tag products_path, method: :get, :class => 'form-inline' do %>
           <%= hidden_field_tag :query, params[:query]%>
           <%= hidden_field_tag :sort_eco, "ecoscore"%>
-          <%= submit_tag "Ecoscore", class: "btn btn-info sidenav col-lg-8"  %>
+          <%= submit_tag "Ecoscore", class: "btn btn-info sidenav col-lg-8" %>
       <% end %>
       <br>
       <%= form_tag products_path, method: :get, :class => 'form-inline' do %>
@@ -78,7 +78,7 @@
               </span>
               <h2><%= product.price%> <%= product.currency.upcase %></h2>
             </div>
-            <%= render 'popup', product: product %>
+            <%= render 'popup', product: product, class: "cursor" %>
           </div>
         <% end %>
       </div>

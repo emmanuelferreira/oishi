@@ -40,13 +40,17 @@
             <% end %>
           </div>
 
-          <div class="d-flex justify-content-end">
+          <div class="d-flex justify-content-end m-3">
             <div class="">
               <div>
                 <%= form_for(item, url: remove_from_cart_path(item.product.id), remote: true) do |f| %>
                   <%= f.hidden_field :product_id, value: item.product.id, class: "form-control" %>
-                  <%= f.submit "Update", class: 'btn btn-secondary btn-cart'  %>
-                  <%= link_to "Delete", delete_from_cart_path(item.product.id), method: :post, remote: true, class: 'btn btn-secondary btn-cart' %>
+                    <%= button_tag type: 'Update', class: "button-update-cart", id: "update-button" do %>
+                      <i class="fa fa-sync fa-lg" aria-hidden="true"></i>
+                    <% end %>
+                  <%= link_to delete_from_cart_path(item.product.id), method: :post, remote: true, class: "button-delete-cart" do%>
+                    <i class="fa fa-trash fa-lg"></i>
+                  <% end %>
                   <%= f.text_field :quantity, value: item.quantity, min: 1, class: 'form-control quantity-cart' %>
                 <% end %>
               </div>
@@ -54,10 +58,10 @@
           </div>
         </div>
       </div>
-    <% end %>
+    <% end %> 
 
     <% if @order_products.present? %>
-      <label class="amount">
+      <label class="amount d-flex justify-content-center">
         <span><STRONG>Total Amount:</STRONG>
           <%= @current_cart.inject(0) do |sum, (key, quantity)|
             @product = Product.find(key)
@@ -66,8 +70,8 @@
             CHF
         </span>
       </label>
-      <div class="container-link-to-strip py-3">
-        <%= link_to "Process Order", new_charge_path, class: "btn btn-info btn-lg" %>
+      <div class="container-link-to-strip py-3 d-flex justify-content-center">
+        <%= link_to "Process Order", new_charge_path, class: "btn btn-info btn-lg " %>
       </div>
     <% end %>
   </div>
