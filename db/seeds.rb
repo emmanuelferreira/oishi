@@ -107,7 +107,7 @@ products = []
 num_queries = 0
 puts 'Fetching products from FoodRepo API...'
 
-until num_queries == 3 do
+until num_queries == 7 do
 
   response = HTTParty.get(url, headers: headers)
   num_queries += 1
