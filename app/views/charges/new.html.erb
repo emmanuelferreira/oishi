@@ -23,7 +23,7 @@
                 <% end %>
               </div>
           </div>
-          
+
 
           <div class="d-flex justify-content-around m-1 checkout-info">
             <% if item.product.eco_score == "A" || item.product.eco_score == "B"%>
@@ -63,7 +63,7 @@
         </div>
       <% end %>
       <label class="amount">
-        <span>Total: 
+        <span>Total:
               <%= @current_cart.inject(0) do |sum, (key, quantity)|
                   @product = Product.find(key)
                   sum += @product.price * quantity

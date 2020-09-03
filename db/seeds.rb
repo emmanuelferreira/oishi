@@ -107,7 +107,7 @@ products = []
 num_queries = 0
 puts 'Fetching products from FoodRepo API...'
 
-until num_queries == 2 do
+until num_queries == 30 do
 
   response = HTTParty.get(url, headers: headers)
   num_queries += 1
@@ -141,7 +141,7 @@ until num_queries == 2 do
     nutriscore = prod.nutriscore_grade
 
     #-------------------------------- Category creation----------------------------------
-    
+
     puts 'Creating categories'
     if Category.find_by(name: prod_category).nil?
       cat = Category.new(
@@ -267,9 +267,9 @@ end
 
 # # ----------------------playlist-------------------------------------------------#
 # # -------------------------eco----------------------------------------------#
-  
+
 #   eco = Playlist.new(
-#     name: "eco_score"  
+#     name: "eco_score"
 #   )
 #   eco.save!
 #   categories =Category.all
@@ -294,9 +294,9 @@ end
 #   end
 
 # # -------------------------nutri----------------------------------------------#
-  
+
 # nutri = Playlist.new(
-#   name: "nutri_score"  
+#   name: "nutri_score"
 # )
 # nutri.save!
 # categories =Category.all
@@ -321,9 +321,9 @@ end
 # end
 
 # # -------------------------price----------------------------------------------#
-  
+
 # price = Playlist.new(
-#   name: "price_score"  
+#   name: "price_score"
 # )
 # price.save!
 # categories =Category.all
@@ -339,11 +339,11 @@ end
 #         product_id: product.id,
 #         quantity: quantity,
 #       )
-      
+
 #     playlist_product.save!
 #     n=n+1
 #     end
 #   end
 # end
 
-  
+
