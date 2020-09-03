@@ -5,13 +5,15 @@
   top:0;
   left:0;
   position: absolute;
-  z-index: -9;
+  z-index: 5 !important;
+
 }
 
 .paper {
   background-image: asset-url("paper.png");
-  z-index: -9;
+  
   opacity: 0.95;
+  
 }
 
 .overview-title{
@@ -31,6 +33,7 @@
   width: fit-content;
   margin-top: 8%;
   margin-left: 32%;
+  z-index: -1000 !important;
 }
 
 
@@ -54,18 +57,24 @@
 .top-buffer ul {
   margin-left: -40px;
 }
-// .top-buffer i{
-//   display: flex;
-//   justify-self: flex-end;
-// }
 
 .list-dashboard{
   margin-top: 1%;
+  position: relative;
 }
 
 
 .strange{
-  z-index: -100 !important;
+  
+}
+
+.current-order{
+  
+}
+
+
+.order-details{
+  
 }
 // .card-product-dashboard {
 //   overflow: hidden;

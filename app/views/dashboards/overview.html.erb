@@ -13,7 +13,7 @@
                   <h5>Order n°<%=order.id %> - <%= order.products.count %> items ordered</h5>
                   <span><strong>Deliver Date:</strong> <%= order.deliver_date %> - <strong>Total:</strong> <%= order.total.round(2) %> CHF</span>
                   <br>
-                  <%= link_to "Order details", order_path(order) %>
+                  <%= link_to "Order details", order_path(order), class: "order-details" %>
                 </div>
               </div>
             </li>
@@ -22,8 +22,10 @@
       </div>
     </div>
 
-    <div class=" charts-infos">
-      <div class="row all-charts d-flex justify-content-between ">
+
+    <div class="container charts-infos">
+      <div class="row all-charts d-flex justify-content-between">
+
         <div class="eco-chart">
           <div class="eco-chart chart">
             <%= column_chart [
@@ -166,5 +168,4 @@
         </div>
       </div>
     </div>
-
   </div>
