@@ -43,5 +43,34 @@
   margin-left: 5%;
   margin-top: 4%;
   position: absolute;
+}
 
+.amount{
+  font-size: 24px;
+  font-weight: bolder;
+  margin-top: 14px;
+  align-self: center;
+}
+
+
+.button-update-cart{
+  border: none;
+  background-color: transparent;
+  margin-right: 16px;
+  color: $gray;
+}
+
+.button-update-cart:hover{
+  opacity: 0.7;
+}
+
+.button-delete-cart{
+  color: $gray;
+  margin-right: 16px;
+  margin-top: 10px;
+}
+
+.button-delete-cart:hover{
+  color: $gray;
+  opacity: 0.7;
 }
