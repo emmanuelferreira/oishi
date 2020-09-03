@@ -9,7 +9,7 @@
   flex-direction: column;
   font-family: $body-font;
   border: 1px solid $light-gray;
-  
+
 }
 
 .card-product:hover{
@@ -179,4 +179,9 @@
 
 .cursor:hover{
   cursor: copy;
+}
+
+.card-product-order {
+  height: 80vh;
+  overflow-y: scroll;
 }

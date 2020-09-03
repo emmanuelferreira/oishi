@@ -3,7 +3,7 @@
 
 
 <div class="container py-6">
-  <div class="container-products col-lg-12 cart-item">
+  <div class="container-products col-lg-12 cart-item card-product-order">
     <h1> Order N° <%= @order.id  %> </h1>
     <p> <em>Delivered on <%= @order.deliver_date %></em></p>
     <% @order_products.each do |item| %>
