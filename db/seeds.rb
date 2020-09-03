@@ -107,7 +107,7 @@ products = []
 num_queries = 0
 puts 'Fetching products from FoodRepo API...'
 
-until num_queries == 30 do
+until num_queries == 2 do
 
   response = HTTParty.get(url, headers: headers)
   num_queries += 1
@@ -121,8 +121,7 @@ until num_queries == 30 do
 
   puts 'Creating products in DB'
   products.each do |product|
-    # openfoodfacts_url = "https://world.openfoodfacts.org/api/v0/product/#{barcode}.json" in case wrapper does not work
-    # open food data parsing
+
     barcode = product['barcode']
     prod = Openfoodfacts::Product.get(barcode, locale: 'world')
     next if Product.exists?(barcode: product['barcode'])
@@ -135,7 +134,6 @@ until num_queries == 30 do
     next if prod.image_nutrition_small_url.nil?
     next if prod.quantity.nil?
     next if prod.nutriments.nil?
-
 
     prod_category = prod.categories_tags.map{|element| element.sub('en:','')}.first.capitalize #or .pnns_groups_2_tags.first   .pnns_groups_1 without any mehtod after
     nutriscore = prod.nutriscore_grade
@@ -151,8 +149,6 @@ until num_queries == 30 do
     else
       cat = Category.find_by(name: prod_category)
     end
-    puts 'Done creating categories'
-
 
     #ecoscore basic calculation
     ecoscore = "A" if prod.origins.capitalize == "Switzerland"
@@ -198,49 +194,50 @@ end
 puts "\n#{products.length} products fetched from #{num_queries} queries."
 puts "Time taken: #{(Time.now - START_TIME).round(1)} seconds"
 
-# ----------------------Orders creation this month----------------------------------------#
-3.times do
-  status = ["pending","delivered"].sample
-  d = Date.today
-  ord = Order.new(
-    status: status,
-    user_id: User.first.id,
-    deliver_date: status == "delivered" ? d - rand(1..10) : d + 1,
-    address_id: User.first.address.id,
-  )
-  ord.save!
-  rand(3..10).times do
-    n = 0
-    products = Product.all.shuffle.each{|x|}
-    product = products[n]
-    quantity = rand(1..3)
-    ord_prod = OrderProduct.new(
-      order_id: ord.id,
-      product_id: product.id,
-      quantity: quantity,
-      unit_price: product.price,
-      total_price: quantity * product.price
-    )
-    ord_prod.save!
-  end
-  ord.total = OrderProduct.where(order_id: ord.id).map(&:total_price).inject(0, &:+)
-  ord.payment_amount = ord.total
-
-  puts "Order Poduct create"
-  ord.save!
-  puts "Order created"
-end
-
-
 # ----------------------Orders creation last month----------------------------------------#
 7.times do
+  i = 0
+  i += 1
   status = ["delivered"].sample
   d = Date.today
   ord = Order.new(
     status: status,
     user_id: User.first.id,
-    deliver_date: status == "delivered" ? d - rand(31..50) : d + 1,
-    address_id: User.first.address.id,
+    deliver_date: (d - 34) + (i * 3) ,
+    address_id: User.first.address.id
+  )
+  ord.save!
+  rand(5..10).times do
+    n = 0
+    products = Product.all.shuffle.each{|x|}
+    product = products[n]
+    quantity = rand(2..7)
+    ord_prod = OrderProduct.new(
+      order_id: ord.id,
+      product_id: product.id,
+      quantity: quantity,
+      unit_price: product.price,
+      total_price: quantity * product.price
+    )
+    ord_prod.save!
+    n += 1
+  end
+  ord.total = OrderProduct.where(order_id: ord.id).map(&:total_price).inject(0, &:+)
+  ord.payment_amount = ord.total
+  ord.save!
+end
+
+# ----------------------Orders creation this month----------------------------------------#
+2.times do
+  i = 0
+  i += 1
+  status = "delivered"
+  d = Date.today
+  ord = Order.new(
+    status: status,
+    user_id: User.first.id,
+    deliver_date: (d - 4) + i,
+    address_id: User.first.address.id
   )
   ord.save!
   rand(3..10).times do
@@ -256,14 +253,13 @@ end
       total_price: quantity * product.price
     )
     ord_prod.save!
+    n += 1
   end
   ord.total = OrderProduct.where(order_id: ord.id).map(&:total_price).inject(0, &:+)
   ord.payment_amount = ord.total
-
-  puts "Order Poduct create"
   ord.save!
-  puts "Order created"
 end
+puts "Orders created"
 
 # # ----------------------playlist-------------------------------------------------#
 # # -------------------------eco----------------------------------------------#
