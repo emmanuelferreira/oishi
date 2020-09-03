@@ -228,14 +228,13 @@ end
 # ----------------------Orders creation this month----------------------------------------#
 i = 0
 status = "delivered"
-
 2.times do
   i += 1
   d = Date.today
   ord = Order.new(
     status: status,
     user_id: User.first.id,
-    deliver_date: (d - 4) + i,
+    deliver_date: (d - 3) + i,
     address_id: User.first.address.id
   )
   ord.save!

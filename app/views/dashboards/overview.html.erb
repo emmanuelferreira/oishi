@@ -1,11 +1,11 @@
-<div class="container strange">
+<div class= "strange">
     <div class="rectangle-overview paper">
       <h2 class="overview-title text-left">
         Dashboard
       </h2>
-      <div class="current-order container">
+      <div class="current-order">
         <h4 class="last-title mb-3">Last 5 Purchases</h4>
-        <% Order.where(user_id: current_user.id).limit(5).each do |order|%>
+        <% Order.where(user_id: current_user.id).order("deliver_date desc").limit(5).each do |order|%>
           <ul>
             <li>
               <div class="list-dashboard">
@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <div class="container charts-infos">
+    <div class=" charts-infos">
       <div class="row all-charts d-flex justify-content-between ">
         <div class="eco-chart">
           <div class="eco-chart chart">
