@@ -11,6 +11,10 @@
   border: 1px solid $light-gray;
 }
 
+.card-product:hover{
+  cursor: zoom-in;
+}
+
 .card-product img {
   height: 100px ;
   width: 100px;
@@ -55,7 +59,7 @@
 .card-product-cart {
   margin-top: 10px;
   overflow: hidden;
-  height: 165px;
+  height: 180px;
   width: 100% !important;
   background: white;
   display: flex;
@@ -170,4 +174,8 @@
 
 .stripe-button-el span{
   background: $orange !important;
+}
+
+.cursor:hover{
+  cursor: copy;
 }
