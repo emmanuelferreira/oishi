@@ -107,7 +107,7 @@ products = []
 num_queries = 0
 puts 'Fetching products from FoodRepo API...'
 
-until num_queries == 12 do
+until num_queries == 4 do
 
   response = HTTParty.get(url, headers: headers)
   num_queries += 1
@@ -124,15 +124,13 @@ until num_queries == 12 do
 
     barcode = product['barcode']
     prod = Openfoodfacts::Product.get(barcode, locale: 'world')
-    next if Product.exists?(barcode: product['barcode'])
-    next if product['name_translations']["en"].nil?
-    next if product["origin_translations"]["en"].nil?
+    # next if Product.exists?(barcode: product['barcode'])
+    # next if product['name_translations']["en"].nil?
     next if prod.nutriscore_grade.nil?
     next if prod.image_url.nil?
     next if prod.categories_tags.nil?
     next if prod.origins.nil?
-    next if prod.image_nutrition_small_url.nil?
-    next if prod.quantity.nil?
+    # next if prod.quantity.nil?
     next if prod.nutriments.nil?
 
     prod_category = prod.categories_tags.map{|element| element.sub('en:','')}.first.capitalize #or .pnns_groups_2_tags.first   .pnns_groups_1 without any mehtod after
@@ -177,8 +175,7 @@ until num_queries == 12 do
       eco_score: ecoscore,
       supplier_id: Supplier.find_by(name: rand_name).id,
       nutriments: prod.nutriments,
-      quantity_product: prod.quantity,
-      image_nutrition: prod.image_nutrition_small_url
+      quantity_product: prod.quantity
     )
 
     produit.image = prod.image_url
@@ -258,6 +255,7 @@ status = "delivered"
   ord.save!
 end
 puts "Orders created"
+
 
 # # ----------------------playlist-------------------------------------------------#
 # # -------------------------eco----------------------------------------------#
