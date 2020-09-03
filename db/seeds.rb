@@ -107,7 +107,7 @@ products = []
 num_queries = 0
 puts 'Fetching products from FoodRepo API...'
 
-until num_queries == 4 do
+until num_queries == 3 do
 
   response = HTTParty.get(url, headers: headers)
   num_queries += 1
@@ -124,11 +124,12 @@ until num_queries == 4 do
 
     barcode = product['barcode']
     prod = Openfoodfacts::Product.get(barcode, locale: 'world')
-    # next if Product.exists?(barcode: product['barcode'])
-    # next if product['name_translations']["en"].nil?
+    next if Product.find_by(barcode: product['barcode']).present?
+    next if product['name_translations']["en"].nil?
     next if prod.nutriscore_grade.nil?
     next if prod.image_url.nil?
     next if prod.categories_tags.nil?
+    next if prod.categories_tags.map{|element| element.sub('en:','')}.first.capitalize.start_with?("Fr:")
     next if prod.origins.nil?
     # next if prod.quantity.nil?
     next if prod.nutriments.nil?
