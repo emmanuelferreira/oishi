@@ -18,9 +18,8 @@
           <div class="checkout-infos d-flex justify-content-end">
             <h2 class="checkout-price"><%= item.product.price.round(2)%><%= item.product.currency.upcase %></h2>
               <div>
-                <%= form_for(item, url: remove_from_cart_path(item.product.id), remote: true) do |f| %>
-                  <%= f.text_field :quantity, size: 1, value: item.quantity, min: 1, class: 'form-control quantity-checkout' %>
-                <% end %>
+
+                  <h3 class="bd-highlight"> <%= item.quantity %> <%= item.quantity == 1 ? "unit" : "units" %></h3>
               </div>
           </div>
 
@@ -55,33 +54,33 @@
 
 
   <div class="container stripe-container d-flex justify-content-center">
-    <%= form_tag charges_path do %>
-    <article>
-      <% if flash[:error].present? %>
-        <div id="error_explanation">
-          <p><%= flash[:error] %></p>
-        </div>
-      <% end %>
-      <label class="amount">
-        <span>Total:
-              <%= @current_cart.inject(0) do |sum, (key, quantity)|
-                  @product = Product.find(key)
-                  sum += @product.price * quantity
-                  end  %>
-            CHF
-        </span>
-      </label>
-    </article>
-    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-            data-description="Current Order"
-            data-amount="<%= @current_cart.inject(0) do |sum, (key, quantity)|
-                  @product = Product.find(key)
-                  sum += @product.price * quantity
-                  end  * 100%>"
-            data-locale="auto"
-            data-currency="chf">
-    </script>
+    <%= form_tag charges_path, class: "text-center" do %>
+      <article>
+        <% if flash[:error].present? %>
+          <div id="error_explanation">
+            <p><%= flash[:error] %></p>
+          </div>
+        <% end %>
+        <label class="amount">
+          <span><STRONG>Total Amount:</STRONG>
+            <%= @current_cart.inject(0) do |sum, (key, quantity)|
+              @product = Product.find(key)
+              sum += @product.price * quantity
+            end.round(2)  %>
+              CHF
+          </span>
+        </label>
+      </article>
+      <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+              data-description="Current Order"
+              data-amount="<%= @current_cart.inject(0) do |sum, (key, quantity)|
+                    @product = Product.find(key)
+                    sum += @product.price * quantity
+                    end  * 100%>"
+              data-locale="auto"
+              data-currency="chf">
+      </script>
     <% end %>
   </div>
 </div>

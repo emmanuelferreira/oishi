@@ -30,7 +30,7 @@
             <% else %>
               <i class="fas fa-heartbeat fa-2x pl-3" style="color: #EB5757;"></i>
             <% end %>
-              
+
             <% if item.product.price < 0.8 * ((Product.where(category_id: item.product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: item.product.category.id).size) %>
               <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #4CA90C;"></i>
             <% elsif item.product.price >= 0.8 * ((Product.where(category_id: item.product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: item.product.category.id).size) && item.product.price <= 1.2 * ((Product.where(category_id: item.product.category.id).pluck(:price).inject { |sum, el| sum + el }.to_f)/Product.where(category_id: item.product.category.id).size) %>
