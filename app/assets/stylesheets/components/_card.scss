@@ -11,6 +11,10 @@
   border: 1px solid $light-gray;
 }
 
+.card-product:hover{
+  cursor: zoom-in;
+}
+
 .card-product img {
   height: 100px ;
   width: 100px;
@@ -170,4 +174,8 @@
 
 .stripe-button-el span{
   background: $orange !important;
+}
+
+.cursor:hover{
+  cursor: copy;
 }

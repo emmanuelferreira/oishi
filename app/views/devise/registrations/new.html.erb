@@ -43,8 +43,8 @@
             input_html: { autocomplete: "username" } %>
             <%= f.simple_fields_for :address do |ff| %>
               <%= ff.input :street,  required: true %>
-              <%= ff.input :city,  required: true %>
-              <%= ff.input :zip,  required: true %>
+              <%= ff.input :city,  required: true, class: "col"  %>
+              <%= ff.input :zip,  required: true, class: "col" %>        
             <% end %>
             <%= f.input :email,
             required: true,
