@@ -48,13 +48,9 @@
                     <%= button_tag type: 'Update', class: "button-update-cart", id: "update-button" do %>
                       <i class="fa fa-sync fa-lg" aria-hidden="true"></i>
                     <% end %>
-
-
-
                   <%= link_to delete_from_cart_path(item.product.id), method: :post, remote: true, class: "button-delete-cart" do%>
                     <i class="fa fa-trash fa-lg"></i>
                   <% end %>
-
                   <%= f.text_field :quantity, value: item.quantity, min: 1, class: 'form-control quantity-cart' %>
                 <% end %>
               </div>
