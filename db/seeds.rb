@@ -42,8 +42,8 @@ addr.save!
 user = User.new(
   firstname:"Emmanuel",
   lastname:"Ferreira",
-  username:"emmanuelferreira",
-  email:"emmanuel.ferreira@gmail.com",
+  username:"emmanuel",
+  email:"manu@gmail.com",
   password: "123456",
   address_id: Address.find_by(street: "Place due Palud 2").id
 )
@@ -139,8 +139,6 @@ until num_queries == 2 do
     nutriscore = prod.nutriscore_grade
 
     #-------------------------------- Category creation----------------------------------
-
-    puts 'Creating categories'
     if Category.find_by(name: prod_category).nil?
       cat = Category.new(
         name: prod_category
@@ -162,7 +160,7 @@ until num_queries == 2 do
 
     # Supplier name random attribution
     supplier_name = []
-    Supplier.all.each { |supplier| supplier_name << supplier.name}
+    Supplier.all.each { |supplier| supplier_name << supplier.name }
     rand_name = supplier_name.sample
 
     produit = Product.new(
@@ -195,23 +193,23 @@ puts "\n#{products.length} products fetched from #{num_queries} queries."
 puts "Time taken: #{(Time.now - START_TIME).round(1)} seconds"
 
 # ----------------------Orders creation last month----------------------------------------#
-7.times do
-  i = 0
+i = 0
+6.times do
   i += 1
   status = ["delivered"].sample
   d = Date.today
   ord = Order.new(
     status: status,
     user_id: User.first.id,
-    deliver_date: (d - 34) + (i * 3) ,
+    deliver_date: (d - 34) + (i * 4) ,
     address_id: User.first.address.id
   )
   ord.save!
-  rand(5..10).times do
-    n = 0
-    products = Product.all.shuffle.each{|x|}
+  n = 0
+  products = Product.all.shuffle.each{|x|}
+  rand(6..10).times do
     product = products[n]
-    quantity = rand(2..7)
+    quantity = rand(1..2)
     ord_prod = OrderProduct.new(
       order_id: ord.id,
       product_id: product.id,
@@ -228,10 +226,11 @@ puts "Time taken: #{(Time.now - START_TIME).round(1)} seconds"
 end
 
 # ----------------------Orders creation this month----------------------------------------#
+i = 0
+status = "delivered"
+
 2.times do
-  i = 0
   i += 1
-  status = "delivered"
   d = Date.today
   ord = Order.new(
     status: status,
@@ -240,11 +239,11 @@ end
     address_id: User.first.address.id
   )
   ord.save!
-  rand(3..10).times do
-    n = 0
-    products = Product.all.shuffle.each{|x|}
+  n = 0
+  products = Product.all.shuffle.each{|x|}
+  rand(5..10).times do
     product = products[n]
-    quantity = rand(1..3)
+    quantity = rand(1..2)
     ord_prod = OrderProduct.new(
       order_id: ord.id,
       product_id: product.id,

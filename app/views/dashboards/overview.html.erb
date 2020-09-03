@@ -116,7 +116,7 @@
 
         <div class="spending-chart">
           <div class="spendings-chart chart">
-            <%= column_chart Order.where(user_id: current_user.id).pluck(:id, :total), ytitle: "Total spent (CHF)", title: "Orders" %>
+            <%= column_chart Order.where(user_id: current_user.id).pluck(:id, :total), ytitle: "Total spent (CHF)", title: "Spendings" %>
           </div>
         </div>
       </div>
