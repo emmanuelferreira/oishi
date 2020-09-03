@@ -53,7 +53,7 @@ class ChargesController < ApplicationController
 
 
     @order.status = "Pending"
-    @current_cart = {}
+    session.delete(:cart)
     redirect_to dashboard_path, notice: 'Payment approved!'
 
     rescue Stripe::CardError => e
