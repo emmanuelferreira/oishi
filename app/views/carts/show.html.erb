@@ -42,11 +42,9 @@
 
           <div class="d-flex justify-content-end">
             <div class="">
-              <%# <%= item.product.name %>
               <div>
                 <%= form_for(item, url: remove_from_cart_path(item.product.id), remote: true) do |f| %>
                   <%= f.hidden_field :product_id, value: item.product.id, class: "form-control" %>
-                  <%# <> <%= item.product.price %>
                   <%= f.submit "Update", class: 'btn btn-secondary btn-cart'  %>
                   <%= link_to "Delete", delete_from_cart_path(item.product.id), method: :post, remote: true, class: 'btn btn-secondary btn-cart' %>
                   <%= f.text_field :quantity, value: item.quantity, min: 1, class: 'form-control quantity-cart' %>
@@ -56,9 +54,18 @@
           </div>
         </div>
       </div>
-      <%= render 'products/popup', product: item.product %>
     <% end %>
+
     <% if @order_products.present? %>
+      <label class="amount">
+        <span><STRONG>Total Amount:</STRONG>
+          <%= @current_cart.inject(0) do |sum, (key, quantity)|
+            @product = Product.find(key)
+            sum += @product.price * quantity
+          end.round(2)  %>
+            CHF
+        </span>
+      </label>
       <div class="container-link-to-strip py-3">
         <%= link_to "Process Order", new_charge_path, class: "btn btn-info btn-lg" %>
       </div>

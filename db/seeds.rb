@@ -108,6 +108,7 @@ num_queries = 0
 puts 'Fetching products from FoodRepo API...'
 
 until num_queries == 2 do
+
   response = HTTParty.get(url, headers: headers)
   num_queries += 1
   raise unless response.code == 200 # HTTP OK
@@ -176,7 +177,7 @@ until num_queries == 2 do
       origin: prod.origins,
       expiration_date: Date.today() + rand(7..30),
       availability: "available",
-      price: Faker::Commerce.price(range: 1..5.0).round(2),
+      price: (Faker::Commerce.price(range: 1..5.0).round(1).to_s<<["0","5"].shuffle.first).to_f,
       currency: "CHF",
       nutri_score: nutriscore.capitalize,
       eco_score: ecoscore,
@@ -263,6 +264,7 @@ end
   ord.save!
   puts "Order created"
 end
+
 # # ----------------------playlist-------------------------------------------------#
 # # -------------------------eco----------------------------------------------#
   
@@ -279,10 +281,12 @@ end
 #       if !products.empty?
 #       product = products[n]
 #       playlist_product = PlaylistProduct.new(
+
 #         playlist_id: eco.id,
 #         product_id: product.id,
 #         quantity: quantity,
 #       )
+
 #       playlist_product.save!
 #       n=n+1
 #       end
@@ -304,10 +308,12 @@ end
 #     if !products.empty?
 #     product = products[n]
 #     playlist_product = PlaylistProduct.new(
+
 #       playlist_id: nutri.id,
 #       product_id: product.id,
 #       quantity: quantity,
 #     )
+
 #     playlist_product.save!
 #     n=n+1
 #     end

@@ -28,8 +28,9 @@
 
 
 .charts-infos{
-  margin-top: 5%;
-  margin-right: 10%;
+  width: fit-content;
+  margin-top: 8%;
+  margin-left: 32%;
 }
 
 
@@ -40,21 +41,26 @@
 
 .top-buffer p, h4{
   color: $gray;
-  font-size: 24px;
+  font-size: 20px;
   margin-top: 16px;
-  
+  display: flex;
+  justify-content: space-between;
 }
 
 .price{
   font-size: 20px;
 }
 
-.top-buffer i{
-  margin-left: 260px;
+.top-buffer ul {
+  margin-left: -40px;
 }
+// .top-buffer i{
+//   display: flex;
+//   justify-self: flex-end;
+// }
 
 .list-dashboard{
-  margin-top: 5%;
+  margin-top: 7%;
 }
 
 // .card-product-dashboard {
@@ -89,4 +95,5 @@
 // .card-product-dashboard .card-product-dashboard-infos {
 //   padding: 16px;
 // }
+
 
