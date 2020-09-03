@@ -34,11 +34,8 @@ class ProductsController < ApplicationController
     end
   end
 
-
   def show
     @product = Product.includes(:category).find(params[:id])
     @order_product = OrderProduct.new
   end
 end
-
-

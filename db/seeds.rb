@@ -16,7 +16,8 @@ UserPreference.destroy_all
 ShoppingPreference.destroy_all
 User.destroy_all
 Address.destroy_all
-
+# PlaylistProduct.destroy_all
+# Playlist.destroy_all
 
 #-------------------------------------- User creation---------------------------
 #------------- Shopping preferences creation-------------
@@ -106,7 +107,8 @@ products = []
 num_queries = 0
 puts 'Fetching products from FoodRepo API...'
 
-until num_queries == 20 do
+until num_queries == 2 do
+
   response = HTTParty.get(url, headers: headers)
   num_queries += 1
   raise unless response.code == 200 # HTTP OK
@@ -139,7 +141,7 @@ until num_queries == 20 do
     nutriscore = prod.nutriscore_grade
 
     #-------------------------------- Category creation----------------------------------
-
+    
     puts 'Creating categories'
     if Category.find_by(name: prod_category).nil?
       cat = Category.new(
@@ -263,48 +265,85 @@ end
   puts "Order created"
 end
 
-# # ----------------------playlist----------------------------------------#
+# # ----------------------playlist-------------------------------------------------#
 # # -------------------------eco----------------------------------------------#
-
+  
 #   eco = Playlist.new(
-#     name: "eco_score"
+#     name: "eco_score"  
 #   )
 #   eco.save!
-
+#   categories =Category.all
+#   categories.each  do |category|
 #     2.times do
 #       n = 0
 #       quantity = rand(1..3)
-#       products = Product.where(eco_score:"A").shuffle.each{|x|}
+#       products = Product.where(category_id:category.id).where(eco_score:"A").shuffle.each{|x|}
+#       if !products.empty?
 #       product = products[n]
-#       playlist_prod = PlaylistProduct.new(
+#       playlist_product = PlaylistProduct.new(
+
 #         playlist_id: eco.id,
 #         product_id: product.id,
 #         quantity: quantity,
 #       )
-#       playlist_prod.save!
+
+#       playlist_product.save!
+#       n=n+1
+#       end
 #     end
 #   end
-# end
 
 # # -------------------------nutri----------------------------------------------#
-
+  
 # nutri = Playlist.new(
-#   name: "nutri_score"
+#   name: "nutri_score"  
 # )
 # nutri.save!
-
+# categories =Category.all
+# categories.each  do |category|
 #   2.times do
 #     n = 0
 #     quantity = rand(1..3)
-#     products = Product.where(nutri_score:"A").shuffle.each{|x|}
+#     products = Product.where(category_id:category.id).where(nutri_score:"A").shuffle.each{|x|}
+#     if !products.empty?
 #     product = products[n]
-#     playlist_prod = PlaylistProduct.new(
+#     playlist_product = PlaylistProduct.new(
+
 #       playlist_id: nutri.id,
 #       product_id: product.id,
 #       quantity: quantity,
 #     )
-#     playlist_prod.save!
+
+#     playlist_product.save!
+#     n=n+1
+#     end
 #   end
-
-
 # end
+
+# # -------------------------price----------------------------------------------#
+  
+# price = Playlist.new(
+#   name: "price_score"  
+# )
+# price.save!
+# categories =Category.all
+# categories.each  do |category|
+#   2.times do
+#     n = 0
+#     quantity = rand(1..3)
+#     products = Product.where(category_id:category.id).order('price ASC')
+#     if !products.empty?
+#       product = products[n]
+#       playlist_product = PlaylistProduct.new(
+#         playlist_id: price.id,
+#         product_id: product.id,
+#         quantity: quantity,
+#       )
+      
+#     playlist_product.save!
+#     n=n+1
+#     end
+#   end
+# end
+
+  

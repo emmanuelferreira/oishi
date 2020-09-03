@@ -17,13 +17,11 @@
           <h2>The Greta Thunberg<i class="fas fa-globe-americas fa-2x" style="color: #4CA90C;"></i></h2>
         </div>
         <div class="playlist-element">
-          <p>Carrots</p>
-          <p>Cumcumber</p>
-          <p>Leeks</p>
-          <p>Apples</p>
-          <p>Cherries</p>
-          <p>Spinachs</p>
-          <p>Cawliflower</p>
+          <ul>
+            <% @eco_scores.products.each do |product| %>
+              <p><%= product.name.capitalize %></p>
+            <% end %>
+          </ul>
         </div>
         <div class="playlist-btn">
           <%= link_to "ADD TO BASKET", "#", class: "btn btn-flat btn-basket" %>
@@ -39,13 +37,11 @@
           <h2>The Healthy</h2>
         </div>
         <div class="playlist-element">
-          <p>Beaf</p>
-          <p>Sausages</p>
-          <p>Corn</p>
-          <p>Beers</p>
-          <p>Olives</p>
-          <p>Ketchup</p>
-          <p>Salad</p>
+             <ul>
+            <% @nutri_scores.products.each do |product| %>
+              <p><%= product.name.capitalize %></p>
+            <% end %>
+          </ul>
         </div>
         <div class="playlist-btn">
           <%= link_to "ADD TO BASKET", "#", class: "btn btn-flat btn-basket" %>
@@ -61,13 +57,11 @@
           <h2>The Wallet friendly <i class="fas fa-money-bill-wave fa-2x pl-3" style="color: #4CA90C;"></i></h2>
         </div>
         <div class="playlist-element">
-          <p>Beacon</p>
-          <p>Eggs</p>
-          <p>Beans</p>
-          <p>Advocado</p>
-          <p>Oranges</p>
-          <p>Cakes</p>
-          <p>Mushrooms</p>
+            <ul>
+            <% @prices.products.each do |product| %>
+              <p><%= product.name.capitalize %></p>
+            <% end %>
+          </ul>
         </div>
         <div class="playlist-btn">
           <%= link_to "ADD TO BASKET", "#", class: "btn btn-flat btn-basket" %>
