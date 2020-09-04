@@ -185,3 +185,19 @@
   height: 80vh;
   overflow-y: scroll;
 }
+
+// show card
+.image-show{
+  margin-bottom: 8px !important;
+}
+
+.show-price{
+  color: $dark-gray;
+}
+.show-category{
+  color: $dark-gray;
+}
+
+.product-data h4{
+  color: $dark-gray;
+}

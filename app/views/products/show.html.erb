@@ -4,7 +4,7 @@
   <div class="popup-product-details d-flex justify-content-between p-4">
     <div class="show-left-section">
       <div class="show-header-details">
-        <%= image_tag @product.image, class: "img-show" %>
+        <%= image_tag @product.image, class: "img-show mb-4" %>
         <div class="d-flex justify-content-between" pt-3>
           <% if @product.eco_score == "A" || @product.eco_score == "B"%>
             <i class="fas fa-globe-americas fa-2x" style="color: #4CA90C;"></i>
@@ -32,12 +32,12 @@
       <div class="popup-product-details pt-3">
         <div class="popup-product-details-section d-flex justify-content-between">
           <div class= "popup-product-details-price">
-            <h3>Price</h3>
+            <h4 class="show-price">Price</h4>
             <p> <strong> <%= @product.price %> CHF </strong>  </p>
           </div>
           <% if @order_product.present? %>
             <div class="quantity-show">
-              <h3>Quantity</h3>
+              <h4 class="show-price">Quantity</h4>
               <%= form_for @order_product, class: "form-group add-button", redirect_to: products_path do |f| %>
                 <%= f.hidden_field :product_id, value: @product.id%>
                 <%= f.text_field :quantity, value: 1, min: 1, size: 2 %>
@@ -50,18 +50,18 @@
     </div>
     <div class="show-right-section flex-grow-1 pl-4">
       <h1 class="show-title" id="exampleshowLabel"> <%= @product.name.capitalize %></h1>
-      <h3><%=@product.category.name %></h3>
+      <h3 class="show-category mb-4"><%=@product.category.name %></h3>
       <div class="show-body d-flex flex-column justify-content-between">
-        <h2>Description</h2>
+        <h3>Description</h3>
         <p><%= @product.description.capitalize if @product.description.present? %> </p>
-        <h2>Data</h2>
+        <h3>Data</h3>
         <div class="product-data">
-          <h3>Ecoscore data</h3>
+          <h4>Ecoscore data</h4>
           <div class="grid-container-ecoscore">
             <p><strong>Eco-score:</strong> <%= @product.eco_score %></p>
             <p><strong>Origin:</strong> <%= @product["origin"] %> </p>
           </div>
-          <h3>Nutriscore data <em>(/100g)</em></h3>
+          <h4 class="d-flex justify-content-start">Nutriscore data <em>(/100g)</em></h4>
           <div class="grid-container-nutriscore">
             <p><strong>Nutri-score:</strong> <%= @product.nutri_score %></p>
             <p><strong>Energie:</strong> <%= @product["nutriments"]["energy-kcal_100g"] %> Kcal </p>
@@ -86,7 +86,7 @@
         <h4 class="suggestion-title">Eco-friendly Suggestions</h4>
         <div class="row suggestions-list d-flex justify-content-around ">
           <% Product.where(category: @product.category).order(eco_score: :asc).take(3).each do |product_suggestion| %>
-            <div class="img-suggestions">
+            <div class="img-suggestions mb-4">
               <%= image_tag product_suggestion.image %>
               <%= link_to "", product_path(product_suggestion)  %>
             </div>
