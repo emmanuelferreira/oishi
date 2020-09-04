@@ -2,7 +2,6 @@
   overflow-x: auto;
   margin-bottom: 24px !important;
   height: 80px;
-  scroll-margin-inline-start: 24px;
 }
 
 .tabs-underlined {
@@ -87,6 +86,7 @@
 .tabs-underlined .tab-underlined-second:hover {
   // background-color: $dark-green;
   color: $yellow;
+  
 }
 
 
@@ -109,8 +109,13 @@
   overflow: auto;
   white-space: nowrap;
   width: 100%;
+  scroll-margin: 20px;
 }
 
 .scrollmenu li{
   display: inline-block;
+}
+
+.scroll {
+  scroll-margin: 20px;
 }
