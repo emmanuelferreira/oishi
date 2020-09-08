@@ -32,6 +32,6 @@ Built on Ruby on Rails v6.0.3.2, Ruby v2.7.0, HTML5, CSS3 and JavaScript ES6. De
 <h2>Contributors</h2>
 The main contributors to this project are:
 
-* Vincent Clair
-* Jocelyn Duquesnoy
-* Morgan Fula
+* [Vincent Clair](https://github.com/Vincentclr)
+* [Jocelyn Duquesnoy](https://github.com/jduquesnoy)
+* [Morgan Fula](https://github.com/Morgasmatron)
