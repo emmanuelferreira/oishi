@@ -1,6 +1,8 @@
 <h1> OISHI. </h1>
 <h2>  cheaper, greener, healthier. </h2>
+
 Oishi is a **e-commerce platform** providing a selection of daily consumer food products with a feedback system ensuring that our users have the **relevant information** and awareness for developping a **sustainable** lifestyle in harmony with nature. 
+
 </br>
 
 ![Image of Oishi Homepage](https://github.com/emmanuelferreira/oishi/blob/master/app/assets/images/oishi_homepage.png)
